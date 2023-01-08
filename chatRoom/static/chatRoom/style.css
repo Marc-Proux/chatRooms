@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "Aharoni";
+    src: url(fonts/ahronbd.ttf);
+}
+
+body {
+    background-color: rgb(32,31,37);
+}
+
+.project-title {
+    font-family: Aharoni, serif;
+    text-align: left;
+    color: rgb(216, 216, 216);
+    font-size: 450%;
+    margin-left: 3%;
+    margin-top: 3%;
+}
+
+.centered-button {
+    position: absolute;
+    color: rgb(167, 167, 167);
+    top: 41%;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+}
+
+.centered-button button {
+    font-family: Aharoni, serif;
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    background-color: rgb(32,31,37);
+    border: 0px;
+    font-size: 250%;
+    padding: 0.75% 1.5% 0.75% 1.5%;
+    border-radius: 15px;
+    transition: ease-out 0.3s;
+}
+
+.centered-button button:hover {
+    background-color: rgb(216, 216, 216);
+    color: rgb(32,31,37);
+    transform: scale(1.1);
+}
+
+footer {
+    position: absolute;
+    color: rgb(167, 167, 167);
+    bottom: 1%;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.form-div {
+    width: 25%;
+    height: 30%;
+    /* background-color: rgb(32,31,37); */
+    position: absolute; /*Can also be `fixed`*/
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: rgb(216, 216, 216);
+    font-family: Aharoni, serif;
+    font-size: 22px;
+    animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+input {
+    width: 96%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.buttons-div {
+    float: right;
+}
+
+.sign-in-button {
+    font-family: Aharoni, serif;
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    background-color: rgb(32,31,37);
+    border: 0px;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease-out 0.3s;
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+.sign-in-button:hover {
+    background-color: rgb(216, 216, 216);
+    color: rgb(32,31,37);
+    transform: scale(1.1);
+}
+
+.sign-up-button {
+    font-family: Aharoni, serif;
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    background-color: rgb(32,31,37);
+    border: 0px;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease-out 0.3s;
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+.sign-up-button:hover {
+    background-color: rgb(253, 253, 153);
+    color: rgb(32,31,37);
+    transform: scale(1.1);
+}
