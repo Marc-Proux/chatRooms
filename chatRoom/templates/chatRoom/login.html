@@ -1,9 +1,12 @@
 <!doctype html>
+{% load static %}
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <title>Chat Room</title>
-    <link rel="stylesheet" href="style.css" />
+    {% block styles %}
+        <link rel="stylesheet" href="{% static 'chatRoom/style.css' %}" />
+    {% endblock %}
 
   </head>
 
