@@ -1,0 +1,26 @@
+<!doctype html>
+{% load static %}
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chat Room</title>
+    {% block styles %}
+        <link rel="stylesheet" href="{% static 'chatRoom/style.css' %}" />
+    {% endblock %}
+
+  </head>
+
+<body>
+    <header>
+        <h1 class="project-title">Chat Room</h1>
+    </header>
+
+    <section>
+        {% block content %} {% endblock %}
+    </section>
+
+    <footer>
+        <div>
+            <p>Créé par Marc Proux, Lucas Dehe et Geryes Doumit - janvier 2023</p>
+        </div>
+    </footer>
