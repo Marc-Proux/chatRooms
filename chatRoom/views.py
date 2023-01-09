@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
@@ -36,6 +37,12 @@ def login(request):
 
 def signup(request):
     if request.method == 'POST':
+        if User.objects.filter(username=request.POST['username']).exists():
+            messages.error(request,'username already exists')
+            return HttpResponseRedirect('/signup')
+        elif request.POST['password1'] != request.POST['password2']:
+            messages.error(request,'passwords do not match')
+            return HttpResponseRedirect('/signup')
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
