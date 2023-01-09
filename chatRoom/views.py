@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
+from .models import Room
 
 def index(request):
     if request.user.is_authenticated:
@@ -53,4 +54,6 @@ class Signup(generic.CreateView):
     template_name = 'registration/signup.html'
 
 def chatRooms(request):
-    return render(request, 'chatRoom/main-page.html', {'user':request.user})
+    all_rooms = Room.objects.get(id=2)
+    messages_in_room = all_rooms.message_set.all()
+    return render(request, 'chatRoom/main-page.html', {'user':request.user, 'messages_in_room':messages_in_room})

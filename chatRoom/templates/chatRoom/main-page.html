@@ -13,7 +13,9 @@
         </nav>
     </aside>
     <section class="messages-list">
-        test
+        {% for message in messages_in_room %}
+            <li>{{ message.message }}</li>
+        {% endfor %}
     </section>
 {% else %}
     <p>You are not logged in</p>
