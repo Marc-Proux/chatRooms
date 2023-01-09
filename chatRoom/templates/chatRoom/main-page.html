@@ -1,5 +1,7 @@
 {% extends "chatRoom/baseLayout.html" %}
 {% block content %}
+{% if user.is_authenticated %}
+    Hi {{ user.username }}!
     <aside class="Room-list">
         <p>Salons de discussion</p>
         <nav>
@@ -10,8 +12,11 @@
             </ul>
         </nav>
     </aside>
-
     <section class="messages-list">
         test
     </section>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
 {% endblock %}

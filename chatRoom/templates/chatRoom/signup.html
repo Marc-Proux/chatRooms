@@ -1,0 +1,50 @@
+{% extends "chatRoom/baseLayout.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <div class="form-div">
+    <p>
+    <label for="id_username">Username:</label>
+    <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+    
+      <p class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+    
+    
+    </p>
+
+
+    <p>
+      <label for="id_password1">Password:</label>
+      <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+      
+      </p>
+        <ul>
+          <li class="helptext" style="margin-bottom: 0%;">Your password can't be too similar to your other personal information.</li>
+          <li class="helptext" style="margin-bottom: 0%;">Your password must contain at least 8 characters.</li>
+          <li class="helptext" style="margin-bottom: 0%;">Your password can't be a commonly used password.</li>
+          <li class="helptext" >Your password can't be entirely numeric.</li>
+        </ul>
+      
+      
+    <p></p>
+
+
+    <p>
+      <label for="id_password2">Password confirmation:</label>
+      <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+      
+        <span class="helptext">Enter the same password as before, for verification.</span>
+      
+      
+        
+      
+    </p>
+    <div class="buttons-div">
+      <button class="sign-up-button" type="submit">Sign Up</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

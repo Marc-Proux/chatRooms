@@ -1,19 +1,56 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
-from .models import Room, Message, Account
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib import messages
 
 def index(request):
-    return render(request, 'chatRoom/index.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/chatrooms')
+    else:
+        return render(request, 'chatRoom/index.html')
+
+def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+    
+        if user is not None:
+            if user.is_active:
+                auth_login(request, user)
+                return HttpResponseRedirect('chatrooms')
+        else:
+            messages.error(request,'username or password not correct')
+            return HttpResponseRedirect('login')
+    
+    else:
+        form = AuthenticationForm()
+    return render(request, 'chatRoom/login.html', {'form': form})
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            auth_login(request, user)
+            return HttpResponseRedirect('chatrooms')
+    else:
+        form = UserCreationForm()
+    return render(request, 'chatRoom/signup.html', {'form': form})
 
 class Signup(generic.CreateView):
     form_class = UserCreationForm
-    sucess_url = reverse_lazy('/login')
+    success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
 def chatRooms(request):
-    user = Account.objects.get(id=2)
-    return render(request, 'chatRoom/main-page.html', {'user':user})
+    return render(request, 'chatRoom/main-page.html', {'user':request.user})

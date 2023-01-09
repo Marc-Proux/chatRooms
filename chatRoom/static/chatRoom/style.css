@@ -78,6 +78,24 @@ footer {
     animation: fade-in 1s;
 }
 
+.form-div .helptext {
+    font-size: 13px;
+    color: rgb(167, 167, 167);
+    line-height: normal;
+    margin: 0%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+.form-div .helptext li{
+    margin: 0%;
+    margin-left: 10%;
+}
+
+.signUpTitle {
+    height:30%
+}
+
 @keyframes fade-in {
     0% {opacity: 0%;}
     100% {opacity: 100%;}
