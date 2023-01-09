@@ -9,4 +9,4 @@ def login(request):
     return render(request, 'chatRoom/login.html')
 
 def bite(request):
-    return render(request, 'chatRoom/bite.html')
+    return render(request, 'chatRoom/test.html')
