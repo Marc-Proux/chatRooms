@@ -24,10 +24,10 @@ def login(request):
         if user is not None:
             if user.is_active:
                 auth_login(request, user)
-                return HttpResponseRedirect('chatrooms')
+                return HttpResponseRedirect('/chatrooms')
         else:
             messages.error(request,'username or password not correct')
-            return HttpResponseRedirect('login')
+            return HttpResponseRedirect('/login')
     
     else:
         form = AuthenticationForm()
@@ -42,7 +42,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
-            return HttpResponseRedirect('chatrooms')
+            return HttpResponseRedirect('/chatrooms')
     else:
         form = UserCreationForm()
     return render(request, 'chatRoom/signup.html', {'form': form})
