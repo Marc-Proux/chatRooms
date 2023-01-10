@@ -31,6 +31,41 @@ Installation de Django
 pip install Django
 ```
 
+Transfère de l'application sur le serveur en cloant le git
+```
+git clone https://github.com/Marc-Proux/chatRoom.git
+```
+
+Configurez le serveur en Python WSGI
+
+Le chemin d'application à 
+```
+/chatRoom/chatRoom_project/wsgi.py
+```
+
+Le répertoire de travail et du virtualenv
+```
+/chatRoom/
+```
+```
+/djangoenv/
+```
+
+Et Chemins Statiques
+```
+/static=/chatRoom/chatRoom/static
+```
+
+
+Enfin, dans le fichier
+```
+chatRoom/chatRoom_project/settings.py
+```
+Ajouter votre URL
+```
+ALLOWED_HOSTS = ['{URL}']
+```
+
 ## Documentation
 blablabla
 
