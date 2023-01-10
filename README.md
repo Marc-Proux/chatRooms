@@ -14,7 +14,7 @@
 <hr />
 
 ## Packages
-mettre les packages utilisés
+Django
 
 ## Installation
 ChatRoom est un projet Web, front-end et back-end nécessitant plusieurs packages. Accedez à la console de votre serveur pour suivre la procédure d'installation.
