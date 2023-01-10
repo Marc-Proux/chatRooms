@@ -1,5 +1,5 @@
 <h1 align="center">
-	Chat Room
+	ChatRoom
 </h1>
 
 <p align ="center">
