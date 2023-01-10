@@ -17,18 +17,18 @@
             </ul>
         </nav>
     </aside>
+    <p class="Messages-title">Messages du Salon</p>
     <section class="messages-list">
-        <p class="Messages-title">Messages du Salon</p>
         <nav>
             <ul class="message-box">
                 {% for message in messages_in_room %}
                     <li class="user">{{ message.user }}</li>
                     <li class="message">{{ message.message }}</li>
-                    <li class="date">{{ message.date.time }}</li>
+                    <li class="date">{{ message.date }}</li>
                 {% endfor %}
-                <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
-                <button class="send-button"> </button>
             </ul>
+            <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
+            <button class="send-button"> </button>
         </nav>
     </section>
 {% else %}

@@ -3,6 +3,30 @@
     padding: 0;
     color: rgb(216, 216, 216);
 }
+/* Custom scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(167, 167, 167); 
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(253, 253, 153); 
+    border-radius: 10px;
+    transition: ease-in-out 1s;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background-color: rgb(216, 216, 216);
+}
 
 @font-face {
     font-family: "Aharoni";
@@ -206,6 +230,10 @@ li {
     color: rgb(253, 253, 153);
 }
 
+.Messages-title {
+    padding-right: 14%;
+}
+
 .messages-list {
     width: 60%;
     height: 70%;
@@ -221,6 +249,7 @@ li {
 
 .messages-list nav {
     padding-left: 3%;
+    margin-top: 3.6%;
     height: 100%;
     border-left: 3px solid rgb(253, 253, 153);
     border-radius: 1.5%;
@@ -250,8 +279,11 @@ li {
 }
 
 .messages-list ul{
-    position: absolute;
-    bottom: 0;
+    align-items: baseline;
+}
+
+.messages-list nav {
+    overflow-y: auto;
 }
 
 .Room-name {
@@ -311,7 +343,7 @@ li {
     width: 70%;
     font-size: 15px;
     padding: 1%;
-    margin: 1% 0 0 11%;
+    margin: 4% 0 0 4%;
     border: 0;
     border-radius: 15px;
     background-color: white;
