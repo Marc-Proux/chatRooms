@@ -26,9 +26,6 @@ SECRET_KEY = 'django-insecure-vdyst=m8*eic84@4ec^!cf&flm8s1skb12!(i!z^l0fjrsi%@u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -128,8 +125,7 @@ LOGIN_REDIRECT_URL = "/chatrooms"
 LOGOUT_REDIRECT_URL = "/login"
 
 ALLOWED_HOSTS = ['chatrooms.alwaysdata.net',
-                 'https://127.0.0.1',
+                 '127.0.0.1',
                  'localhost',]
 
-STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
