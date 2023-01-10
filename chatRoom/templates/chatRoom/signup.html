@@ -11,8 +11,6 @@
     <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
     
       <p class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
-    
-    
     </p>
 
 
@@ -37,12 +35,12 @@
       <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
       
         <span class="helptext">Enter the same password as before, for verification.</span>
-      
-      
-        
-      
     </p>
+    {% for message in messages %}
+      <p class="helptext" style="color:red;">{{ message }}</p>
+    {% endfor %}
     <div class="buttons-div">
+      <button class="sign-in-button" onclick="window.location.href='/login';">Se connecter</button>
       <button class="sign-up-button" type="submit">Sign Up</button>
     </div>
   </div>

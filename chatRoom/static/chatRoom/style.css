@@ -81,12 +81,10 @@ footer {
     margin: 0%;
     margin-left: 10%;
     margin-bottom: 5%;
+    text-align: right;
 }
 
-.form-div .helptext li{
-    margin: 0%;
-    margin-left: 10%;
-}
+
 
 .signUpTitle {
     height:30%
