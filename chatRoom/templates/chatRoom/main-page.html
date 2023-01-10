@@ -2,6 +2,7 @@
 {% block content %}
 {% if user.is_authenticated %}
     Hi {{ user.username }}!
+    <a href="{% url 'logout' %}">Log Out</a>
     <aside class="Room-list">
         <p>Salons de discussion</p>
         <nav>
