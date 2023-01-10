@@ -2,7 +2,7 @@
 	Chat Room
 </h1>
 
-<p align ="center">
+<p align ="center" style="font-size=20px">
 	ChatRoom est un projet de fin de semestre de première année en cycle
 	ingénieur en Informatique & Réseaux.<br></br>
 	ChatRoom est une <a href="https://fr.wikipedia.org/wiki/Application_web">Application Web</a>
