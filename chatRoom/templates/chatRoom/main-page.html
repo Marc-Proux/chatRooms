@@ -3,9 +3,9 @@
 {% if user.is_authenticated %}
     <!-- Hi {{ user.username }}! -->
     <header>
-        <h1 class="main-page-title">Chat Room</h1>
+        <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
+        <a class="log-out" href="{% url 'logout' %}">Deconnexion</a>
     </header>
-    <a href="{% url 'logout' %}">Log Out</a>
     <aside class="Room-list">
         <p class="Room-title">Salons de discussion</p>
         <nav>
