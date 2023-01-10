@@ -13,6 +13,24 @@
 ## Packages
 mettre les packages utilisés
 
+## Installation
+ChatRoom est un projet Web, front-end et back-end nécessitant plusieurs packages. Accedez à la console de votre serveur pour suivre la procédure d'installation.
+
+Création de l'environnement virtuel pour django
+```
+python -m venv djangoenv
+```
+
+Activation de l'environnement virtuel
+```
+source djangoenv/bin/activate
+```
+
+Installation de Django
+```
+pip install Django
+```
+
 ## Documentation
 blablabla
 
