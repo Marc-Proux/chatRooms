@@ -22,6 +22,27 @@ body {
     margin-top: 3%;
 }
 
+.project-title a {
+    text-decoration: none;
+}
+
+.log-out {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    text-decoration: none;
+    font-family: Aharoni, sans-serif;
+    border-radius: 12px;
+    transition: ease-in-out 0.3s;
+    padding: 5px;
+}
+
+.log-out:hover {
+    background-color: rgb(216, 216, 216);
+    color: rgb(32,31,37);
+    transform: scale(1.1);
+}
+
 .centered-button {
     position: absolute;
     color: rgb(167, 167, 167);
@@ -29,6 +50,7 @@ body {
     width: 99%;
     text-align: center;
     margin: auto;
+    animation: fade-in 1s;
 }
 
 .centered-button button {
@@ -44,7 +66,7 @@ body {
 }
 
 .centered-button button:hover {
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(253, 253, 153);
     color: rgb(32,31,37);
     transform: scale(1.1);
 }
@@ -154,6 +176,10 @@ input {
     color: rgb(216, 216, 216);
     font-size: 350%;
     margin: 1.5%;
+}
+
+.main-page-title a {
+    text-decoration: none;
 }
 
 li {
