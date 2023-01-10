@@ -225,6 +225,7 @@ li {
     padding: 2%;
     margin: 3% 0 3% 0;
     transition: ease-in-out 0.2s;
+    cursor: pointer;
 }
 
 .Room-name:hover {
