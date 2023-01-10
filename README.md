@@ -3,9 +3,14 @@
 </h1>
 
 <p align ="center">
-	The chat room project is an end of semester project of the first 
-	year of the engineering cycle. It aims to deploy a chat platform with 
-	account management and creation of rooms by the user.
+	ChatRoom est un projet de fin de semestre de première année en cycle
+	ingénieur en Informatique & Réseaux. 
+	
+	ChatRoom est une <a href="https://fr.wikipedia.org/wiki/Application_web>Application Web</a>
+	de <a href ="https://fr.wikipedia.org/wiki/Chat_en_ligne">Chat en Ligne</a> gratuite et 
+	hébergeable sur tout serveur.
+	
+	Découvrez le site <a href="http://chatrooms.alwaysdata.net/">ChatRoom</a>.
 </p>
 
 <hr />
