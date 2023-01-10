@@ -10,29 +10,29 @@ from django.contrib import messages
 from .models import Room
 
 def index(request):
+    return render(request, 'chatRoom/index.html')
+
+def login(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/chatrooms')
     else:
-        return render(request, 'chatRoom/index.html')
-
-def login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-    
-        if user is not None:
-            if user.is_active:
-                auth_login(request, user)
-                return HttpResponseRedirect('/chatrooms')
+        if request.method == 'POST':
+            form = AuthenticationForm(request.POST)
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+        
+            if user is not None:
+                if user.is_active:
+                    auth_login(request, user)
+                    return HttpResponseRedirect('/chatrooms')
+            else:
+                messages.error(request,'username or password not correct')
+                return HttpResponseRedirect('/login')
+        
         else:
-            messages.error(request,'username or password not correct')
-            return HttpResponseRedirect('/login')
-    
-    else:
-        form = AuthenticationForm()
-    return render(request, 'chatRoom/login.html', {'form': form})
+            form = AuthenticationForm()
+        return render(request, 'chatRoom/login.html', {'form': form})
 
 def signup(request):
     if request.method == 'POST':
