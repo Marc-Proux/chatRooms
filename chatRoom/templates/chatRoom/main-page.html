@@ -6,6 +6,7 @@
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
         <a class="log-out" href="{% url 'logout' %}">Deconnexion</a>
     </header>
+    <button class="add-room-button">+</button>
     <aside class="Room-list">
         <p class="Room-title">Salons de discussion</p>
         <nav>
@@ -25,6 +26,8 @@
                     <li class="message">{{ message.message }}</li>
                     <li class="date">{{ message.date.time }}</li>
                 {% endfor %}
+                <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
+                <button class="send-button"> </button>
             </ul>
         </nav>
     </section>

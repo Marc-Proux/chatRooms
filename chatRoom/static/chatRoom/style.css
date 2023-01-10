@@ -103,23 +103,19 @@ footer {
 
 .form-div input {
     color: rgb(32,31,37);
+    margin-bottom: 0;
 }
 
-.form-div .helptext {
-    font-size: 13px;
-    color: rgb(167, 167, 167);
-    line-height: normal;
-    margin: 0%;
-    margin-left: 10%;
-    margin-bottom: 5%;
-    text-align: right;
+.help-text {
+    /* In the html file directly.. */
+    font-family: sans-serif;
 }
 
 .signUpTitle {
     height:30%
 }
 
-input {
+.form-div input {
     width: 96%;
     padding: 2%;
     margin: 1.5% 0 5% 0;
@@ -285,4 +281,60 @@ li {
     float: left;
     animation: fade-in 1s;
     /* background-color: red; */
+}
+
+.add-room-button {
+    font-family: Aharoni, sans-serif;
+    font-size: 40px;
+    color: rgb(32,31,37);
+    background-color: rgb(216, 216, 216);
+    padding: 1;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    border-radius: 100%;
+    position: fixed;
+    left: 28.35%;
+    bottom: 10%;
+    animation: fade-in 1s;
+    transition: ease-in-out 0.2s;
+}
+
+.add-room-button:hover {
+    border-radius: 20px;
+    color: rgb(32,31,37);
+    background-color: rgb(253, 253, 153);
+    /* transform: scale(1.2); */
+}
+
+.messages-list input {
+    width: 70%;
+    font-size: 15px;
+    padding: 1%;
+    margin: 1% 0 0 11%;
+    border: 0;
+    border-radius: 15px;
+    background-color: white;
+    color: rgb(32,31,37);
+    transition: ease-in-out 0.2s;
+}
+
+.send-button {
+    vertical-align: bottom;
+    height: 35px;
+    width: 60px;
+    border: 0;
+    border-radius: 16px;
+    background-color: white;
+    background-image: url("img/send.png");
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: ease-in-out 0.2s;
+}
+
+.send-button:hover {
+    background-color: rgb(253, 253, 153);
+    /* transform: scale(1.04) */
+    border-radius: 10px;
 }
