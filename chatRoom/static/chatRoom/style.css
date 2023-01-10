@@ -18,14 +18,14 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(253, 253, 153); 
+    background: rgb(216, 216, 216); 
     border-radius: 10px;
     transition: ease-in-out 1s;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-   background-color: rgb(216, 216, 216);
+   background-color: rgb(253, 253, 153);
 }
 
 @font-face {
@@ -101,9 +101,10 @@ body {
 }
 
 footer {
-    position: absolute;
-    color: rgb(167, 167, 167);
+    position: fixed;
+    z-index: 0;
     bottom: 1%;
+    color: rgb(167, 167, 167);
     width: 100%;
     text-align: center;
     margin: auto;
@@ -224,14 +225,24 @@ li {
 }
 
 .Messages-title, .Room-title{
+    display: inline-block;
     font-family: Aharoni, sans-serif;
     font-size: 30px;
     text-align: center;
     color: rgb(253, 253, 153);
 }
 
+.Room-title {
+    width: 19%;
+    margin-left: 11%;
+    /* background-color: blueviolet; */
+}
+
 .Messages-title {
-    padding-right: 14%;
+    float: right;
+    width: 60%;
+    margin-right: 10%;
+    /* background-color: blue; */
 }
 
 .messages-list {
@@ -243,7 +254,7 @@ li {
     position: absolute;
     bottom: 15%;
     right: 0%;
-    animation: fade-in 1s;
+    animation: fade-in 2s;
     /* background-color: red; */
 }
 
@@ -251,8 +262,10 @@ li {
     padding-left: 3%;
     margin-top: 3.6%;
     height: 100%;
-    border-left: 3px solid rgb(253, 253, 153);
-    border-radius: 1.5%;
+    border-left: 2px solid;
+    border-image:linear-gradient(0deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    /* border-radius: 1.5%; */
+    position: relative;
 }
 
 .user {
@@ -287,8 +300,11 @@ li {
 }
 
 .Room-name {
-    border-left: 3px solid rgb(216, 216, 216);
-    border-right: 3px solid rgb(216, 216, 216);
+    /* border-left: 3px solid rgb(216, 216, 216);
+    border-right: 3px solid rgb(216, 216, 216); */
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    /* border-top: 3px solid rgb(32,31,37); */
     border-radius: 7px;
     font-family: sans-serif;
     font-size: 20px;
@@ -297,64 +313,56 @@ li {
     margin: 3% 0 3% 0;
     transition: ease-in-out 0.2s;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .Room-name:hover {
     color: rgb(32,31,37);
-    border: 3px solid rgb(253, 253, 153);
+    /* border: 3px solid rgb(253, 253, 153); */
     background-color: rgb(253, 253, 153);
     transform: scale(1.05);
-    margin-bottom: 0;
 }
 
 .Room-list {
-    width: 20%;
-    padding-left: 10%;
-    float: left;
+    width: 19%;
+    height: 72%;
+    margin-left: 5%;
+    padding-left: 6%;
+    padding-right: 3%;
+    position: absolute;
+    left: 0;
     animation: fade-in 1s;
+    overflow-y: auto;
     /* background-color: red; */
+    direction: rtl;
 }
 
 .add-room-button {
-    font-family: Aharoni, sans-serif;
-    font-size: 40px;
-    color: rgb(32,31,37);
-    background-color: rgb(216, 216, 216);
-    padding: 1;
-    width: 50px;
-    height: 50px;
+    background-color: white;
+    background-image: url(img/plus.png);
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
     border: 0;
     border-radius: 100%;
-    position: fixed;
-    left: 28.35%;
-    bottom: 10%;
-    animation: fade-in 1s;
+    margin-right: 220px;
+    margin-bottom: 20px;
     transition: ease-in-out 0.2s;
 }
 
 .add-room-button:hover {
-    border-radius: 20px;
+    border-radius: 10px;
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.2); */
 }
 
-.messages-list input {
-    width: 70%;
-    font-size: 15px;
-    padding: 1%;
-    margin: 4% 0 0 4%;
-    border: 0;
-    border-radius: 15px;
-    background-color: white;
-    color: rgb(32,31,37);
-    transition: ease-in-out 0.2s;
-}
-
 .send-button {
-    vertical-align: bottom;
     height: 35px;
     width: 60px;
+    vertical-align: bottom;
     border: 0;
     border-radius: 16px;
     background-color: white;
@@ -369,4 +377,38 @@ li {
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.04) */
     border-radius: 10px;
+}
+
+.fixed-buttons input {
+    width: 60%;
+    vertical-align: bottom;
+    font-size: 15px;
+    padding: 9px;
+    border: 0;
+    border-radius: 15px;
+    background-color: white;
+    color: rgb(32,31,37);
+    transition: ease-in-out 0.2s;
+}
+
+.fixed-buttons div {
+    display: inline-block;
+    width: 60%;
+}
+
+.fixed-buttons {
+    margin: auto;
+    animation: fade-in 2s;
+    width: 70%;
+    display: inline-block;
+    position: fixed;
+    bottom: 4%;
+    left: 30%;
+    border-radius: 15px;
+    background-color: rgb(32,31,37);
+}
+
+.space {
+    /* background-color: red; */
+    height: 10%;
 }

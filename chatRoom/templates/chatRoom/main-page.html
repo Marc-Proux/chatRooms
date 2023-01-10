@@ -6,9 +6,8 @@
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
         <a class="log-out" href="{% url 'logout' %}">Deconnexion</a>
     </header>
-    <button class="add-room-button">+</button>
+    <p class="Room-title">Salons de discussion</p>
     <aside class="Room-list">
-        <p class="Room-title">Salons de discussion</p>
         <nav>
             <ul>
                 {% for room in user.room_set.all %}
@@ -26,10 +25,16 @@
                     <li class="message">{{ message.message }}</li>
                     <li class="date">{{ message.date }}</li>
                 {% endfor %}
+                <p class="space">ㅤ</p>
             </ul>
-            <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
-            <button class="send-button"> </button>
         </nav>
+    </section>
+    <section class="fixed-buttons">
+        <button class="add-room-button" title="Créer un salon de discussion"></button>
+        <div>
+            <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
+            <button class="send-button" title="Envoyer le message"> </button>
+        </div>
     </section>
 {% else %}
     <p>You are not logged in</p>
