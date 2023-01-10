@@ -9,16 +9,12 @@
     src: url(fonts/ahronbd.ttf);
 }
 
-.Room-list li {
-    color:rgb(216, 216, 216);
-}
-
 body {
     background-color: rgb(32,31,37);
 }
 
 .project-title {
-    font-family: Aharoni, serif;
+    font-family: Aharoni, sans-serif;
     text-align: left;
     color: rgb(216, 216, 216);
     font-size: 450%;
@@ -36,7 +32,7 @@ body {
 }
 
 .centered-button button {
-    font-family: Aharoni, serif;
+    font-family: Aharoni, sans-serif;
     text-decoration: none;
     color: rgb(216, 216, 216);
     background-color: rgb(32,31,37);
@@ -73,7 +69,7 @@ footer {
     bottom: 0;
     margin: auto;
     color: rgb(216, 216, 216);
-    font-family: Aharoni, serif;
+    font-family: Aharoni, sans-serif;
     font-size: 22px;
     animation: fade-in 1s;
 }
@@ -115,7 +111,7 @@ input {
 }
 
 .sign-in-button {
-    font-family: Aharoni, serif;
+    font-family: Aharoni, sans-serif;
     text-decoration: none;
     color: rgb(216, 216, 216);
     background-color: rgb(32,31,37);
@@ -135,7 +131,7 @@ input {
 }
 
 .sign-up-button {
-    font-family: Aharoni, serif;
+    font-family: Aharoni, sans-serif;
     text-decoration: none;
     color: rgb(216, 216, 216);
     background-color: rgb(32,31,37);
@@ -152,4 +148,98 @@ input {
     background-color: rgb(253, 253, 153);
     color: rgb(32,31,37);
     transform: scale(1.1);
+}
+
+.main-page-title {
+    font-family: Aharoni, sans-serif;
+    text-align: left;
+    color: rgb(216, 216, 216);
+    font-size: 350%;
+    margin: 1.5%;
+}
+
+li {
+    list-style-type: none;
+    width: 100%;
+}
+
+.Messages-title, .Room-title{
+    font-family: Aharoni, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: rgb(253, 253, 153);
+}
+
+.messages-list {
+    width: 60%;
+    height: 70%;
+    padding-right: 7%;
+    float: right;
+    text-align: left;
+    position: absolute;
+    bottom: 15%;
+    right: 0%;
+    /* background-color: red; */
+}
+
+.messages-list nav {
+    padding-left: 3%;
+    height: 100%;
+    border-left: 3px solid rgb(253, 253, 153);
+    border-radius: 1.5%;
+}
+
+.user {
+    color: rgb(253, 253, 153);
+    font-family: Aharoni, sans-serif;
+    margin-top: 1%;
+}
+
+.message {
+    font-family: sans-serif;
+    color: rgb(216, 216, 216);
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+}
+
+.date {
+    font-family: sans-serif;
+    text-align: right;
+    font-size: 14px;
+}
+
+.message-box {
+    width: 85%;
+}
+
+.messages-list ul{
+    position: absolute;
+    bottom: 0;
+}
+
+.Room-name {
+    border-left: 3px solid rgb(216, 216, 216);
+    border-right: 3px solid rgb(216, 216, 216);
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    padding: 2%;
+    margin: 3% 0 3% 0;
+    transition: ease-in-out 0.2s;
+}
+
+.Room-name:hover {
+    color: rgb(32,31,37);
+    border: 3px solid rgb(253, 253, 153);
+    background-color: rgb(253, 253, 153);
+    transform: scale(1.05);
+    margin-bottom: 0;
+}
+
+.Room-list {
+    width: 20%;
+    padding-left: 10%;
+    float: left;
+    /* background-color: red; */
 }

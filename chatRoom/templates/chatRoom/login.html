@@ -1,5 +1,8 @@
 {% extends "chatRoom/baseLayout.html" %}
 {% block content %}
+    <header>
+        <h1 class="project-title">Chat Room</h1>
+    </header>
     <form method="post">
         {% csrf_token %}
         <div class="form-div">
