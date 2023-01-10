@@ -74,7 +74,7 @@ blablabla
 
 <footer>
 <p align="center">
-Built by Lucas, Geryes and Marc, <a href="https://www.ensisa.uha.fr">ENSISA</a> 
+Créé avec ❤️ par Lucas, Geryes and Marc, <a href="https://www.ensisa.uha.fr">ENSISA</a> 
 students.
 </p>
 </footer>
