@@ -1,4 +1,4 @@
-// Show/hide the add room form
+// Show/hide the forms
 $(document).ready(function() {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
@@ -6,6 +6,13 @@ $(document).ready(function() {
     })  
 });
 
+
+$(document).ready(function() {
+    $(".add-user-form").hide();
+    $(".user-list-button").click(function() {
+        $(".add-user-form").toggle();
+    })  
+});
 // getMessage
 
 $(document).ready(function(){
