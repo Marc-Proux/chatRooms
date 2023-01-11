@@ -128,7 +128,12 @@ footer {
 
 .form-div input {
     color: rgb(32,31,37);
-    margin-bottom: 0;
+    width: 96%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 18px;
 }
 
 .help-text {
@@ -138,15 +143,6 @@ footer {
 
 .signUpTitle {
     height:30%
-}
-
-.form-div input {
-    width: 96%;
-    padding: 2%;
-    margin: 1.5% 0 5% 0;
-    border: 0px;
-    border-radius: 8px;
-    font-size: 18px;
 }
 
 .buttons-div {
@@ -233,8 +229,8 @@ li {
 }
 
 .Room-title {
-    width: 19%;
-    margin-left: 11%;
+    width: 18.8%;
+    margin-left: 11.2%;
     /* background-color: blueviolet; */
 }
 
@@ -300,7 +296,7 @@ li {
     overflow-y: auto;
 }
 
-.Room-name{
+.Room-name, .current-room {
     border-bottom: 1px solid;
     border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
     border-radius: 7px;
@@ -314,13 +310,23 @@ li {
     text-decoration: none;
 }
 
-.Room-name a {
+.current-room {
+    background-color: white;
+}
+
+.Room-name a, .current-room a {
     text-align: center;
     display: block;
     text-decoration: none;
     margin: auto;
     padding: 3%;
 }
+
+.current-room a {
+    color: rgb(32,31,37);
+    cursor: default;
+}
+
 
 .Room-name a:hover {
     color: rgb(32,31,37);
@@ -346,7 +352,7 @@ li {
     direction: rtl;
 }
 
-.add-room-button {
+#add-room-button {
     background-color: white;
     background-image: url(img/plus.png);
     background-size: 45%;
@@ -362,7 +368,7 @@ li {
     transition: ease-in-out 0.2s;
 }
 
-.add-room-button:hover {
+#add-room-button:hover {
     border-radius: 10px;
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
@@ -424,6 +430,72 @@ li {
     height: 10%;
 }
 
-#add-room-form {
-    z-index: 6;
+.add-room-form {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin-top: 7%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    /* background-color: red; */
+}
+
+.add-room-form form {
+    width: 34%;
+    background-color: rgb(32,31,37);
+    border: 2px solid rgb(216, 216, 216);
+    color: rgb(216, 216, 216);
+    font-family: Aharoni, sans-serif;
+    font-size: 22px;
+    animation: form-pop-up 0.8s ease;
+    margin: auto;
+    padding: 3%;
+    border-radius: 20px;
+}
+
+@keyframes form-pop-up {
+    0% {scale: 0; translate: -50% 50%; opacity: 0%;}
+    80% {opacity: 70%;}
+    100% {scale: 1; translate: 0; opacity: 100%;}
+}
+
+.add-room-form form input {
+    color: rgb(32,31,37);
+    width: 500px;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.add-room-form form label {
+    text-align: left;
+}
+
+.add-room-form h2 {
+    font-family: Aharoni, sans-serif;
+    margin: 0 0 20px 0;
+    transform: translateY(-18px);
+}
+
+#cancel-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    background-color: rgb(32,31,37);
+    border: 0px;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease-out 0.3s;
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+#cancel-button:hover {
+    background-color: rgb(216, 216, 216);
+    color: rgb(32,31,37);
+    transform: scale(1.1);
 }
