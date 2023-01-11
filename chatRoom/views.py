@@ -74,6 +74,12 @@ def room(request, id):
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     romm = get_object_or_404(Room, id=id)
     messages_in_room = romm.message_set.all()
+    if request.method == 'POST':
+        roomName = request.POST['room-name']
+        newRoom = Room(name=roomName)
+        newRoom.save()
+        newRoom.users.add(request.user)
+        return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
     return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'messages_in_room':messages_in_room})
 
 def error_404(request, exception):

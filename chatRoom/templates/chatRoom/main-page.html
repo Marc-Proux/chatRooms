@@ -36,6 +36,13 @@
             <button class="send-button" title="Envoyer le message"> </button>
         </div>
     </section>
+    <section class="add-room-form">
+        <form method="POST" id="add-room-form">
+            {% csrf_token %}
+            <input type="text" name="room-name" placeholder="Nom du salon" maxlength="50">
+            <button type="submit">Créer</button>
+        </form>
+    </section>
 {% else %}
     <p>You are not logged in</p>
     <a href="{% url 'login' %}">Log In</a>
