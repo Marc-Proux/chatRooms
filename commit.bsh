@@ -1,0 +1,71 @@
+#!/bin/bash
+file="commit.bsh"
+blue="\033[1;34m"
+nocolor="\033[0m"
+
+add(){
+	echo "adding files"
+	git add *
+	git reset -- $file
+}
+
+push(){
+	echo "pushing files"
+	git commit -m "$1"
+	git push -u origin main
+}
+
+commit(){
+	add
+	echo
+	git status -s
+	echo
+	echo -n "Do you want to push ? [y/n] "
+	read choice
+	case $choice in
+		y) push "$1";;
+		n) exit 1;;
+	esac
+}
+
+except() {
+	add
+	message="$1"
+	shift 1;
+	git reset -- "$*"
+	echo
+	git status -s
+	echo
+	echo -n "Do you want to push ? [y/n] "
+	read choice
+	case $choice in
+		y) push "$message";;
+		n) exit 1;;
+	esac
+}
+
+function_h(){
+	echo "
+		$file option *
+
+		$file        command name
+		option *          indicates that it can have one or more options
+
+		<commit message>  			  commit with message
+		-e <commit message> <files to except>     except files
+		-h           				  help
+	"
+}
+
+if ! [ $1 ]; then
+	echo "Error: not enough arguments passed"
+	exit 1
+fi
+
+while [ $# -ne 0 ]; do
+	case "$1" in
+		-e) shift 1; except "$@"; exit 0;;
+		-h) function_h;exit 0;;
+		*) if [ $# -le 1 ];then commit "$2";else echo "Error: too many arguments passed"; exit 1; fi;;
+	esac
+done
