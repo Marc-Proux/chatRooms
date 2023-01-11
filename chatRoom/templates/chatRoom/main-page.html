@@ -10,7 +10,7 @@
     <aside class="Room-list">
         <nav>
             <ul>
-                {% for room in user.room_set.all %}
+                {% for room in room_list %}
                     <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
                 {% endfor %}
             </ul>

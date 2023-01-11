@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
 from .models import Room
+from django.db.models import Max
 
 def index(request):
     return render(request, 'chatRoom/index.html')
@@ -60,16 +61,20 @@ class Signup(generic.CreateView):
     template_name = 'registration/signup.html'
 
 def chatRooms(request):
-    all_rooms = Room.objects.get(id=2)
-    messages_in_room = all_rooms.message_set.all()
-    return render(request, 'chatRoom/main-page.html', {'user':request.user, 'messages_in_room':messages_in_room})
+    last_message_time = Max("message__date")
+    room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    id = room_list[0].id
+    print(type(id))
+    return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
 
 def room(request, id):
     if id not in Room.objects.filter(users=request.user).values_list('pk', flat=True):
         raise Http404('Page not found')
+    last_message_time = Max("message__date")
+    room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     romm = get_object_or_404(Room, id=id)
     messages_in_room = romm.message_set.all()
-    return render(request, 'chatRoom/main-page.html', {'user':request.user, 'messages_in_room':messages_in_room})
+    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'messages_in_room':messages_in_room})
 
 def error_404(request, exception):
     return render(request,'chatRoom/404.html')
