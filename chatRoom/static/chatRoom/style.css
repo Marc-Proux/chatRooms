@@ -358,6 +358,7 @@ li {
     border-radius: 100%;
     margin-right: 220px;
     margin-bottom: 20px;
+    cursor: pointer;
     transition: ease-in-out 0.2s;
 }
 
@@ -379,6 +380,7 @@ li {
     background-size: 45%;
     background-position: center;
     background-repeat: no-repeat;
+    cursor: pointer;
     transition: ease-in-out 0.2s;
 }
 
