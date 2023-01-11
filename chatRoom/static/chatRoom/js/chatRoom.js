@@ -6,31 +6,31 @@ $(document).ready(function() {
     })  
 });
 
-// getMessage
+// updateMessages
+function updateMessages(){
+    var room_id = $("#room_id").val();
+    console.log('Requesting messages');
+    $.getJSON('/getMessages/'+room_id+'/', function(data){
+        console.log('JSON', data);
+        $(".message-box").empty();
+        for (var key in data.messages)
+        {
+            var date = new Date(data.messages[key].date);
+            date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+            var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
+            $(".message-box").append(temp);
+        }
+        setTimeout(updateMessages, 500);
+    });
+};
 
 $(document).ready(function(){
-    var room_id = $("#room_id").val();
-    setInterval(function(){
-        $.ajax({
-            type: 'GET',
-            url : "/getMessages/"+room_id+"/",
-            success: function(response){
-                console.log(response);
-                $("#display").empty();
-                for (var key in response.messages)
-                {
-                    var temp='<li class="user">'+response.messages[key].username+'</li><li class="message">'+response.messages[key].message+'</li><li class="date">'+response.messages[key].date+'</li>';
-                    $(".message-box").append(temp);
-                }
-            },
-            error: function(response){
-                alert('room_id:')
-                alert('An error occured')
-            }
-        });
-    },1000);
+    $.ajaxSetup({ cache: false });
+    updateMessages();
 });
 
+
+// sendMessage
 $(document).on('submit','#post-form',function(e){
     e.preventDefault();
 

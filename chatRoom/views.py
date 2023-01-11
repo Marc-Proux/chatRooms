@@ -84,8 +84,7 @@ def room(request, id):
 def getMessages(request, id):
     room = get_object_or_404(Room, id=id)
     messages = room.message_set.all()
-    print("Getting messages...")
-    return JsonResponse({'messages':list(messages.values())})
+    return JsonResponse({'messages':list(messages.values())}, safe=False)
 
 def sendMessage(request):
     text = request.POST['value']
