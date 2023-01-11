@@ -276,6 +276,7 @@ li {
 
 .message {
     font-family: sans-serif;
+    padding-bottom: 5px;
     color: rgb(216, 216, 216);
     border-bottom: 1px solid;
     border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
@@ -299,26 +300,34 @@ li {
     overflow-y: auto;
 }
 
-.Room-name {
-    /* border-left: 3px solid rgb(216, 216, 216);
-    border-right: 3px solid rgb(216, 216, 216); */
+.Room-name{
     border-bottom: 1px solid;
     border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
-    /* border-top: 3px solid rgb(32,31,37); */
     border-radius: 7px;
     font-family: sans-serif;
     font-size: 20px;
     text-align: center;
-    padding: 2%;
     margin: 3% 0 3% 0;
     transition: ease-in-out 0.2s;
     cursor: pointer;
     overflow: hidden;
+    text-decoration: none;
+}
+
+.Room-name a {
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    margin: auto;
+    padding: 3%;
+}
+
+.Room-name a:hover {
+    color: rgb(32,31,37);
+    transform: scale(1.05);
 }
 
 .Room-name:hover {
-    color: rgb(32,31,37);
-    /* border: 3px solid rgb(253, 253, 153); */
     background-color: rgb(253, 253, 153);
     transform: scale(1.05);
 }
