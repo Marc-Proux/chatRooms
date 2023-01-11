@@ -242,7 +242,7 @@ li {
     float: right;
     width: 60%;
     margin-right: 10%;
-    /* background-color: blue; */
+    background-color: rgb(32,31,37);
 }
 
 .messages-list {
@@ -415,9 +415,9 @@ li {
     left: 30%;
     border-radius: 15px;
     background-color: rgb(32,31,37);
+    background: linear-gradient(90deg, rgba(32,31,37,1) 0%, rgba(32,31,37,1) 85%, rgba(32,31,37,0) 85%);
 }
 
 .space {
-    /* background-color: red; */
     height: 10%;
 }
