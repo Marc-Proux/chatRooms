@@ -19,7 +19,7 @@
             <ul>
                 {% for room in room_list %}
                     {% if room.id == current_room.id %}
-                        <li class="current-room"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
+                        <li class="current-room"><a>{{ room.name }}</a></li>
                     {% else %}
                         <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
                     {% endif %}
@@ -44,7 +44,7 @@
         </nav>
     </section>
     <section class="fixed-buttons">
-        <button class="add-room-button" title="Créer un salon de discussion"></button>
+        <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
         <div>
             <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
             <button class="send-button" title="Envoyer le message"> </button>
@@ -52,10 +52,14 @@
     </section>
     <section class="add-room-form">
         <form method="POST" id="add-room-form">
+            <h2>Ajout de salon</h2>
             {% csrf_token %}
-            <input type="text" name="room-name" placeholder="Nom du salon" maxlength="50"><br></br>
-            <input type="search" id="unser-input" placeholder="Search">
-            <button type="submit">Créer</button>
+            <label for="enter-room-name"><p>Nom du salon</p></label>
+            <input type="text" name="room-name" id="enter-room-name" placeholder="Nom..." maxlength="50">
+            <label for="select-users"><p>Utilisateurs qui feront partie du salon</p></label>
+            <input type="search" id="select-users" placeholder="Rechercher utilisateur...">
+            <button type="submit" class="sign-up-button">Ajouter le salon</button>
+            <button type="submit" class="add-room-button" id="cancel-button">Annuler</button>
         </form>
     </section>
 {% else %}
