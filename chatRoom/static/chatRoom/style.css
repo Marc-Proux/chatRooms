@@ -199,10 +199,10 @@ footer {
     color: rgb(216, 216, 216);
     font-size: 350%;
     margin: 1.5%;
-    animation: title-animation 1s;
+    /* animation: title-animation 1s; */
 }
 
-@keyframes title-animation {
+/* @keyframes title-animation {
     0% {
         font-size: 450%;
         margin-left: 3%;
@@ -213,7 +213,7 @@ footer {
         font-size: 350%;
         margin: 1.5%;
     }
-}
+} */
 
 .main-page-title a {
     text-decoration: none;
@@ -254,7 +254,7 @@ li {
     position: absolute;
     bottom: 15%;
     right: 0%;
-    animation: fade-in 2s;
+    /* animation: fade-in 2s; */
     /* background-color: red; */
 }
 
@@ -340,7 +340,7 @@ li {
     padding-right: 3%;
     position: absolute;
     left: 0;
-    animation: fade-in 1s;
+    /* animation: fade-in 1s; */
     overflow-y: auto;
     /* background-color: red; */
     direction: rtl;
@@ -407,7 +407,7 @@ li {
 
 .fixed-buttons {
     margin: auto;
-    animation: fade-in 2s;
+    /* animation: fade-in 2s; */
     width: 70%;
     display: inline-block;
     position: fixed;
