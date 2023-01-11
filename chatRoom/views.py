@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
-from .models import Room
+from .models import Room, Message
 from django.db.models import Max
 
 def index(request):
@@ -86,6 +86,11 @@ def getMessages(request, id):
     messages = room.message_set.all()
     print("Getting messages...")
     return JsonResponse({'messages':list(messages.values())})
+
+def sendMessage(request):
+    text = request.POST['value']
+    new_message = Message(user = request.user, username=request.user.username, message=text, room=Room.objects.get(id=request.POST['room_id']))
+    new_message.save()
 
 def error_404(request, exception):
     return render(request,'chatRoom/404.html')

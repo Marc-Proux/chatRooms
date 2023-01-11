@@ -46,8 +46,11 @@
     <section class="fixed-buttons">
         <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
         <div>
-            <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
-            <button class="send-button" title="Envoyer le message"> </button>
+            <form method="post" id="post-form">
+                {% csrf_token %}
+                <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
+                <button class="send-button" title="Envoyer le message"> </button>
+            </form>
         </div>
     </section>
     <section class="add-room-form">
@@ -59,7 +62,7 @@
             <label for="select-users"><p>Utilisateurs qui feront partie du salon</p></label>
             <input type="search" id="select-users" placeholder="Rechercher utilisateur...">
             <button type="submit" class="sign-up-button">Ajouter le salon</button>
-            <button type="submit" class="add-room-button" id="cancel-button">Annuler</button>
+            <button type="button" class="add-room-button" id="cancel-button">Annuler</button>
         </form>
     </section>
 {% else %}

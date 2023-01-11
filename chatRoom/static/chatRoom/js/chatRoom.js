@@ -30,3 +30,21 @@ $(document).ready(function(){
         });
     },1000);
 });
+
+$(document).on('submit','#post-form',function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url:'/sendMessage/',
+      data:{
+          value:$('#msg-txt-field').val(),
+          room_id:$("#room_id").val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function(data){
+         //alert(data)
+      }
+    });
+    $('#msg-txt-field').val('');
+  });
