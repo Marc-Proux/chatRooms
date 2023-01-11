@@ -1,8 +1,15 @@
 {% extends "chatRoom/baseLayout.html" %}
+{% load static %}
 {% block content %}
+    <!-- JS for bootstrap -->
+    <script src="{% static 'chatRoom/bootstrap.min.js' %}"></script>
+    <!-- Jquery -->
+    <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
+    <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
 {% if user.is_authenticated %}
     <!-- Hi {{ user.username }}! -->
     <header>
+        <input type="hidden" id="room_id" name="room_id" value="{{ current_room.id }}">
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
         <a class="log-out" href="{% url 'logout' %}">Deconnexion</a>
     </header>
@@ -24,11 +31,13 @@
     <section class="messages-list">
         <nav>
             <ul class="message-box">
+                <!--
                 {% for message in current_room.message_set.all %}
                     <li class="user">{{ message.user }}</li>
                     <li class="message">{{ message.message }}</li>
                     <li class="date">{{ message.date }}</li>
                 {% endfor %}
+                -->
                 <br class="space">
                 <br class="space">
             </ul>

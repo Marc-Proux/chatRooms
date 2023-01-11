@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 '''
 class Account(models.Model):
@@ -16,8 +17,9 @@ class Room(models.Model):
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=200)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     message = models.CharField(max_length=200)
-    date = models.DateTimeField('date published')
+    date = models.DateTimeField(default=datetime.now)
     def __str__(self):
         return self.message

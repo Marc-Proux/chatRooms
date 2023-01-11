@@ -10,4 +10,5 @@ urlpatterns = [
     path('chatrooms/<int:id>/', views.room, name='room'),
     path('signup', views.signup, name='signup'),
     path('logout/', LogoutView.as_view(next_page=settings.LOGOUT_REDIRECT_URL), name='logout'),
+    path('getMessages/<int:id>/', views.getMessages, name='getMessages'),
 ]

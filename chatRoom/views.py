@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -28,7 +28,7 @@ def login(request):
                     auth_login(request, user)
                     return HttpResponseRedirect('/chatrooms')
             else:
-                messages.error(request,'username or password not correct')
+                messages.error(request,"Nom d'utilisateur ou mot de passe incorrect")
                 return HttpResponseRedirect('/login')
         
         else:
@@ -38,10 +38,10 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
-            messages.error(request,'username already exists')
+            messages.error(request,"Nom d'utilisateur déjà utilisé.")
             return HttpResponseRedirect('/signup')
         elif request.POST['password1'] != request.POST['password2']:
-            messages.error(request,'passwords do not match')
+            messages.error(request,"Les mots de passe ne sont pas identiques.")
             return HttpResponseRedirect('/signup')
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -80,6 +80,12 @@ def room(request, id):
         newRoom.users.add(request.user)
         return HttpResponseRedirect('/chatrooms/'+str(newRoom.id)+'/')
     return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room})
+
+def getMessages(request, id):
+    room = get_object_or_404(Room, id=id)
+    messages = room.message_set.all()
+    print("Getting messages...")
+    return JsonResponse({'messages':list(messages.values())})
 
 def error_404(request, exception):
     return render(request,'chatRoom/404.html')
