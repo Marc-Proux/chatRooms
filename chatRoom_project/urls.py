@@ -20,3 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('chatRoom.urls')),
 ]
+
+handler404 = 'chatRoom.views.error_404'

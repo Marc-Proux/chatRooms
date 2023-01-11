@@ -11,7 +11,7 @@
         <nav>
             <ul>
                 {% for room in user.room_set.all %}
-                    <li class="Room-name">{{ room.name }}</li>
+                    <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
                 {% endfor %}
             </ul>
         </nav>

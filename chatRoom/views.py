@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -63,3 +63,13 @@ def chatRooms(request):
     all_rooms = Room.objects.get(id=2)
     messages_in_room = all_rooms.message_set.all()
     return render(request, 'chatRoom/main-page.html', {'user':request.user, 'messages_in_room':messages_in_room})
+
+def room(request, id):
+    if id not in Room.objects.filter(users=request.user).values_list('pk', flat=True):
+        raise Http404('Page not found')
+    romm = get_object_or_404(Room, id=id)
+    messages_in_room = romm.message_set.all()
+    return render(request, 'chatRoom/main-page.html', {'user':request.user, 'messages_in_room':messages_in_room})
+
+def error_404(request, exception):
+    return render(request,'chatRoom/404.html')
