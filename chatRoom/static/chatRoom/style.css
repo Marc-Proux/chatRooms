@@ -421,3 +421,7 @@ li {
 .space {
     height: 10%;
 }
+
+#add-room-form {
+    z-index: 6;
+}

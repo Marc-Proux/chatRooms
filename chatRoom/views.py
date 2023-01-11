@@ -72,15 +72,14 @@ def room(request, id):
         raise Http404('Page not found')
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    romm = get_object_or_404(Room, id=id)
-    messages_in_room = romm.message_set.all()
+    room = get_object_or_404(Room, id=id)
     if request.method == 'POST':
         roomName = request.POST['room-name']
         newRoom = Room(name=roomName)
         newRoom.save()
         newRoom.users.add(request.user)
-        return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
-    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'messages_in_room':messages_in_room})
+        return HttpResponseRedirect('/chatrooms/'+str(newRoom.id)+'/')
+    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room})
 
 def error_404(request, exception):
     return render(request,'chatRoom/404.html')

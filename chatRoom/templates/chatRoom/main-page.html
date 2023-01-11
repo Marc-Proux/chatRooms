@@ -11,7 +11,11 @@
         <nav>
             <ul>
                 {% for room in room_list %}
-                    <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
+                    {% if room.id == current_room.id %}
+                        <li class="current-room"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
+                    {% else %}
+                        <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </nav>
@@ -20,7 +24,7 @@
     <section class="messages-list">
         <nav>
             <ul class="message-box">
-                {% for message in messages_in_room %}
+                {% for message in current_room.message_set.all %}
                     <li class="user">{{ message.user }}</li>
                     <li class="message">{{ message.message }}</li>
                     <li class="date">{{ message.date }}</li>
@@ -40,7 +44,8 @@
     <section class="add-room-form">
         <form method="POST" id="add-room-form">
             {% csrf_token %}
-            <input type="text" name="room-name" placeholder="Nom du salon" maxlength="50">
+            <input type="text" name="room-name" placeholder="Nom du salon" maxlength="50"><br></br>
+            <input type="search" id="unser-input" placeholder="Search">
             <button type="submit">Créer</button>
         </form>
     </section>
