@@ -136,20 +136,55 @@ $(document).on('submit','#post-form',function(e){
     $('#msg-txt-field').val('');
 });
 
-// addRoom
+// createRoom
 $(document).on('submit','#add-room-form',function(e){
+    e.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'/addRoom/',
+        data:{
+            room_name:$('#enter-room-name').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function(data){
+            window.location.href = "/chatrooms/"+data.room_id+"/";
+        }
+    });
+    $('#room-add-input').val('');
+});
+
+// addUser
+$(document).on('submit','#add-user-form',function(e){
     e.preventDefault();
 
     $.ajax({
       type:'POST',
-      url:'/addRoom/',
+      url:'/addUser/',
       data:{
-          room_name:$('#enter-room-name').val(),
+          user_name:$('#user-add-input').val(),
+          room_id:$("#room_id").val(),
           csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
-      success: function(response){
-        window.location.href = '/chatrooms/'+response.room_id+'/';
+      success: function(data){
+        //alert(data)
       }
     });
-    $('#enter-room-name').val('');
+    $('#user-add-input').val('');
+});
+
+// emoji button
+const picker = new EmojiButton( {
+    position: 'top-start',
+    autoHide: false,
+    theme:'dark',
+});
+
+$(document).ready(function() {
+    $("#emoji-button").click(function() {
+        picker.togglePicker(document.querySelector('#emoji-button'));
+    })  
+});
+
+picker.on('emoji', emoji => {
+    document.querySelector('#msg-txt-field').value += emoji;
 });
