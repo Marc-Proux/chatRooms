@@ -12,7 +12,7 @@
     <header>
         <input type="hidden" id="room_id" name="room_id" value="{{ current_room.id }}">
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
-        <a class="log-out" href="{% url 'logout' %}">Deconnexion</a>
+        <a class="log-out" href="{% url 'logout' %}" title="Déconnexion">Utilisateur : {{ user.username }}</a>
     </header>
     <p class="Room-title">Salons de discussion</p>
     <aside class="Room-list">
