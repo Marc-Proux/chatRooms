@@ -1,9 +1,23 @@
 // Show/hide the forms
-$(document).ready(function() {
+$(document).ready(function(e) {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
         $("#add-room-form").toggle();
-    })  
+    })
+});
+
+$(document).mouseup(function(e){
+    var container = $("#add-room-form");
+    var container2 = $(".add-user-form");
+ 
+    // If the target of the click isn't the container
+    if(!container.is(e.target) && container.has(e.target).length === 0){
+        container.hide();
+    }
+
+    if(!container2.is(e.target) && container2.has(e.target).length === 0){
+        container2.hide();
+    }
 });
 
 $(document).ready(function() {
