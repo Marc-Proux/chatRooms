@@ -375,7 +375,7 @@ li {
     /* transform: scale(1.2); */
 }
 
-.user-list-button {
+#user-list-button {
     vertical-align: bottom;
     background-color: white;
     background-image: url(img/users.png);
@@ -471,7 +471,7 @@ li {
     color: rgb(216, 216, 216);
     font-family: Aharoni, sans-serif;
     font-size: 22px;
-    animation: form-pop-up 0.8s ease;
+    animation: form-pop-up 0.6s ease;
     margin: auto;
     padding: 3%;
     border-radius: 20px;
@@ -536,7 +536,7 @@ li {
     color: rgb(216, 216, 216);
     font-family: Aharoni, sans-serif;
     font-size: 15px;
-    animation: userlist-pop-up 0.8s ease;
+    animation: userlist-pop-up 0.6s ease;
     margin: auto;
     padding: 3%;
     border-radius: 20px;
@@ -570,4 +570,24 @@ li {
     font-family: Aharoni, sans-serif;
     margin: 0 0 20px 0;
     transform: translateY(-18px);
+}
+
+#user-cancel-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    background-color: rgb(32,31,37);
+    border: 0px;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease-out 0.3s;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+#user-cancel-button:hover {
+    background-color: rgb(216, 216, 216);
+    color: rgb(32,31,37);
+    transform: scale(1.1);
 }

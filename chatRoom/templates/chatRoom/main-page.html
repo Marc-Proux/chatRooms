@@ -51,7 +51,7 @@
                 <button class="send-button" title="Envoyer le message"> </button>
             </form>
         </div>
-        <button class="user-list-button" title="Ajouter des utilisateurs dans le salon"></button>
+        <button class="user-list-button" id="user-list-button" title="Ajouter des utilisateurs dans le salon"></button>
     </section>
     <section class="add-room-form">
         <form method="POST" id="add-room-form">
@@ -74,11 +74,9 @@
         <form method="POST" id="add-user-form">
             {% csrf_token %}
             <input type="search" id="user-add-input" placeholder="Nom de l'tilisateur à ajouter...">
-            <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0;">Ajouter l'utilisateur</button>
+            <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
+            <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
         </form>
     </section>
-{% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">Log In</a>
 {% endif %}
 {% endblock %}
