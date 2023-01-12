@@ -29,7 +29,7 @@
     </aside>
     <p class="Messages-title">Messages du Salon</p>
     <section class="messages-list">
-        <nav>
+        <div id="messages-div">
             <ul class="message-box">
                 <!--
                 {% for message in current_room.message_set.all %}
@@ -40,7 +40,7 @@
                 -->
             </ul>
             <br class="space">
-        </nav>
+        </div>
     </section>
     <section class="fixed-buttons">
         <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>        

@@ -7,11 +7,22 @@ $(document).ready(function() {
 });
 
 // updateMessages
+function scrollBottom(element) {
+    element.scrollTop = element.scrollHeight;
+}
+
+var num_msg = 0;
+var new_num = 0;
+
 function updateMessages(){
     var room_id = $("#room_id").val();
+    var elem = document.getElementById('messages-div'); 
     console.log('Requesting messages');
     $.getJSON('/getMessages/'+room_id+'/', function(data){
         console.log('JSON', data);
+        if ( (data.messages).length != num_msg) {
+            new_num = (data.messages).length;    
+        }
         $(".message-box").empty();
         for (var key in data.messages)
         {
@@ -20,9 +31,17 @@ function updateMessages(){
             var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
             $(".message-box").append(temp);
         }
-        setTimeout(updateMessages, 500);
+        setTimeout(updateMessages, 100);
     });
 };
+
+window.setInterval(function() {
+    if ( new_num != num_msg) {
+        var elem = document.getElementById('messages-div');
+        elem.scrollTop = elem.scrollHeight;
+        num_msg = new_num;
+    }
+}, 30);
 
 $(document).ready(function() {
     $(".add-user-form").hide();
@@ -55,4 +74,4 @@ $(document).on('submit','#post-form',function(e){
       }
     });
     $('#msg-txt-field').val('');
-  });
+});

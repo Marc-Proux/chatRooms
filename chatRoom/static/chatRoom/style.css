@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     color: rgb(216, 216, 216);
+    scroll-behavior: smooth;
 }
 /* Custom scrollbar */
 
@@ -254,7 +255,7 @@ li {
     /* background-color: red; */
 }
 
-.messages-list nav {
+.messages-list div {
     padding-left: 3%;
     margin-top: 3.6%;
     height: 100%;
@@ -292,7 +293,7 @@ li {
     align-items: baseline;
 }
 
-.messages-list nav {
+.messages-list div {
     overflow-y: auto;
 }
 
