@@ -6,7 +6,6 @@ $(document).ready(function() {
     })  
 });
 
-<<<<<<< HEAD
 // updateMessages
 function updateMessages(){
     var room_id = $("#room_id").val();
@@ -24,7 +23,6 @@ function updateMessages(){
         setTimeout(updateMessages, 500);
     });
 };
-=======
 
 $(document).ready(function() {
     $(".add-user-form").hide();
@@ -33,7 +31,6 @@ $(document).ready(function() {
     })  
 });
 // getMessage
->>>>>>> bb4bbce58e44f43a108c9d89fe01cc70f71ea2f2
 
 $(document).ready(function(){
     $.ajaxSetup({ cache: false });
