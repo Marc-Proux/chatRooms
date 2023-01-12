@@ -101,7 +101,12 @@ def getUpdates(request, id):
     messages = room.message_set.all()
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return JsonResponse({'messages':list(messages.values()), 'room_list':list(room_list.values()), 'user_list':list(room.users.all().values())})
+    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values())})
+
+def updateRoomList(request):
+    last_message_time = Max("message__date")
+    room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    return JsonResponse({'room_list':list(room_list.values())})
 
 def deleteUser(request, id, user_name):
     room = get_object_or_404(Room, id=id)

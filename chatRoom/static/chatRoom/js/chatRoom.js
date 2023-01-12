@@ -34,6 +34,35 @@ $(document).mouseup(function(e){
 var num_msg = 0;
 var new_num = 0;
 
+function updateRoomList(){
+    var room_id = $("#room_id").val();
+    if (room_id == ""){
+        $.ajax({
+            type:'GET',
+            url:'/updateRoomList/',
+            success: function(data){
+                console.log('JSON', data);
+                $(".Room-list").empty();
+                for (var key in data.room_list)
+                {
+                    if (data.room_list[key].id == room_id) {
+                        var temp='<li class="current-room"><a>'+data.room_list[key].name+'</a></li>';
+                        $(".Room-list").append(temp);
+                    }
+                    else {
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
+                        $(".Room-list").append(temp);
+                    }
+                }
+            },
+            error : function(data) {
+                console.log('Error', data);
+            }
+        });
+    }
+    setTimeout(updateRoomList, 1000);
+};
+
 function update(){
     var room_id = $("#room_id").val();
     var user = $("#user").val();
@@ -51,13 +80,6 @@ function update(){
                 $(".message-box").empty();
                 $(".Room-list").empty();
                 $(".user-list").empty();
-                for (var key in data.messages)
-                {
-                    var date = new Date(data.messages[key].date);
-                    date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
-                    var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
-                    $(".message-box").append(temp);
-                }
                 for (var key in data.room_list)
                 {
                     if (data.room_list[key].id == room_id) {
@@ -69,6 +91,14 @@ function update(){
                         $(".Room-list").append(temp);
                     }
                 }
+                for (var key in data.messages)
+                {
+                    var date = new Date(data.messages[key].date);
+                    date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+                    var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
+                    $(".message-box").append(temp);
+                }
+
                 if (owner == user) {
                     for (var key in data.user_list)
                     {
@@ -107,6 +137,7 @@ function update(){
 $(document).ready(function(){
     $.ajaxSetup({ cache: false });
     update();
+    updateRoomList();
 });
 
 
