@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <!-- JS for bootstrap -->
-    <script src="{% static 'chatRoom/bootstrap.min.js' %}"></script>
+    <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
     <!-- Jquery -->
     <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
     <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
@@ -89,7 +89,9 @@
                 <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
                 <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
             </form>
-            {% endif %}
+        {% else %}
+            <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
+        {% endif %}
     </section>
 {% endif %}
 {% endblock %}

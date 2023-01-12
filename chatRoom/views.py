@@ -1,5 +1,5 @@
-from django.http import HttpResponseRedirect, Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
@@ -9,6 +9,7 @@ from django.views import generic
 from django.contrib import messages
 from .models import Room, Message
 from django.db.models import Max
+import json
 
 def index(request):
     return render(request, 'chatRoom/index.html')
@@ -55,24 +56,9 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'chatRoom/signup.html', {'form': form})
 
-class Signup(generic.CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
-
 def chatRooms(request):
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    if request.method == 'POST':
-        print("adding room")
-        roomName = request.POST['room-name']
-        if roomName == "" or roomName[0] == " ":
-            messages.error(request,"Nom de chatroom invalide.")
-            return HttpResponseRedirect('/chatrooms')
-        newRoom = Room(name=roomName, owner=request.user)
-        newRoom.save()
-        newRoom.users.add(request.user)
-        return HttpResponseRedirect('/chatrooms/'+str(newRoom.id)+'/')
     if len(room_list) == 0:
         return render(request, 'chatRoom/main-page.html', {'room_list':room_list})
     id = room_list[0].id
@@ -84,27 +70,29 @@ def room(request, id):
     room = get_object_or_404(Room, id=id)
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    if request.method == 'POST':
-        print("adding room")
-        roomName = request.POST['room-name']
-        if roomName == "" or roomName[0] == " ":
-            messages.error(request,"Nom de chatroom invalide.")
-            return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
-        newRoom = Room(name=roomName, owner=request.user)
-        newRoom.save()
-        newRoom.users.add(request.user)
-        return HttpResponseRedirect('/chatrooms/'+str(newRoom.id)+'/')
     return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username})
+
+def addRoom(request):
+    roomName = request.POST['room_name']
+    print(roomName)
+    if roomName == "" or roomName[0] == " ":
+        messages.error(request,"Nom de chatroom invalide.")
+        return HttpResponseRedirect('/chatrooms')
+    newRoom = Room(name=roomName, owner=request.user)
+    newRoom.save()
+    newRoom.users.add(request.user)
+    return HttpResponse(json.dumps({'room_id':newRoom.id}), safe=False)
 
 def getMessages(request, id):
     room = get_object_or_404(Room, id=id)
     messages = room.message_set.all()
-    return JsonResponse({'messages':list(messages.values())}, safe=False)
+    return JsonResponse({'messages':list(messages.values())})
 
 def sendMessage(request):
     text = request.POST['value']
     new_message = Message(user = request.user, username=request.user.username, message=text, room=Room.objects.get(id=request.POST['room_id']))
     new_message.save()
+    return HttpResponseRedirect('/chatrooms/'+str(request.POST['room_id'])+'/')
 
 def error_404(request, exception):
     return render(request,'chatRoom/404.html')
