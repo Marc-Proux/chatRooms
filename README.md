@@ -64,9 +64,16 @@ Enfin, dans le fichier
 ```
 chatRoom/chatRoom_project/settings.py
 ```
-Ajouter votre URL
+Ajoutez votre URL
 ```
 ALLOWED_HOSTS = ['{URL}']
+```
+
+L'application possède un superuser 'System' nécessaire à son fonctionnement.
+Il a accès à l'ensemble des salons et à leur gestion.
+Changez son mot de passe avec la commande
+```
+python manage.py changepassword System
 ```
 
 ## Documentation
