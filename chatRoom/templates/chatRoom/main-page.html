@@ -43,7 +43,7 @@
         </nav>
     </section>
     <section class="fixed-buttons">
-        <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
+        <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>        
         <div>
             <form method="post" id="post-form">
                 {% csrf_token %}
@@ -51,6 +51,7 @@
                 <button class="send-button" title="Envoyer le message"> </button>
             </form>
         </div>
+        <button class="user-list-button" title="Ajouter des utilisateurs dans le salon"></button>
     </section>
     <section class="add-room-form">
         <form method="POST" id="add-room-form">
@@ -58,10 +59,22 @@
             {% csrf_token %}
             <label for="enter-room-name"><p>Nom du salon</p></label>
             <input type="text" name="room-name" id="enter-room-name" placeholder="Nom..." maxlength="50">
-            <label for="select-users"><p>Utilisateurs qui feront partie du salon</p></label>
-            <input type="search" id="select-users" placeholder="Rechercher utilisateur...">
-            <button type="submit" class="sign-up-button">Ajouter le salon</button>
+            <button type="submit" class="sign-up-button" style="margin-left: 0; margin-right: 20px;">Ajouter le salon</button>
             <button type="button" class="add-room-button" id="cancel-button">Annuler</button>
+        </form>
+    </section>
+
+    <section class="add-user-form">
+        <h2>Utilisateurs dans le salon</h2>
+        <nav>
+            <ul>
+                <!-- à faire  -->
+            </ul>
+        </nav>
+        <form method="POST" id="add-user-form">
+            {% csrf_token %}
+            <input type="search" id="user-add-input" placeholder="Nom de l'tilisateur à ajouter...">
+            <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0;">Ajouter l'utilisateur</button>
         </form>
     </section>
 {% else %}

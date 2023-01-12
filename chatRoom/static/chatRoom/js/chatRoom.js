@@ -1,4 +1,4 @@
-// Show/hide the add room form
+// Show/hide the forms
 $(document).ready(function() {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
@@ -6,6 +6,7 @@ $(document).ready(function() {
     })  
 });
 
+<<<<<<< HEAD
 // updateMessages
 function updateMessages(){
     var room_id = $("#room_id").val();
@@ -23,6 +24,16 @@ function updateMessages(){
         setTimeout(updateMessages, 500);
     });
 };
+=======
+
+$(document).ready(function() {
+    $(".add-user-form").hide();
+    $(".user-list-button").click(function() {
+        $(".add-user-form").toggle();
+    })  
+});
+// getMessage
+>>>>>>> bb4bbce58e44f43a108c9d89fe01cc70f71ea2f2
 
 $(document).ready(function(){
     $.ajaxSetup({ cache: false });
