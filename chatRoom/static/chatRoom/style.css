@@ -322,10 +322,11 @@ li {
 
 .current-room {
     background-color: white;
+    height: 43px;
     width: 90%;
 }
 
-.Room-name a, .current-room a {
+.Room-name a {
     text-align: center;
     display: block;
     text-decoration: none;
@@ -336,6 +337,10 @@ li {
 .current-room a {
     color: rgb(32,31,37);
     cursor: default;
+    text-decoration: none;
+    padding: 3%;
+    display: block;
+    height: 100%;
 }
 
 
