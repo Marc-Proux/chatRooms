@@ -311,8 +311,18 @@ li {
     text-decoration: none;
 }
 
+.current-room-div {
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    display: inline-flex;
+    direction: ltr;
+    align-items: center;
+    width: 100%;
+}
+
 .current-room {
     background-color: white;
+    width: 90%;
 }
 
 .Room-name a, .current-room a {
@@ -331,12 +341,33 @@ li {
 
 .Room-name a:hover {
     color: rgb(32,31,37);
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
 }
 
 .Room-name:hover {
     background-color: rgb(253, 253, 153);
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
+}
+
+.leave-button {
+    height: 43px;
+    width: 43px;
+    border-radius: 7px;
+    background-color: white;
+    background-image: url(img/quit.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    margin-left: 1%;
+    border: none;
+}
+
+.leave-button:hover {
+    background-color: rgb(253, 253, 153);
+}
+
+.leave-button:active {
+    transform: scale(0.9);
 }
 
 .Room-list {
@@ -366,7 +397,7 @@ li {
     border-radius: 100%;
     margin-right: 220px;
     cursor: pointer;
-    transition: ease-in-out 0.2s;
+    transition: ease-in-out 0.1s;
 }
 
 #add-room-button:hover {
@@ -374,6 +405,10 @@ li {
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.2); */
+}
+
+#add-room-button:active {
+    transform: scale(0.9);
 }
 
 #user-list-button {
@@ -388,7 +423,7 @@ li {
     border: 0;
     border-radius: 100%;
     cursor: pointer;
-    transition: ease-in-out 0.2s;
+    transition: ease-in-out 0.1s;
 }
 
 #user-list-button:hover {
@@ -396,6 +431,10 @@ li {
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.2); */
+}
+
+#user-list-button:active {
+    transform: scale(0.9);
 }
 
 .send-button {
@@ -410,13 +449,17 @@ li {
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-    transition: ease-in-out 0.2s;
+    transition: ease-in-out 0.1s;
 }
 
 .send-button:hover {
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.04) */
     border-radius: 10px;
+}
+
+.send-button:active {
+    transform: scale(0.9);
 }
 
 .fixed-buttons input {
@@ -622,6 +665,10 @@ li {
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.1); */
+}
+
+#emoji-button:active {
+    transform: scale(0.9);
 }
 
 .user-name-list {
