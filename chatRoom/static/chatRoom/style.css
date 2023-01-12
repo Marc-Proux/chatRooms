@@ -305,7 +305,7 @@ li {
     font-size: 20px;
     text-align: center;
     margin: 3% 0 3% 0;
-    transition: ease-in-out 0.2s;
+    /* transition: ease-in-out 0.2s; */
     cursor: pointer;
     overflow: hidden;
     text-decoration: none;
