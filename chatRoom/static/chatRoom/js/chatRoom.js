@@ -3,7 +3,6 @@ $(document).ready(function(e) {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
         $("#add-room-form").toggle();
-        $(".fixed-buttons").hide();
     })
 });
 
@@ -13,7 +12,6 @@ $(document).ready(function() {
     $(".add-user-form").hide();
     $(".user-list-button").click(function() {
         $(".add-user-form").toggle();
-        $(".fixed-buttons").hide();
     })  
 });
 
@@ -24,12 +22,10 @@ $(document).mouseup(function(e){
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
         container.hide();
-        $(".fixed-buttons").show();
     }
 
     if(!container2.is(e.target) && container2.has(e.target).length === 0){
         container2.hide();
-        $(".fixed-buttons").show();
     }
 });
 
