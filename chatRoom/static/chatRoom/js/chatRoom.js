@@ -3,7 +3,18 @@ $(document).ready(function(e) {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
         $("#add-room-form").toggle();
+        $(".fixed-buttons").hide();
     })
+});
+
+
+
+$(document).ready(function() {
+    $(".add-user-form").hide();
+    $(".user-list-button").click(function() {
+        $(".add-user-form").toggle();
+        $(".fixed-buttons").hide();
+    })  
 });
 
 $(document).mouseup(function(e){
@@ -13,18 +24,13 @@ $(document).mouseup(function(e){
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
         container.hide();
+        $(".fixed-buttons").show();
     }
 
     if(!container2.is(e.target) && container2.has(e.target).length === 0){
         container2.hide();
+        $(".fixed-buttons").show();
     }
-});
-
-$(document).ready(function() {
-    $(".add-user-form").hide();
-    $(".user-list-button").click(function() {
-        $(".add-user-form").toggle();
-    })  
 });
 
 // update
@@ -71,11 +77,11 @@ function update(){
                     for (var key in data.user_list)
                     {
                         if (data.user_list[key].username == owner) {
-                            var temp='<li class="Room-name">'+data.user_list[key].username+' | Admin</li>'
+                            var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
                             $(".user-list").append(temp);
                         }
                         else if (data.user_list[key].username != 'System') {
-                            var temp='<li class="Room-name">'+data.user_list[key].username+' <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">supprimer</a></li>';
+                            var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
                             $(".user-list").append(temp);
                         }
                     }
@@ -84,11 +90,11 @@ function update(){
                     for (var key in data.user_list)
                     {
                         if (data.user_list[key].username == owner) {
-                            var temp='<li class="Room-name">'+data.user_list[key].username+' | Admin</li>'
+                            var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
                             $(".user-list").append(temp);
                         }
                         else if (data.user_list[key].username != 'System') {
-                            var temp='<li class="Room-name">'+data.user_list[key].username+'</li>';
+                            var temp='<li class="user-name-list">'+data.user_list[key].username+'</li>';
                             $(".user-list").append(temp);
                         }
                     }

@@ -75,7 +75,7 @@
 
     <section class="add-user-form">
         <h2>Utilisateurs dans le salon</h2>
-        <nav>
+        <div id="user-div">
             <ul class="user-list">
                 <!-- {% for users in user_list %}
                     {% if users.username == owner %}
@@ -85,14 +85,15 @@
                     {% endif %}
                 {% endfor %} -->
             </ul>
-        </nav>
+        </div>
         {% if user.username == owner %}
-            <form method="POST" id="add-user-form">
-                {% csrf_token %}
-                <input type="search" id="user-add-input" placeholder="Nom de l'tilisateur à ajouter...">
-                <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
-                <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
-            </form>
+            <div id="add-user-div">
+                <form method="POST" id="add-user-form">
+                    {% csrf_token %}
+                    <input type="search" id="user-add-input" placeholder="Ajouter un utilisateur...">
+                    <button type="submit" class="sign-up-button" style="font-size: 15px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
+                </form>
+            </div>
         {% endif %}
     </section>
 {% endif %}

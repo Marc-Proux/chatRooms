@@ -524,14 +524,14 @@ li {
 
 .add-user-form {
     position: absolute;
+    display: inline-block;
     text-align: center;
     margin: auto;
     right: 0;
     bottom: 0;
     top: 0;
     left: 0;
-    transform: translate(-50% 0);
-    width: 10%;
+    width: max-content;
     height: 60%;
     background-color: rgb(32,31,37);
     border: 2px solid rgb(216, 216, 216);
@@ -543,6 +543,7 @@ li {
     padding: 3%;
     border-radius: 20px;
     box-shadow: 1px 1px 5px black;
+    overflow-y: auto;
 }
 
 @keyframes userlist-pop-up {
@@ -551,17 +552,23 @@ li {
     100% {scale: 1; opacity: 100%;}
 }
 
+#add-user-div {
+    width:max-content;
+}
+
 .add-user-form form {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
+    padding: 1%;
+    border-radius: 15px;
     text-align: center;
+}
+
+.add-room-form label {
+    margin-bottom: 5px;
 }
 
 .add-user-form form input {
     color: rgb(32,31,37);
-    width: 90%;
+    width: 80%;
     padding: 2%;
     margin: 1.5% 0 5% 0;
     border: 0px;
@@ -615,4 +622,48 @@ li {
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.1); */
+}
+
+.user-name-list {
+    font-family: Aharoni, sans-serif;
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-size: 25px;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    /* transition: ease-in-out 0.2s; */
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.user-name-list a {
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 15px;
+    color: rgb(167, 167, 167);
+}
+
+.user-name-list a:hover {
+    text-decoration: underline;
+    color: rgb(253, 253, 153);
+}
+
+.admin-name-list {
+    font-family: Aharoni, sans-serif;
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-size: 25px;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    /* transition: ease-in-out 0.2s; */
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.admin-name-list span {
+    color: rgb(253, 253, 153);
+    font-family: sans-serif;
+    font-size: 15px;
 }
