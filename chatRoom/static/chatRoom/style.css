@@ -455,32 +455,32 @@ li {
 
 .add-room-form {
     position: absolute;
-    width: 100%;
+    width: 34%;
     text-align: center;
-    margin-top: 15%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto;
+    margin-left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    z-index: 0;
     /* background-color: red; */
 }
 
 .add-room-form form {
-    width: 34%;
+    width: 100%;
     background-color: rgb(32,31,37);
     border: 2px solid rgb(216, 216, 216);
     color: rgb(216, 216, 216);
     font-family: Aharoni, sans-serif;
     font-size: 22px;
-    animation: form-pop-up 0.6s ease;
+    animation: form-pop-up 0.4s ease;
     margin: auto;
     padding: 3%;
     border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
 }
 
 @keyframes form-pop-up {
-    0% {scale: 0; translate: -50% 50%; opacity: 0%;}
+    0% {scale: 0; opacity: 0%;}
     80% {opacity: 70%;}
-    100% {scale: 1; translate: 0; opacity: 100%;}
+    100% {scale: 1; opacity: 100%;}
 }
 
 .add-room-form form input {
@@ -500,7 +500,6 @@ li {
 .add-room-form h2 {
     font-family: Aharoni, sans-serif;
     margin: 0 0 20px 0;
-    transform: translateY(-18px);
 }
 
 #cancel-button {
@@ -527,8 +526,11 @@ li {
     position: absolute;
     text-align: center;
     margin: auto;
-    right: 7.9%;
-    bottom: 10%;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    transform: translate(-50% 0);
     width: 10%;
     height: 60%;
     background-color: rgb(32,31,37);
@@ -536,16 +538,16 @@ li {
     color: rgb(216, 216, 216);
     font-family: Aharoni, sans-serif;
     font-size: 15px;
-    animation: userlist-pop-up 0.6s ease;
+    animation: userlist-pop-up 0.4s ease;
     margin: auto;
     padding: 3%;
     border-radius: 20px;
 }
 
 @keyframes userlist-pop-up {
-    0% {scale: 0; translate: 50% 50%; opacity: 0%;}
+    0% {scale: 0; opacity: 0%;}
     80% {opacity: 70%;}
-    100% {scale: 1; translate: 0; opacity: 100%;}
+    100% {scale: 1; opacity: 100%;}
 }
 
 .add-user-form form {
