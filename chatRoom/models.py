@@ -13,6 +13,7 @@ class Account(models.Model):
 class Room(models.Model):
     name = models.CharField(max_length=200)
     users = models.ManyToManyField(User)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
     def __str__(self):
         return self.name
 

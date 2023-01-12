@@ -59,6 +59,11 @@
             {% csrf_token %}
             <label for="enter-room-name"><p>Nom du salon</p></label>
             <input type="text" name="room-name" id="enter-room-name" placeholder="Nom..." maxlength="50">
+            {% for message in messages %}
+                 <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                </div>
+            {% endfor %}
             <button type="submit" class="sign-up-button" style="margin-left: 0; margin-right: 20px;">Ajouter le salon</button>
             <button type="button" class="add-room-button" id="cancel-button">Annuler</button>
         </form>
@@ -68,15 +73,23 @@
         <h2>Utilisateurs dans le salon</h2>
         <nav>
             <ul>
-                <!-- à faire  -->
+                {% for users in user_list %}
+                    {% if users.username == owner %}
+                        <li class="Room-name">{{ users.username }} | Admin</li>
+                    {% else %}
+                        <li class="Room-name">{{ users.username }}</li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </nav>
-        <form method="POST" id="add-user-form">
-            {% csrf_token %}
-            <input type="search" id="user-add-input" placeholder="Nom de l'tilisateur à ajouter...">
-            <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
-            <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
-        </form>
+        {% if user.username == owner %}
+            <form method="POST" id="add-user-form">
+                {% csrf_token %}
+                <input type="search" id="user-add-input" placeholder="Nom de l'tilisateur à ajouter...">
+                <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
+                <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
+            </form>
+            {% endif %}
     </section>
 {% endif %}
 {% endblock %}

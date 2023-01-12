@@ -63,23 +63,38 @@ class Signup(generic.CreateView):
 def chatRooms(request):
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    if request.method == 'POST':
+        print("adding room")
+        roomName = request.POST['room-name']
+        if roomName == "" or roomName[0] == " ":
+            messages.error(request,"Nom de chatroom invalide.")
+            return HttpResponseRedirect('/chatrooms')
+        newRoom = Room(name=roomName, owner=request.user)
+        newRoom.save()
+        newRoom.users.add(request.user)
+        return HttpResponseRedirect('/chatrooms/'+str(newRoom.id)+'/')
+    if len(room_list) == 0:
+        return render(request, 'chatRoom/main-page.html', {'room_list':room_list})
     id = room_list[0].id
-    print(type(id))
     return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
 
 def room(request, id):
     if id not in Room.objects.filter(users=request.user).values_list('pk', flat=True):
         raise Http404('Page not found')
+    room = get_object_or_404(Room, id=id)
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    room = get_object_or_404(Room, id=id)
     if request.method == 'POST':
+        print("adding room")
         roomName = request.POST['room-name']
-        newRoom = Room(name=roomName)
+        if roomName == "" or roomName[0] == " ":
+            messages.error(request,"Nom de chatroom invalide.")
+            return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
+        newRoom = Room(name=roomName, owner=request.user)
         newRoom.save()
         newRoom.users.add(request.user)
         return HttpResponseRedirect('/chatrooms/'+str(newRoom.id)+'/')
-    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room})
+    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username})
 
 def getMessages(request, id):
     room = get_object_or_404(Room, id=id)
