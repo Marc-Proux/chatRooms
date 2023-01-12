@@ -10,20 +10,22 @@
     <!-- Hi {{ user.username }}! -->
     <header>
         <input type="hidden" id="room_id" name="room_id" value="{{ current_room.id }}">
+        <input type="hidden" id="user" name="user" value="{{ user.username }}">
+        <input type="hidden" id="owner" name="owner" value="{{ owner }}">
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
         <a class="log-out" href="{% url 'logout' %}">Deconnexion</a>
     </header>
     <p class="Room-title">Salons de discussion</p>
     <aside class="Room-list">
         <nav>
-            <ul>
-                {% for room in room_list %}
+            <ul id="Room-list">
+                <!-- {% for room in room_list %}
                     {% if room.id == current_room.id %}
                         <li class="current-room"><a>{{ room.name }}</a></li>
                     {% else %}
                         <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
                     {% endif %}
-                {% endfor %}
+                {% endfor %} -->
             </ul>
         </nav>
     </aside>
@@ -72,14 +74,14 @@
     <section class="add-user-form">
         <h2>Utilisateurs dans le salon</h2>
         <nav>
-            <ul>
-                {% for users in user_list %}
+            <ul class="user-list">
+                <!-- {% for users in user_list %}
                     {% if users.username == owner %}
                         <li class="Room-name">{{ users.username }} | Admin</li>
-                    {% else %}
+                    {% elif users.username != 'System' %}
                         <li class="Room-name">{{ users.username }}</li>
                     {% endif %}
-                {% endfor %}
+                {% endfor %} -->
             </ul>
         </nav>
         {% if user.username == owner %}
@@ -89,8 +91,6 @@
                 <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
                 <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
             </form>
-        {% else %}
-            <button type="button" class="user-list-button" id="user-cancel-button">Fermer</button>
         {% endif %}
     </section>
 {% endif %}

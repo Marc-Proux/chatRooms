@@ -1,15 +1,12 @@
-from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect, Http404, JsonResponse
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
-from django.urls import reverse_lazy
-from django.views import generic
 from django.contrib import messages
 from .models import Room, Message
 from django.db.models import Max
-import json
 
 def index(request):
     return render(request, 'chatRoom/index.html')
@@ -74,19 +71,46 @@ def room(request, id):
 
 def addRoom(request):
     roomName = request.POST['room_name']
-    print(roomName)
     if roomName == "" or roomName[0] == " ":
         messages.error(request,"Nom de chatroom invalide.")
         return HttpResponseRedirect('/chatrooms')
     newRoom = Room(name=roomName, owner=request.user)
     newRoom.save()
-    newRoom.users.add(request.user)
-    return HttpResponse(json.dumps({'room_id':newRoom.id}), safe=False)
+    newRoom.users.add(request.user, User.objects.get(username='System'))
+    admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon "'+roomName+'"', room=Room.objects.get(id=newRoom.id))
+    admin_message.save()
+    return JsonResponse({'room_id':newRoom.id})
 
-def getMessages(request, id):
+def addUser(request):
+    user_name = request.POST['user_name']
+    room_id = request.POST['room_id']
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        room = Room.objects.get(id=room_id)
+        if user not in room.users.all():
+            room.users.add(user)
+            admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a rejoint le salon', room=room)
+            admin_message.save()
+            return JsonResponse({'user_id':user.id, 'user_name':user.username})
+        else:
+            messages.error(request,"Utilisateur déjà dans le salon.")
+            return HttpResponseRedirect('/chatrooms/'+str(room_id)+'/')
+
+def getUpdates(request, id):
     room = get_object_or_404(Room, id=id)
     messages = room.message_set.all()
-    return JsonResponse({'messages':list(messages.values())})
+    last_message_time = Max("message__date")
+    room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    return JsonResponse({'messages':list(messages.values()), 'room_list':list(room_list.values()), 'user_list':list(room.users.all().values())})
+
+def deleteUser(request, id, user_name):
+    room = get_object_or_404(Room, id=id)
+    user = User.objects.get(username=user_name)
+    room.users.remove(user)
+    admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a quitté le salon', room=room)
+    admin_message.save()
+    return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
+    
 
 def sendMessage(request):
     text = request.POST['value']
