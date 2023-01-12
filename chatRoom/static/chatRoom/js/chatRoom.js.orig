@@ -16,6 +16,7 @@ var new_num = 0;
 
 function updateMessages(){
     var room_id = $("#room_id").val();
+<<<<<<< HEAD
     if (room_id != ""){
         console.log('Requesting messages');
         $.getJSON('/getMessages/'+room_id+'/', function(data){
@@ -31,6 +32,7 @@ function updateMessages(){
         });
     }
     setTimeout(updateMessages, 500);
+=======
     var elem = document.getElementById('messages-div'); 
     console.log('Requesting messages');
     $.getJSON('/getMessages/'+room_id+'/', function(data){
@@ -48,6 +50,7 @@ function updateMessages(){
         }
         setTimeout(updateMessages, 100);
     });
+>>>>>>> b97855911dff0cacfc6225e2cb4808aeddfde826
 };
 
 window.setInterval(function() {
