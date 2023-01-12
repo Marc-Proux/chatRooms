@@ -173,7 +173,7 @@ footer {
 .sign-up-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(216, 216, 216);
+    color: rgb(253, 253, 153);
     background-color: rgb(32,31,37);
     border: 0px;
     font-size: 18px;
@@ -188,6 +188,11 @@ footer {
     background-color: rgb(253, 253, 153);
     color: rgb(32,31,37);
     transform: scale(1.1);
+}
+
+.sign-up-text {
+    font-family: sans-serif;
+    font-size: 16px;
 }
 
 .main-page-title {
