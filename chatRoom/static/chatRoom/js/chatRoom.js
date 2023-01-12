@@ -83,11 +83,11 @@ function update(){
                 for (var key in data.room_list)
                 {
                     if (data.room_list[key].id == room_id) {
-                        var temp='<li class="current-room"><a>'+data.room_list[key].name+'</a></li>';
+                        var temp='<div class="current-room-div"> <li class="current-room"><a>'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon"></button> </div>';
                         $(".Room-list").append(temp);
                     }
                     else {
-                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
                         $(".Room-list").append(temp);
                     }
                 }
