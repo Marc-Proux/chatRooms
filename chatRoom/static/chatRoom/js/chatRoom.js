@@ -98,3 +98,21 @@ $(document).on('submit','#add-room-form',function(e){
     });
     $('#enter-room-name').val('');
 });
+
+// emoji button
+
+const picker = new EmojiButton( {
+    position: 'top-start',
+    autoHide: false,
+    theme:'dark',
+});
+
+$(document).ready(function() {
+    $("#emoji-button").click(function() {
+        picker.togglePicker(document.querySelector('#emoji-button'));
+    })  
+});
+
+picker.on('emoji', emoji => {
+    document.querySelector('#msg-txt-field').value += emoji;
+});

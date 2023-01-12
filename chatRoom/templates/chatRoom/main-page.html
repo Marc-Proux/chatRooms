@@ -3,6 +3,7 @@
 {% block content %}
     <!-- JS for bootstrap -->
     <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
     <!-- Jquery -->
     <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
     <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
@@ -43,7 +44,8 @@
         </div>
     </section>
     <section class="fixed-buttons">
-        <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>        
+        <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
+        <button class="emoji-button" id="emoji-button" title="Use emojis !"></button>        
         <div>
             <form method="post" id="post-form">
                 {% csrf_token %}
