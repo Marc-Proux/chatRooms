@@ -375,6 +375,7 @@ li {
     background-position: center;
     margin-left: 1%;
     border: none;
+    cursor: pointer;
 }
 
 .leave-button:hover {
