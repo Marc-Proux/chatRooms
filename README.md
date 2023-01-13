@@ -14,7 +14,10 @@
 <hr />
 
 ## Packages
-Django
+
+Django <a href="https://docs.djangoproject.com/en/4.1/releases/4.1/">4.1</a><br/>
+Python <a href="https://www.python.org/downloads/release/python-3108/">3.10.8</a>
+
 
 ## Installation
 ChatRoom est un projet Web, front-end et back-end nécessitant plusieurs packages. Accedez à la console de votre serveur pour suivre la procédure d'installation.
@@ -76,8 +79,15 @@ Changez son mot de passe avec la commande
 python manage.py changepassword System
 ```
 
-## Documentation
-blablabla
+## Fonctionnalités
+
+ - S'inscrie et se connecter à son compte personnel
+ - Rejoindre un salon existant ou en créer un et y ajouter d'autres utilisateurs
+ - Envoyer des messages contenant des emojis
+
+## License
+
+Application sous [license MIT]
 
 <footer>
 <p align="center">
