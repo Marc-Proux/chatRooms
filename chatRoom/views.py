@@ -104,7 +104,7 @@ def addUser(request):
 
 def deleteUser(request, id, user_name):
     room = get_object_or_404(Room, id=id)
-    if room.owner.username == 'System' or room.owner == request.user:
+    if request.user == 'System' or room.owner == request.user:
         delete_user = User.objects.get(username=user_name)
         if room.owner == delete_user:
             user_list = room.users.all()
