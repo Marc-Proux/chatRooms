@@ -93,85 +93,87 @@ function update(){
             url:'/getUpdates/'+room_id+'/',
             success: function(data){
                 if ( (data.messages).length != num_msg) {
-                    new_num = (data.messages).length;    
-                    $(".message-box").empty();
-                    $(".Room-list").empty();
-                    $(".user-list").empty();
+                    console.log("update");
+                    //new_num = (data.messages).length;    
                     if (user == 'System') {
-                        for (var key in data.room_list)
+                        for (let i = num_msg; i < (data.room_list).length; i++)
                         {
-                            if (data.room_list[key].id == room_id) {
-                                var temp='<li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
+                            if (data.room_list[i].id == room_id) {
+                                var temp='<li class="current-room"><a title="Salon actuel">'+data.room_list[i].name+'</a>';
                                 $(".Room-list").append(temp);
                             }
                             else {
-                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[i].id+'/">'+data.room_list[key].name+'</a> </li>';
                                 $(".Room-list").append(temp);
                             }
                         }
                     }
                     else {
-                        for (var key in data.room_list)
+                        for (let i = num_msg; i < (data.room_list).length; i++)
                         {
-                            if (data.room_list[key].id == room_id) {
-                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'"></button> </div>';
+                            if (data.room_list[i].id == room_id) {
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[i].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'"></button> </div>';
                                 $(".Room-list").append(temp);
                             }
                             else {
-                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[i].id+'/">'+data.room_list[i].name+'</a> </li>';
                                 $(".Room-list").append(temp);
                             }
                         }
                     }
-                    for (var key in data.messages)
+                    for (let i = num_msg; i < (data.messages).length; i++)
                     {
-                        var date = new Date(data.messages[key].date);
+                        var date = new Date(data.messages[i].date);
                         date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
-                        var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
+                        var temp='<li class="user">'+data.messages[i].username+'</li><li class="message">'+data.messages[i].message+'</li><li class="date">'+date+'</li>';
                         $(".message-box").append(temp);
                     }
 
                     if (data.owner == user) {
-                        for (var key in data.user_list)
+                        for (let i = num_msg; i < (data.user_list).length; i++)
                         {
-                            if (data.user_list[key].username == data.owner) {
-                                var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
+                            if (data.user_list[i].username == data.owner) {
+                                var temp='<li class="admin-name-list">'+data.user_list[i].username+' | <span>Admin</span></li>'
                                 $(".user-list").append(temp);
                             }
-                            else if (data.user_list[key].username != 'System') {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
+                            else if (data.user_list[i].username != 'System') {
+                                var temp='<li class="user-name-list">'+data.user_list[key]+num_msg.username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[i].username+'">Retirer</a> </li>';
                                 $(".user-list").append(temp);
                             }
                         }
                     }
 
                     else if ('System' == user) {
-                        for (var key in data.user_list)
+                        for (let i = num_msg; i < (data.user_list).length; i++)
                         {
-                            if (data.user_list[key].username == data.owner) {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <span>Admin </span><a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>'
+                            if (data.user_list[i].username == data.owner) {
+                                var temp='<li class="user-name-list">'+data.user_list[i].username+' | <span>Admin </span><a href="/deleteUser/'+room_id+'/'+data.user_list[i].username+'">Retirer</a> </li>'
                                 $(".user-list").append(temp);
                             }
-                            else if (data.user_list[key].username != 'System') {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
+                            else if (data.user_list[i].username != 'System') {
+                                var temp='<li class="user-name-list">'+data.user_list[i].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[i].username+'">Retirer</a> </li>';
                                 $(".user-list").append(temp);
                             }
                         }
                     }
 
                     else {
-                        for (var key in data.user_list)
+                        for (let i = num_msg; i < (data.user_list).length; i++)
                         {
-                            if (data.user_list[key].username == data.owner) {
-                                var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
+                            if (data.user_list[i].username == data.owner) {
+                                var temp='<li class="admin-name-list">'+data.user_list[i].username+' | <span>Admin</span></li>'
                                 $(".user-list").append(temp);
                             }
-                            else if (data.user_list[key].username != 'System') {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+'</li>';
+                            else if (data.user_list[i].username != 'System') {
+                                var temp='<li class="user-name-list">'+data.user_list[i].username+'</li>';
                                 $(".user-list").append(temp);
                             }
                         }
                     }
+                    new_num = (data.messages).length;
+                    var elem = document.getElementById('messages-div');
+                    elem.scrollTop = elem.scrollHeight;
+                    num_msg = new_num;
                 }
             },
             error : function(data) {
@@ -189,13 +191,13 @@ $(document).ready(function(){
 });
 
 
-window.setInterval(function() {
-    if ( new_num != num_msg) {
-        var elem = document.getElementById('messages-div');
-        elem.scrollTop = elem.scrollHeight;
-        num_msg = new_num;
-    }
-}, 500);
+// window.setInterval(function() {
+//     if ( new_num != num_msg) {
+//         var elem = document.getElementById('messages-div');
+//         elem.scrollTop = elem.scrollHeight;
+//         num_msg = new_num;
+//     }
+// }, 500);
 
 
 // sendMessage
