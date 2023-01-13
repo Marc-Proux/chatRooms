@@ -92,18 +92,20 @@ def addRoom(request):
 def addUser(request):
     user_name = request.POST['user_name']
     room_id = request.POST['room_id']
-    if User.objects.filter(username=user_name).exists():
-        user = User.objects.get(username=user_name)
-        room = Room.objects.get(id=room_id)
-        if user not in room.users.all():
-            room.users.add(user)
-            admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a rejoint le salon', room=room)
-            admin_message.save()
-            return JsonResponse({'user_id':user.id, 'user_name':user.username})
-        else:
-            messages.error(request,"Utilisateur déjà dans le salon.")
-            return HttpResponseRedirect('/chatrooms/'+str(room_id)+'/')
-
+    room = get_object_or_404(Room, id=room_id)
+    if request.user.username == 'System' or room.owner == request.user:
+        if User.objects.filter(username=user_name).exists():
+            user = User.objects.get(username=user_name)
+            if user not in room.users.all():
+                room.users.add(user)
+                admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a rejoint le salon', room=room)
+                admin_message.save()
+                return JsonResponse({'user_id':user.id, 'user_name':user.username})
+            else:
+                messages.error(request,"Utilisateur déjà dans le salon.")
+                return HttpResponseRedirect('/chatrooms/'+str(room_id)+'/')
+    return HttpResponseRedirect('/chatroom/')
+    
 def deleteUser(request, id, user_name):
     room = get_object_or_404(Room, id=id)
     if request.user.username == 'System' or room.owner == request.user:
