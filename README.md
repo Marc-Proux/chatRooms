@@ -87,7 +87,7 @@ python manage.py changepassword System
 
 ## License
 
-Application sous [license MIT]
+Application sous [license MIT](./LICENSE.md)
 
 <footer>
 <p align="center">
