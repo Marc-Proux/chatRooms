@@ -103,7 +103,7 @@ function update(){
                                 $(".Room-list").append(temp);
                             }
                             else {
-                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[i].id+'/">'+data.room_list[key].name+'</a> </li>';
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[i].id+'/">'+data.room_list[i].name+'</a> </li>';
                                 $(".Room-list").append(temp);
                             }
                         }
@@ -137,7 +137,7 @@ function update(){
                                 $(".user-list").append(temp);
                             }
                             else if (data.user_list[i].username != 'System') {
-                                var temp='<li class="user-name-list">'+data.user_list[key]+num_msg.username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[i].username+'">Retirer</a> </li>';
+                                var temp='<li class="user-name-list">'+data.user_list[i]+num_msg.username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[i].username+'">Retirer</a> </li>';
                                 $(".user-list").append(temp);
                             }
                         }
