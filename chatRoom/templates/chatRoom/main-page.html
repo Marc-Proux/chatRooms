@@ -31,10 +31,13 @@
         </nav>
     </aside>
     <button class="show-rooms-button" title="Voir les salons"></button>
-    <p class="Messages-title">Messages du Salon</p>
+    <p class="Messages-title">{{ current_room.name }}</p>
     <section class="messages-list">
         <div id="messages-div">
             <ul class="message-box">
+                {% if curren_room == NONE %}
+                    <p class="message">Rejoingnez un salon pour parler</p>
+                {% endif %}
                 <!--
                 {% for message in current_room.message_set.all %}
                     <li class="user">{{ message.user }}</li>
@@ -48,15 +51,17 @@
     </section>
     <section class="fixed-buttons">
         <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
-        <button class="emoji-button" id="emoji-button" title="Use emojis !"></button>        
-        <div>
-            <form method="post" id="post-form">
-                {% csrf_token %}
-                <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="500">
-                <button class="send-button" title="Envoyer le message"> </button>
-            </form>
-        </div>
-        <button class="user-list-button" id="user-list-button" title="Ajouter des utilisateurs dans le salon"></button>
+        {% if current_room.id != NONE %}
+            <button class="emoji-button" id="emoji-button" title="Use emojis !"></button>        
+            <div>
+                <form method="post" id="post-form">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="400">
+                    <button class="send-button" title="Envoyer le message"> </button>
+                </form>
+            </div>
+            <button class="user-list-button" id="user-list-button" title="Ajouter des utilisateurs dans le salon"></button>
+        {% endif %}
     </section>
     <section class="add-room-form">
         <form method="POST" id="add-room-form">
@@ -87,7 +92,7 @@
                 {% endfor %} -->
             </ul>
         </div>
-        {% if user.username == owner %}
+        {% if user.username == owner or user.username == System %}
             <div id="add-user-div">
                 <form method="POST" id="add-user-form">
                     {% csrf_token %}

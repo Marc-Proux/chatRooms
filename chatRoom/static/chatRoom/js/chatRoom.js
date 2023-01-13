@@ -63,7 +63,6 @@ function updateRoomList(){
             type:'GET',
             url:'/updateRoomList/',
             success: function(data){
-                console.log('JSON', data);
                 $(".Room-list").empty();
                 for (var key in data.room_list)
                 {
@@ -88,62 +87,89 @@ function updateRoomList(){
 function update(){
     var room_id = $("#room_id").val();
     var user = $("#user").val();
-    var owner = $("#owner").val();
-    console.log("room_id: ", room_id)
     if (room_id != ""){
         $.ajax({
             type:'GET',
             url:'/getUpdates/'+room_id+'/',
             success: function(data){
-                console.log('JSON', data);
                 if ( (data.messages).length != num_msg) {
                     new_num = (data.messages).length;    
-                }
-                $(".message-box").empty();
-                $(".Room-list").empty();
-                $(".user-list").empty();
-                for (var key in data.room_list)
-                {
-                    if (data.room_list[key].id == room_id) {
-                        var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon"></button> </div>';
-                        $(".Room-list").append(temp);
+                    $(".message-box").empty();
+                    $(".Room-list").empty();
+                    $(".user-list").empty();
+                    if (user == 'System') {
+                        for (var key in data.room_list)
+                        {
+                            if (data.room_list[key].id == room_id) {
+                                var temp='<li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
+                                $(".Room-list").append(temp);
+                            }
+                            else {
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
+                                $(".Room-list").append(temp);
+                            }
+                        }
                     }
                     else {
-                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
-                        $(".Room-list").append(temp);
+                        for (var key in data.room_list)
+                        {
+                            if (data.room_list[key].id == room_id) {
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'"></button> </div>';
+                                $(".Room-list").append(temp);
+                            }
+                            else {
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
+                                $(".Room-list").append(temp);
+                            }
+                        }
                     }
-                }
-                for (var key in data.messages)
-                {
-                    var date = new Date(data.messages[key].date);
-                    date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
-                    var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
-                    $(".message-box").append(temp);
-                }
+                    for (var key in data.messages)
+                    {
+                        var date = new Date(data.messages[key].date);
+                        date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+                        var temp='<li class="user">'+data.messages[key].username+'</li><li class="message">'+data.messages[key].message+'</li><li class="date">'+date+'</li>';
+                        $(".message-box").append(temp);
+                    }
 
-                if (owner == user) {
-                    for (var key in data.user_list)
-                    {
-                        if (data.user_list[key].username == owner) {
-                            var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
-                            $(".user-list").append(temp);
-                        }
-                        else if (data.user_list[key].username != 'System') {
-                            var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
-                            $(".user-list").append(temp);
+                    if (data.owner == user) {
+                        for (var key in data.user_list)
+                        {
+                            if (data.user_list[key].username == data.owner) {
+                                var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
+                                $(".user-list").append(temp);
+                            }
+                            else if (data.user_list[key].username != 'System') {
+                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
+                                $(".user-list").append(temp);
+                            }
                         }
                     }
-                }
-                else {
-                    for (var key in data.user_list)
-                    {
-                        if (data.user_list[key].username == owner) {
-                            var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
-                            $(".user-list").append(temp);
+
+                    else if ('System' == user) {
+                        for (var key in data.user_list)
+                        {
+                            if (data.user_list[key].username == data.owner) {
+                                var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin </span><a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>'
+                                $(".user-list").append(temp);
+                            }
+                            else if (data.user_list[key].username != 'System') {
+                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
+                                $(".user-list").append(temp);
+                            }
                         }
-                        else if (data.user_list[key].username != 'System') {
-                            var temp='<li class="user-name-list">'+data.user_list[key].username+'</li>';
-                            $(".user-list").append(temp);
+                    }
+
+                    else {
+                        for (var key in data.user_list)
+                        {
+                            if (data.user_list[key].username == data.owner) {
+                                var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
+                                $(".user-list").append(temp);
+                            }
+                            else if (data.user_list[key].username != 'System') {
+                                var temp='<li class="user-name-list">'+data.user_list[key].username+'</li>';
+                                $(".user-list").append(temp);
+                            }
                         }
                     }
                 }

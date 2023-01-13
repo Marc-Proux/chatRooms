@@ -49,9 +49,14 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
             return HttpResponseRedirect('/chatrooms')
+        else :
+            messages.error(request,"Formulaire invalide.")
+            return HttpResponseRedirect('/signup')
     else:
         form = UserCreationForm()
     return render(request, 'chatRoom/signup.html', {'form': form})
+
+
 
 def chatRooms(request):
     last_message_time = Max("message__date")
@@ -67,7 +72,8 @@ def room(request, id):
     room = get_object_or_404(Room, id=id)
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username})
+    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username, 'System':'System'})
+
 
 def addRoom(request):
     roomName = request.POST['room_name']
@@ -96,29 +102,66 @@ def addUser(request):
             messages.error(request,"Utilisateur déjà dans le salon.")
             return HttpResponseRedirect('/chatrooms/'+str(room_id)+'/')
 
+def deleteUser(request, id, user_name):
+    room = get_object_or_404(Room, id=id)
+    user = User.objects.get(username=user_name)
+    print(user.username)
+    if room.owner == user:
+        user_list = room.users.all()
+        for users in user_list:
+            if users != user and user != User.objects.get(username='System'):
+                room.owner = users
+                room.save()
+                print("new owner:"+users.username)
+                break
+    room.users.remove(user)
+    admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a quitté le salon', room=room)
+    admin_message.save()
+    return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
+
+def quitRoom(request, id):
+    delete_user = request.user
+    print('userName:'+delete_user.username)
+    room = get_object_or_404(Room, id=id)
+    user_list = room.users.all()
+    if room.owner == delete_user:
+        for user in user_list:
+            if user != delete_user and user != User.objects.get(username='System'):
+                room.owner = user
+                break
+        room.users.remove(delete_user)
+        room.save()
+        admin_message = Message(user = User.objects.get(username='System'), username=' ', message=delete_user.username+' a quitté le salon', room=room)
+        admin_message.save()
+        return HttpResponseRedirect('/chatrooms')
+    elif len(user_list) == 2:
+        room.delete()
+        return HttpResponseRedirect('/chatrooms')
+    else :
+        room.users.remove(delete_user)
+        admin_message = Message(user = User.objects.get(username='System'), username=' ', message=delete_user.username+' a quitté le salon', room=room)
+        admin_message.save()
+        return HttpResponseRedirect('/chatrooms')
+
+
 def getUpdates(request, id):
     room = get_object_or_404(Room, id=id)
     messages = room.message_set.all()
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values())})
+    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username})
 
 def updateRoomList(request):
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     return JsonResponse({'room_list':list(room_list.values())})
 
-def deleteUser(request, id, user_name):
-    room = get_object_or_404(Room, id=id)
-    user = User.objects.get(username=user_name)
-    room.users.remove(user)
-    admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a quitté le salon', room=room)
-    admin_message.save()
-    return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
-    
-
 def sendMessage(request):
     text = request.POST['value']
+    if text == "" or text[0] == " " or len(text) > 400:
+        print("Message invalide.")
+        messages.error(request,"Message invalide.")
+        return HttpResponseRedirect('/chatrooms/'+str(request.POST['room_id'])+'/')
     new_message = Message(user = request.user, username=request.user.username, message=text, room=Room.objects.get(id=request.POST['room_id']))
     new_message.save()
     return HttpResponseRedirect('/chatrooms/'+str(request.POST['room_id'])+'/')
