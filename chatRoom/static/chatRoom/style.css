@@ -87,13 +87,14 @@ body {
 .centered-button button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(216, 216, 216);
-    background-color: rgb(32,31,37);
-    border: 0px;
+    color: rgb(32,31,37);
+    background-color: rgb(216, 216, 216);
+    border: 0;
     font-size: 250%;
     padding: 0.75% 1.5% 0.75% 1.5%;
     border-radius: 15px;
     transition: ease-out 0.3s;
+    cursor: pointer;
 }
 
 .centered-button button:hover {
@@ -126,6 +127,7 @@ footer {
     font-family: Aharoni, sans-serif;
     font-size: 22px;
     animation: fade-in 1s;
+    transform: translateY(-20%);
 }
 
 .form-div input {
@@ -163,6 +165,7 @@ footer {
     transition: ease-out 0.3s;
     margin-left: 20px;
     margin-right: 0px;
+    cursor: pointer;
 }
 
 .sign-in-button:hover {
@@ -183,6 +186,7 @@ footer {
     transition: ease-out 0.3s;
     margin-left: 20px;
     margin-right: 0px;
+    cursor: pointer;
 }
 
 .sign-up-button:hover {
