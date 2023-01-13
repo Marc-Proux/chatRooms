@@ -67,6 +67,8 @@ def chatRooms(request):
     return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
 
 def room(request, id):
+    if request.user.is_authenticated == False:
+        return HttpResponseRedirect('/login')
     if id not in Room.objects.filter(users=request.user).values_list('pk', flat=True):
         raise Http404('Page not found')
     room = get_object_or_404(Room, id=id)
