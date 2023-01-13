@@ -6,8 +6,6 @@ $(document).ready(function(e) {
     })
 });
 
-
-
 $(document).ready(function() {
     $(".add-user-form").hide();
     $(".user-list-button").click(function() {
@@ -15,9 +13,17 @@ $(document).ready(function() {
     })  
 });
 
+$(document).ready(function(e) {
+    $(".show-rooms-button").click(function() {
+        $(".Room-list").show();
+        $(".add-room-button").show();
+    })
+});
+
 $(document).mouseup(function(e){
     var container = $("#add-room-form");
     var container2 = $(".add-user-form");
+    var container3 = $(".Room-list");
  
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
@@ -26,6 +32,22 @@ $(document).mouseup(function(e){
 
     if(!container2.is(e.target) && container2.has(e.target).length === 0){
         container2.hide();
+    }
+
+    if(window.innerWidth < 800 && !container3.is(e.target) && container3.has(e.target).length === 0){
+        container3.hide();
+        $(".add-room-button").hide();
+    }
+});
+
+$(window).resize(function() {
+    if (window.innerWidth > 800) {
+        $(".Room-list").show();
+        $(".add-room-button").show();
+    }
+    else {
+        $(".Room-list").hide();
+        $(".add-room-button").hide();
     }
 });
 
