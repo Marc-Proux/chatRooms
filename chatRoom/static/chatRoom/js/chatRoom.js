@@ -216,6 +216,9 @@ $(document).on('submit','#post-form',function(e){
             if (data.redirect){
                 window.location.href = data.redirect;
             }
+            else if (data.error){
+                alert(data.error);
+            }
         }
     });
     $('.msg-txt-field').val('');

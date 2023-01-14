@@ -85,11 +85,9 @@ def sendMessage(request):
     room = get_object_or_404(Room, id=request.POST['room_id'])
     user_list = room.users.all()
     if request.user not in user_list:
-        return JsonResponse({'redirect':'True'})
+        return JsonResponse({'redirect':'/chatrooms/'})
     if text == "" or text[0] == " " or len(text) > 400:
-        print("Message invalide.")
-        messages.error(request,"Message invalide.", extra_tags='messageForm')
-        return JsonResponse({'redirect':'/chatrooms/'+str(request.POST['room_id'])+'/'})
+        return JsonResponse({'error':'Message invalide'})
     if settings.SAFE_LANGUAGE:
         print("Safe mode activé.")
         for word in settings.BAD_WORDS:
