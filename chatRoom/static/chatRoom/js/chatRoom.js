@@ -108,7 +108,7 @@ function update(){
                         for (var key in data.room_list)
                         {
                             if (data.room_list[key].id == room_id) {
-                                var temp='<li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
+                                var temp='<li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
                                 $(".Room-list").append(temp);
                             }
                             else {
