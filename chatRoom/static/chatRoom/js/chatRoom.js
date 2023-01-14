@@ -16,6 +16,8 @@ $(document).ready(function() {
 $(document).ready(function(e) {
     $(".show-rooms-button").click(function() {
         $(".Room-list").show();
+        $(".show-rooms-button").hide();
+        $(".user-list-button").hide();
         $(".add-room-button").show();
     })
 });
@@ -34,20 +36,24 @@ $(document).mouseup(function(e){
         container2.hide();
     }
 
-    if(window.innerWidth < 800 && !container3.is(e.target) && container3.has(e.target).length === 0){
+    if(window.innerWidth < 845 && !container3.is(e.target) && container3.has(e.target).length === 0){
         container3.hide();
         $(".add-room-button").hide();
+        $(".show-rooms-button").show();
+        $(".user-list-button").show();
     }
 });
 
 $(window).resize(function() {
-    if (window.innerWidth > 800) {
+    if (window.innerWidth > 845) {
         $(".Room-list").show();
         $(".add-room-button").show();
+        $(".show-rooms-button").hide();
     }
     else {
         $(".Room-list").hide();
         $(".add-room-button").hide();
+        $(".show-rooms-button").show();
     }
 });
 
@@ -115,7 +121,7 @@ function update(){
                         for (var key in data.room_list)
                         {
                             if (data.room_list[key].id == room_id) {
-                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'"></button> </div>';
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'">.</button> </div>';
                                 $(".Room-list").append(temp);
                             }
                             else {

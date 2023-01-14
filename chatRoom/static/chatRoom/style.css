@@ -5,6 +5,7 @@
     scroll-behavior: smooth;
     word-wrap: break-word;
 }
+
 /* Custom scrollbar */
 
 /* width */
@@ -142,7 +143,7 @@ footer {
     width: 25%;
     height: 30%;
     /* background-color: rgb(32,31,37); */
-    position: absolute; /*Can also be `fixed`*/
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -258,6 +259,7 @@ li {
 
 .Messages-title, .Room-title{
     display: inline-block;
+    vertical-align: middle;
     font-family: Aharoni, sans-serif;
     font-size: 30px;
     text-align: center;
@@ -300,10 +302,11 @@ li {
     position: relative;
 }
 
-.user {
+.user { /* user displayed above the message*/
     color: rgb(253, 253, 153);
     font-family: Aharoni, sans-serif;
     margin-top: 1%;
+    animation: message-animation 0.5s ease;
 }
 
 .message {
@@ -312,11 +315,17 @@ li {
     color: rgb(216, 216, 216);
     border-bottom: 1px solid;
     border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    animation: message-animation 0.5s ease;
 }
 
-#msg-txt-field-error::placeholder {
-    color: rgba(224, 19, 19, 0.735);
+@keyframes message-animation {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
 }
+
+/* #msg-txt-field-error::placeholder {
+    color: rgba(224, 19, 19, 0.735);
+} */
 
 .date {
     font-family: sans-serif;
@@ -348,12 +357,13 @@ li {
     cursor: pointer;
     overflow: hidden;
     text-decoration: none;
+    transition: 0.2s ease;
 }
 
 .current-room-div {
     border-bottom: 1px solid;
     border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
-    display: inline-flex;
+    display: flex;
     direction: ltr;
     align-items: center;
     width: 100%;
@@ -361,8 +371,30 @@ li {
 
 .current-room {
     background-color: white;
-    height: 43px;
+    height: 100%;
     width: 90%;
+}
+
+.leave-button {
+    height: 43px;
+    width: 43px;
+    border-radius: 7px;
+    background-color: white;
+    background-image: url(img/quit.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    margin-left: 1%;
+    border: none;
+    cursor: pointer;
+}
+
+.leave-button:hover {
+    background-color: rgb(253, 253, 153);
+}
+
+.leave-button:active {
+    transform: scale(0.9);
 }
 
 .Room-name a {
@@ -391,28 +423,6 @@ li {
 .Room-name:hover {
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.05); */
-}
-
-.leave-button {
-    height: 43px;
-    width: 43px;
-    border-radius: 7px;
-    background-color: white;
-    background-image: url(img/quit.png);
-    background-repeat: no-repeat;
-    background-size: 70%;
-    background-position: center;
-    margin-left: 1%;
-    border: none;
-    cursor: pointer;
-}
-
-.leave-button:hover {
-    background-color: rgb(253, 253, 153);
-}
-
-.leave-button:active {
-    transform: scale(0.9);
 }
 
 .Room-list {
@@ -537,10 +547,6 @@ li {
     background: linear-gradient(90deg, rgba(32,31,37,1) 0%, rgba(32,31,37,1) 85%, rgba(32,31,37,0) 85%);
 }
 
-.space {
-    height: 10%;
-}
-
 .add-room-form {
     position: absolute;
     width: 34%;
@@ -567,7 +573,7 @@ li {
 
 @keyframes form-pop-up {
     0% {scale: 0; opacity: 0%;}
-    80% {opacity: 70%;}
+    70% {scale: 1.1; opacity: 80%;}
     100% {scale: 1; opacity: 100%;}
 }
 
@@ -626,18 +632,12 @@ li {
     color: rgb(216, 216, 216);
     font-family: Aharoni, sans-serif;
     font-size: 15px;
-    animation: userlist-pop-up 0.4s ease;
+    animation: form-pop-up 0.4s ease;
     margin: auto;
     padding: 3%;
     border-radius: 20px;
     box-shadow: 1px 1px 5px black;
     overflow-y: auto;
-}
-
-@keyframes userlist-pop-up {
-    0% {scale: 0; opacity: 0%;}
-    80% {opacity: 70%;}
-    100% {scale: 1; opacity: 100%;}
 }
 
 #add-user-div {
@@ -706,7 +706,7 @@ li {
 }
 
 #emoji-button:hover {
-    border-radius: 15px;
+    border-radius: 10px;
     color: rgb(32,31,37);
     background-color: rgb(253, 253, 153);
     /* transform: scale(1.1); */
@@ -763,7 +763,7 @@ li {
 .show-rooms-button {
     width: 30px;
     height: 30px;
-    position: absolute;
+    position: fixed;
     background-image: url(img/list.png);
     background-size: 45%;
     background-position: center;
@@ -784,6 +784,11 @@ li {
     transform: scale(0.9);
 }
 
+.input-message-div {
+    padding: 0;
+    margin: 0;
+}
+
 @media screen and (min-width: 800px) {
     .show-rooms-button {
         display: none;
@@ -792,12 +797,40 @@ li {
 
 @media screen and (max-width: 1300px) {
     .fixed-buttons {
+        left: 5%;
+        width: 100%;
+    }
+    
+    .Messages-title {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 970px) {
+    .fixed-buttons {
         left: 0;
         width: 100%;
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 845px) {
+    .fixed-buttons input {
+        width: 60%;
+    }
+
+    .send-button {
+        width: 45px;
+    }
+
+    .input-message-div {
+        margin-left: 5%;
+    }
+
+    #user-list-button {
+        position: fixed;
+        right: 0;
+    }
+
     .Room-title, footer{
         display: none;
     }
@@ -828,7 +861,7 @@ li {
         transform: translateY(-50%);
         left: 0;
         border: 0;
-        width: 100%;
+        width: 90%;
     }
 
     .message {
@@ -839,6 +872,8 @@ li {
     .Messages-title {
         margin-right: 35%;
         margin-top: 3%;
+        font-size: 20px;
+        width: 50%;
     }
 
     .Room-list {
@@ -848,8 +883,28 @@ li {
         border: 2px solid rgb(253, 253, 153);
         box-shadow: 1px 1px 5px black;
         border-radius: 8px;
-        height: 90%;
+        height: 94%;
         width: 60%;
         bottom: 0;
+        transform: translateX(-11%);
+        animation: room-list-animation 0.3s ease;
+    }
+}
+
+@keyframes room-list-animation {
+    0% {transform: translateX(-100%);}
+    100% {transform: translateX(-11%);}
+}
+
+@media screen and (max-width: 360px) {
+    .Messages-title {
+        margin-right: 35%;
+        margin-top: 10%;
+        font-size: 14px;
+        width: 50%;
+    }
+
+    .message {
+        font-size: 14px;
     }
 }
