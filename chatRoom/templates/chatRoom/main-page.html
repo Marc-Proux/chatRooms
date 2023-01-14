@@ -13,7 +13,7 @@
         <input type="hidden" id="user" name="user" value="{{ user.username }}">
         <input type="hidden" id="owner" name="owner" value="{{ owner }}">
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
-        <a class="log-out" href="{% url 'logout' %}" title="Déconnexion">Utilisateur : {{ user.username }}</a>
+        <a class="log-out" href="{% url 'logout' %}">Utilisateur : {{ user.username }} <button title="Déconnexion" class="log-out-button" style="height: 20px; width: 20px;"></button></a>
     </header>
     <p class="Room-title">Salons de discussion</p>
     <aside class="Room-list">

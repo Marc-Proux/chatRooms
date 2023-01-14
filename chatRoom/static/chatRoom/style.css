@@ -66,12 +66,37 @@ body {
     border-radius: 12px;
     transition: ease-in-out 0.3s;
     padding: 5px;
+    padding-bottom: 10px;
+    cursor: default;
 }
 
-.log-out:hover {
+/* .log-out:hover {
     background-color: rgb(216, 216, 216);
     color: rgb(32,31,37);
     transform: scale(1.1);
+} */
+
+.log-out-button {
+    background-color: rgb(32,31,37);
+    border-radius: 7px;
+    background-image: url(img/quit-white.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transform: translateY(25%);
+    transition: ease-in-out 0.3s;
+}
+
+.log-out-button:hover {
+    background-color: rgb(216, 216, 216);
+    background-image: url(img/quit.png);
+    transform: scale(1.1) translateY(25%);
+}
+
+.log-out-button:active {
+    transform: scale(1.0) translateY(25%);
 }
 
 .centered-button {
