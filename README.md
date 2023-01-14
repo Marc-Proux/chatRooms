@@ -16,7 +16,7 @@
 ## Packages
 
 Django <a href="https://docs.djangoproject.com/en/4.1/releases/4.1/">4.1</a><br/>
-Python <a href="https://www.python.org/downloads/release/python-3108/">3.10.8</a>
+Python <a href="https://www.python.org/downloads/release/python-3108/">3.10.8</a><br/>
 jQuery <a href="https://jquery.com/">3.6.1</a>
 
 
