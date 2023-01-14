@@ -85,7 +85,7 @@ python manage.py changepassword System
  - S'inscrie et se connecter à son compte personnel
  - Rejoindre un salon existant ou en créer un et y ajouter d'autres utilisateurs
  - Envoyer des messages contenant des emojis
- - Mode SAFE_LANGUAGE qui floutte une liste non exhaustive de mots interdit. Par défault :
+ - Mode SAFE_LANGUAGE qui floute une liste non exhaustive de mots interdit. Par défaut :
  ```
  SAFE_LANGUAGE = True  #settings.py
  ```
