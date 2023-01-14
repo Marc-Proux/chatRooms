@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib import messages
 from .models import Room, Message
 from django.db.models import Max
+from django.conf import settings
 
 # Page d'accueil
 def index(request):
@@ -89,9 +90,19 @@ def sendMessage(request):
         print("Message invalide.")
         messages.error(request,"Message invalide.", extra_tags='messageForm')
         return JsonResponse({'redirect':'/chatrooms/'+str(request.POST['room_id'])+'/'})
+    if settings.SAFE_LANGUAGE:
+        print("Safe mode activé.")
+        for word in settings.BAD_WORDS:
+            if word in text.lower():
+                print("Mot interdit détecté.")
+                first_letter = text.lower().find(word)
+                print(first_letter)
+                new_word = text[first_letter]+ (len(word)-1)*"*"
+                print(new_word)
+                text = text.lower().replace(word, new_word)
     new_message = Message(user = request.user, username=request.user.username, message=text, room=Room.objects.get(id=request.POST['room_id']))
     new_message.save()
-    return JsonResponse({'redirect':'/chatrooms/'+str(request.POST['room_id'])+'/'})
+    return JsonResponse({})
 
 # fonction créer un salon
 def addRoom(request):

@@ -128,3 +128,27 @@ LOGOUT_REDIRECT_URL = "/login"
 ALLOWED_HOSTS = ['chatrooms.alwaysdata.net',
                  '127.0.0.1',
                  'localhost',]
+
+# Language safe settings
+SAFE_LANGUAGE = True
+BAD_WORDS = ['pute',
+             'putain',
+             'salope',
+             'connard',
+             'con',
+             'merde',
+             'fdp',
+             'encule',
+             'enculee',
+             'encules',
+             'enculees',
+             'enculé',
+             'enculée',
+             'enculés',
+             'enculées',
+             'baise',
+             'bite',
+             'bites',
+             'pd',
+             'fuck',
+             ]
