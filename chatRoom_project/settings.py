@@ -128,5 +128,3 @@ LOGOUT_REDIRECT_URL = "/login"
 ALLOWED_HOSTS = ['chatrooms.alwaysdata.net',
                  '127.0.0.1',
                  'localhost',]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')

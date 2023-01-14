@@ -93,6 +93,9 @@ function update(){
             type:'GET',
             url:'/getUpdates/'+room_id+'/',
             success: function(data){
+                if (data.redirect) {
+                    window.location.href = '/chatrooms';
+                }
                 if ((data.room_list).length != num_room) {
                     $(".Room-list").empty();
                     if (user == 'System') {
@@ -205,12 +208,17 @@ $(document).on('submit','#post-form',function(e){
       type:'POST',
       url:'/sendMessage/',
       data:{
-          value:$('#msg-txt-field').val(),
+          value:$('.msg-txt-field').val(),
           room_id:$("#room_id").val(),
         csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
+        success: function(data){
+            if (data.redirect){
+                window.location.href = data.redirect;
+            }
+        }
     });
-    $('#msg-txt-field').val('');
+    $('.msg-txt-field').val('');
 });
 
 // createRoom
@@ -224,7 +232,12 @@ $(document).on('submit','#add-room-form',function(e){
             csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
         },
         success: function(data){
-            window.location.href = "/chatrooms/"+data.room_id+"/";
+            if (data.redirect){
+                window.location.href = "/chatrooms/"+$("#room_id").val()+"/";
+            }
+            else {
+                window.location.href = "/chatrooms/"+data.room_id+"/";
+            }
         }
     });
     $('#room-add-input').val('');
@@ -243,7 +256,9 @@ $(document).on('submit','#add-user-form',function(e){
           csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
       success: function(data){
-        //alert(data)
+        if (data.redirect){
+            window.location.href = data.redirect;
+        }
       }
     });
     $('#user-add-input').val('');
@@ -263,5 +278,5 @@ $(document).ready(function() {
 });
 
 picker.on('emoji', emoji => {
-    document.querySelector('#msg-txt-field').value += emoji;
+    document.querySelector('.msg-txt-field').value += emoji;
 });

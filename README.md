@@ -17,6 +17,7 @@
 
 Django <a href="https://docs.djangoproject.com/en/4.1/releases/4.1/">4.1</a><br/>
 Python <a href="https://www.python.org/downloads/release/python-3108/">3.10.8</a>
+jQuery <a href="https://jquery.com/">3.6.1</a>
 
 
 ## Installation
@@ -91,7 +92,6 @@ Application sous [license MIT](./LICENSE.md)
 
 <footer>
 <p align="center">
-Créé avec ❤️ par Lucas, Geryes and Marc, <a href="https://www.ensisa.uha.fr">ENSISA</a> 
-students.
+Créé avec ❤️ par Lucas, Geryes and Marc, étudiants à l'<a href="https://www.ensisa.uha.fr">ENSISA</a>.
 </p>
 </footer>

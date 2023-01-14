@@ -8,9 +8,11 @@ from django.contrib import messages
 from .models import Room, Message
 from django.db.models import Max
 
+# Page d'accueil
 def index(request):
     return render(request, 'chatRoom/index.html')
 
+# Page de connexion
 def login(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/chatrooms')
@@ -33,6 +35,7 @@ def login(request):
             form = AuthenticationForm()
         return render(request, 'chatRoom/login.html', {'form': form})
 
+# Page d'inscription
 def signup(request):
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
@@ -57,15 +60,13 @@ def signup(request):
     return render(request, 'chatRoom/signup.html', {'form': form})
 
 
-
+# Page de chat sans salon d'ouvert
 def chatRooms(request):
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    if len(room_list) == 0:
-        return render(request, 'chatRoom/main-page.html', {'room_list':room_list})
-    id = room_list[0].id
-    return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
+    return render(request, 'chatRoom/main-page.html', {'room_list':room_list})
 
+# Page de chat avec un salon d'ouvert
 def room(request, id):
     if request.user.is_authenticated == False:
         return HttpResponseRedirect('/login')
@@ -77,18 +78,35 @@ def room(request, id):
     return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username, 'System':'System'})
 
 
-def addRoom(request):
-    roomName = request.POST['room_name']
-    if roomName == "" or roomName[0] == " ":
-        messages.error(request,"Nom de chatroom invalide.")
-        return HttpResponseRedirect('/chatrooms')
-    newRoom = Room(name=roomName, owner=request.user)
-    newRoom.save()
-    newRoom.users.add(request.user, User.objects.get(username='System'))
-    admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon "'+roomName+'"', room=Room.objects.get(id=newRoom.id))
-    admin_message.save()
-    return JsonResponse({'room_id':newRoom.id})
+# Fonction pour envoyer un message
+def sendMessage(request):
+    text = request.POST['value']
+    room = get_object_or_404(Room, id=request.POST['room_id'])
+    user_list = room.users.all()
+    if request.user not in user_list:
+        return JsonResponse({'redirect':'True'})
+    if text == "" or text[0] == " " or len(text) > 400:
+        print("Message invalide.")
+        messages.error(request,"Message invalide.", extra_tags='messageForm')
+        return JsonResponse({'redirect':'/chatrooms/'+str(request.POST['room_id'])+'/'})
+    new_message = Message(user = request.user, username=request.user.username, message=text, room=Room.objects.get(id=request.POST['room_id']))
+    new_message.save()
+    return JsonResponse({'redirect':'/chatrooms/'+str(request.POST['room_id'])+'/'})
 
+# fonction créer un salon
+def addRoom(request):
+    room_name = request.POST['room_name']
+    if room_name == "" or room_name[0] == " " or len(room_name)>50:
+        messages.error(request,"Nom de chatroom invalide.", extra_tags='roomForm')
+        return JsonResponse({'redirect':'/chatrooms'})
+    new_room = Room(name=room_name, owner=request.user)
+    new_room.save()
+    new_room.users.add(request.user, User.objects.get(username='System'))
+    admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon "'+room_name+'"', room=Room.objects.get(id=new_room.id))
+    admin_message.save()
+    return JsonResponse({'room_id':new_room.id})
+
+# fonction pour ajouter un utilisateur dans un salon
 def addUser(request):
     user_name = request.POST['user_name']
     room_id = request.POST['room_id']
@@ -100,20 +118,26 @@ def addUser(request):
                 room.users.add(user)
                 admin_message = Message(user = User.objects.get(username='System'), username=' ', message=user.username+' a rejoint le salon', room=room)
                 admin_message.save()
-                return JsonResponse({'user_id':user.id, 'user_name':user.username})
+                return JsonResponse({'redirect':'/chatrooms/'+str(room_id)+'/'})
             else:
-                messages.error(request,"Utilisateur déjà dans le salon.")
-                return HttpResponseRedirect('/chatrooms/'+str(room_id)+'/')
-    return HttpResponseRedirect('/chatroom/')
-    
+                messages.error(request,"Utilisateur déjà dans le salon.", extra_tags='userForm')
+                return JsonResponse({'redirect':'/chatrooms/'+str(room_id)+'/'})
+    messages.error(request,"Utilisateur introuvable.", extra_tags='userForm')
+    return JsonResponse({'redirect':'/chatrooms/'+str(room_id)+'/'})
+
+# fonction pour supprimer un utilisateur d'un salon
 def deleteUser(request, id, user_name):
     room = get_object_or_404(Room, id=id)
     if request.user.username == 'System' or room.owner == request.user:
+        if len(room.users.all()) <= 2:
+            print("delete room")
+            room.delete()
+            return HttpResponseRedirect('/chatrooms')
         delete_user = User.objects.get(username=user_name)
         if room.owner == delete_user:
             user_list = room.users.all()
             for users in user_list:
-                if users != delete_user and delete_user != User.objects.get(username='System'):
+                if users != delete_user and users != User.objects.get(username='System'):
                     room.owner = users
                     room.save()
                     print("new owner:"+users.username)
@@ -124,7 +148,7 @@ def deleteUser(request, id, user_name):
         return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
     return HttpResponseRedirect('/chatrooms/'+str(id)+'/')
 
-
+# fonction pour quitter un salon
 def quitRoom(request, id):
     delete_user = request.user
     room = get_object_or_404(Room, id=id)
@@ -151,33 +175,23 @@ def quitRoom(request, id):
         return HttpResponseRedirect('/chatrooms')
 
 
+# fonction pour envoyer les mise à jour des messages et des utilisateurs
 def getUpdates(request, id):
     room = get_object_or_404(Room, id=id)
+    if request.user not in room.users.all():
+        return JsonResponse({'redirect':'True'})
     messages = room.message_set.all()
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username})
 
+# fonction pour envoyer les mise à jour des salons
 def updateRoomList(request):
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     return JsonResponse({'room_list':list(room_list.values())})
 
-def sendMessage(request):
-    text = request.POST['value']
-    room = get_object_or_404(Room, id=request.POST['room_id'])
-    user_list = room.users.all()
-    if request.user not in user_list:
-        print("Vous n'êtes pas dans ce salon.")
-        messages.error(request,"Vous n'êtes pas dans ce salon.")
-        return HttpResponseRedirect('/chatrooms/'+str(request.POST['room_id'])+'/')
-    if text == "" or text[0] == " " or len(text) > 400:
-        print("Message invalide.")
-        messages.error(request,"Message invalide.")
-        return HttpResponseRedirect('/chatrooms/'+str(request.POST['room_id'])+'/')
-    new_message = Message(user = request.user, username=request.user.username, message=text, room=Room.objects.get(id=request.POST['room_id']))
-    new_message.save()
-    return HttpResponseRedirect('/chatrooms/'+str(request.POST['room_id'])+'/')
 
-def error_404(request, exception):
+# Page d'erreur 404
+def error404(request, exception):
     return render(request,'chatRoom/404.html')

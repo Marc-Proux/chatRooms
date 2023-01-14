@@ -21,4 +21,4 @@ urlpatterns = [
     path('', include('chatRoom.urls')),
 ]
 
-handler404 = 'chatRoom.views.error_404'
+handler404 = 'chatRoom.views.error404'

@@ -8,7 +8,6 @@
     <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
     <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
 {% if user.is_authenticated %}
-    <!-- Hi {{ user.username }}! -->
     <header>
         <input type="hidden" id="room_id" name="room_id" value="{{ current_room.id }}">
         <input type="hidden" id="user" name="user" value="{{ user.username }}">
@@ -20,13 +19,6 @@
     <aside class="Room-list">
         <nav>
             <ul id="Room-list">
-                <!-- {% for room in room_list %}
-                    {% if room.id == current_room.id %}
-                        <li class="current-room"><a>{{ room.name }}</a></li>
-                    {% else %}
-                        <li class="Room-name"><a href="{% url 'room' room.id %}">{{ room.name }}</a></li>
-                    {% endif %}
-                {% endfor %} -->
             </ul>
         </nav>
     </aside>
@@ -36,15 +28,8 @@
         <div id="messages-div">
             <ul class="message-box">
                 {% if current_room == NONE %}
-                    <p class="message">Rejoingnez un salon pour parler</p>
+                    <p class="message">Rejoingnez/Ouvrez un salon pour discuter</p>
                 {% endif %}
-                <!--
-                {% for message in current_room.message_set.all %}
-                    <li class="user">{{ message.user }}</li>
-                    <li class="message">{{ message.message }}</li>
-                    <li class="date">{{ message.date }}</li>
-                {% endfor %}
-                -->
             </ul>
             <br class="space">
         </div>
@@ -56,7 +41,16 @@
             <div>
                 <form method="post" id="post-form">
                     {% csrf_token %}
-                    <input type="text" placeholder="Votre message..." name="message-text-field" id="msg-txt-field" maxlength="400">
+                    {% for message in messages %}
+                        {% if 'messageForm' in message.tags %}
+                            <input type="text" placeholder="{{ message }}" name="message-text-field" class="msg-txt-field" id="msg-txt-field-error" maxlength="400">
+                        {% else %}
+                        <input type="text" placeholder="Votre message..." name="message-text-field" class="msg-txt-field" maxlength="400">
+                        {% endif %}
+                    {% endfor %}
+                    {% if not messages %}
+                        <input type="text" placeholder="Votre message..." name="message-text-field" class="msg-txt-field" maxlength="400">
+                    {% endif %}
                     <button class="send-button" title="Envoyer le message"> </button>
                 </form>
             </div>
@@ -69,6 +63,13 @@
             {% csrf_token %}
             <label for="enter-room-name"><p>Nom du salon</p></label>
             <input type="text" name="room-name" id="enter-room-name" placeholder="Nom..." maxlength="50">
+            {% for message in messages %}
+                {% if 'roomForm' in message.tags %}
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
             <button type="submit" class="sign-up-button" style="margin-left: 0; margin-right: 20px;">Ajouter le salon</button>
             <button type="button" class="add-room-button" id="cancel-button">Annuler</button>
         </form>
@@ -78,20 +79,20 @@
         <h2>Utilisateurs dans le salon</h2>
         <div id="user-div">
             <ul class="user-list">
-                <!-- {% for users in user_list %}
-                    {% if users.username == owner %}
-                        <li class="Room-name">{{ users.username }} | Admin</li>
-                    {% elif users.username != 'System' %}
-                        <li class="Room-name">{{ users.username }}</li>
-                    {% endif %}
-                {% endfor %} -->
             </ul>
         </div>
         {% if user.username == owner or user.username == System %}
             <div id="add-user-div">
                 <form method="POST" id="add-user-form">
                     {% csrf_token %}
-                    <input type="search" id="user-add-input" placeholder="Ajouter un utilisateur...">
+                    <input type="search" id="user-add-input" placeholder="Ajouter un utilisateur...", maxlength="50">
+                    {% for message in messages %}
+                        {% if 'userForm' in message.tags %}
+                            <div class="alert alert-success">
+                                <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <button type="submit" class="sign-up-button" style="font-size: 15px; margin: 0 0 5px 0;">Ajouter l'utilisateur</button>
                 </form>
             </div>
