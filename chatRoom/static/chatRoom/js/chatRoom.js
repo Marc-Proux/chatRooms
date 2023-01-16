@@ -70,17 +70,20 @@ function updateRoomList(){
             type:'GET',
             url:'/updateRoomList/',
             success: function(data){
-                $(".Room-list").empty();
-                for (var key in data.room_list)
-                {
-                    if (data.room_list[key].id == room_id) {
-                        var temp='<li class="current-room"><a>'+data.room_list[key].name+'</a></li>';
-                        $(".Room-list").append(temp);
+                if ((data.room_list).length != num_room) {
+                    $(".Room-list").empty();
+                    for (var key in data.room_list)
+                    {
+                        if (data.room_list[key].id == room_id) {
+                            var temp='<li class="current-room"><a>'+data.room_list[key].name+'</a></li>';
+                            $(".Room-list").append(temp);
+                        }
+                        else {
+                            var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
+                            $(".Room-list").append(temp);
+                        }
                     }
-                    else {
-                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
-                        $(".Room-list").append(temp);
-                    }
+                    num_room = (data.room_list).length;
                 }
             },
             error : function(data) {
