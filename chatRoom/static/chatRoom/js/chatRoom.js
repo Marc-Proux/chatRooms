@@ -1,5 +1,5 @@
 // Show/hide the forms
-$(document).ready(function(e) {
+$(document).ready(function() {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
         $("#add-room-form").toggle();
@@ -13,7 +13,14 @@ $(document).ready(function() {
     })  
 });
 
-$(document).ready(function(e) {
+$(document).ready(function() {
+    $(".profile-options").hide();
+    $(".profile-button").click(function() {
+        $(".profile-options").toggle();
+    })  
+});
+
+$(document).ready(function() {
     $(".show-rooms-button").click(function() {
         $(".Room-list").show();
         $(".show-rooms-button").hide();
@@ -26,6 +33,7 @@ $(document).mouseup(function(e){
     var container = $("#add-room-form");
     var container2 = $(".add-user-form");
     var container3 = $(".Room-list");
+    var container4 = $(".profile-options");
  
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
@@ -41,6 +49,10 @@ $(document).mouseup(function(e){
         $(".add-room-button").hide();
         $(".show-rooms-button").show();
         $(".user-list-button").show();
+    }
+
+    if(!container4.is(e.target) && container4.has(e.target).length === 0){
+        container4.hide();
     }
 });
 

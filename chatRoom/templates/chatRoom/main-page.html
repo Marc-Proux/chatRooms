@@ -13,8 +13,32 @@
         <input type="hidden" id="user" name="user" value="{{ user.username }}">
         <input type="hidden" id="owner" name="owner" value="{{ owner }}">
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
-        <a class="log-out" href="{% url 'logout' %}">Utilisateur : {{ user.username }} <button title="Déconnexion" class="log-out-button" style="height: 20px; width: 20px;"></button></a>
+        <div class="log-out-div">
+            <p class="log-out">
+                <button title="Profil" class="profile-button" style="height: 30px; width: 30px;"></button>
+                {{ user.username }}
+            </p>
+        </div>
     </header>
+    <div class="profile-options">
+        <nav>
+            <div style="margin-bottom: 20px;">
+                <button title="Liste d'amis" class="friends-button" id="friends-button" style="height: 50px; width: 50px;"></button>
+                <!-- <label for="friends-button">Liste d'amis</label> -->
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <button title="Paramètres du compte" class="settings-button" id="settings-button" style="height: 50px; width: 50px;"></button>
+                <!-- <label for="settings-button">Paramètres du compte</label> -->
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <button onclick="window.location.href='/logout'" title="Déconnexion" class="log-out-button" id="log-out-button" style="height: 50px; width: 50px;"></button>
+                <!-- <label for="log-out-button">Se déconnecter</label> -->
+            </div>
+            
+        </nav>
+    </div>
     <div class="titles"> <p class="Room-title">Salons de discussion</p> <p class="Messages-title">{{ current_room.name }}</p> </div>
     <aside class="Room-list">
         <nav>
