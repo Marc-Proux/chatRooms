@@ -47,7 +47,11 @@
             |
             <button class="group-chats-button" id="group-chats-button" title="Liste de vos discussions de groupe">Groupes</button>
         </p>
-        <p class="Messages-title">{{ current_room.name }}</p>
+        {% if current_room.is_group == False %}
+            <p class="Messages-title">{{ friend }}</p>
+        {% else %}
+            <p class="Messages-title">{{ current_room.name }}</p>
+        {% endif %}
     </div>
     <aside class="Room-list">
         <div class="titles">
