@@ -58,6 +58,29 @@ body {
     text-decoration: none;
 }
 
+.profile-options {
+    z-index: 4;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: max-content;
+    background-color: rgb(32,31,37);
+    border: 2px solid rgb(216, 216, 216);
+    border-radius: 20px;
+    padding: 1.5% 3% 0% 3%;
+    text-align: left;
+    font-family: sans-serif;
+    font-size: 18px;
+    vertical-align: middle;
+    animation: form-pop-up 0.4s ease;
+}
+
 .log-out {
     position: absolute;
     right: 5%;
@@ -78,26 +101,96 @@ body {
 } */
 
 .log-out-button {
-    background-color: rgb(32,31,37);
-    border-radius: 7px;
-    background-image: url(img/quit-white.png);
+    background-color: rgb(216, 216, 216);
+    border-radius: 30px;
+    background-image: url(img/quit.png);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
     border: none;
     cursor: pointer;
-    transform: translateY(25%);
     transition: ease-in-out 0.3s;
 }
 
 .log-out-button:hover {
-    background-color: rgb(216, 216, 216);
-    background-image: url(img/quit.png);
-    transform: scale(1.1) translateY(25%);
+    background-color: rgb(253, 253, 153);
+    transform: scale(1.0);
+    border-radius: 15px;
 }
 
 .log-out-button:active {
-    transform: scale(1.0) translateY(25%);
+    transform: scale(0.9);
+    transition: ease 0.05s; 
+}
+
+.settings-button {
+    background-color: rgb(216, 216, 216);
+    border-radius: 30px;
+    background-image: url(img/settings.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.settings-button:hover {
+    background-color: rgb(253, 253, 153);
+    transform: scale(1.0);
+    border-radius: 15px;
+}
+
+.settings-button:active {
+    transform: scale(0.9);
+    transition: ease 0.05s;
+}
+
+.friends-button {
+    background-color: rgb(216, 216, 216);
+    border-radius: 30px;
+    background-image: url(img/friends.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.friends-button:hover {
+    background-color: rgb(253, 253, 153);
+    transform: scale(1.0);
+    border-radius: 15px;
+}
+
+.friends-button:active {
+    transform: scale(0.9);
+    transition: ease 0.05s;
+}
+
+.profile-button {
+    background-color: rgb(32,31,37);
+    border-radius: 100%;
+    background-image: url(img/profile-white.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transform: translateY(35%);
+    transition: ease-in-out 0.3s;
+}
+
+.profile-button:hover {
+    background-color: rgb(253, 253, 153);
+    background-image: url(img/profile.png);
+    /* transform: scale(1.1) translateY(35%); */
+}
+
+.profile-button:active {
+    transform: scale(1.0) translateY(35%);
+    transition: ease 0.05s;
 }
 
 .centered-button {
@@ -470,7 +563,7 @@ li {
     vertical-align: bottom;
     background-color: white;
     background-image: url(img/users.png);
-    background-size: 55%;
+    background-size: 65%;
     background-position: center;
     background-repeat: no-repeat;
     width: 35px;
@@ -478,7 +571,7 @@ li {
     border: 0;
     border-radius: 100%;
     cursor: pointer;
-    transition: ease-in-out 0.1s;
+    transition: ease-in-out 0.2s;
 }
 
 #user-list-button:hover {

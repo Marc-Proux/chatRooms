@@ -68,6 +68,7 @@ body {
     bottom: 0;
     top: 0;
     left: 0;
+    transform: translateY(-20%);
     width: max-content;
     height: max-content;
     background-color: rgb(32,31,37);
@@ -362,7 +363,11 @@ li {
 .Room-title {
     width: 18.8%;
     margin-left: 11.2%;
-    /* background-color: blueviolet; */
+    font-size: 40px;
+    background-image: linear-gradient(rgba(255,255,255,0) , rgba(255,255,255,0.2), rgba(255,255,255,0));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
 }
 
 .Messages-title {
@@ -370,6 +375,59 @@ li {
     width: 45%;
     margin-right: 20%;
     background-color: rgb(32,31,37);
+}
+
+.Room-title-small-screen {
+    vertical-align: middle;
+    font-family: Aharoni, sans-serif;
+    text-align: center;
+    color: rgb(253, 253, 153);
+    width: 100%;
+    margin-top: 3%;
+    direction: ltr;
+    font-size: 40px;
+    background-image: linear-gradient(rgba(255,255,255,0) , rgba(255,255,255,0.2), rgba(255,255,255,0));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.friend-chats-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: rgb(32,31,37);
+    background-color: rgb(253, 253, 153);
+    border: 0px;
+    font-size: 20px;
+    border-radius: 7px;
+    padding: 5px 20px 5px 20px;
+    transition: ease-out 0.3s;
+    cursor: pointer;
+    transform: translateY(-20%);
+}
+
+.friend-chats-button:hover {
+    color: rgb(32,31,37);
+    transform: scale(1.05) translateY(-20%);
+}
+
+.group-chats-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: rgb(32,31,37);
+    background-color: rgb(253, 253, 153);
+    border: 0px;
+    font-size: 20px;
+    border-radius: 7px;
+    padding: 5px 20px 5px 20px;
+    transition: ease-out 0.3s;
+    cursor: pointer;
+    transform: translateY(-20%);
+}
+
+.group-chats-button:hover {
+    color: rgb(32,31,37);
+    transform: scale(1.05) translateY(-20%);
 }
 
 .messages-list {
@@ -451,6 +509,7 @@ li {
     overflow: hidden;
     text-decoration: none;
     transition: 0.2s ease;
+    animation: fade-in 0.8s ease;
 }
 
 .current-room-div {
@@ -469,17 +528,19 @@ li {
 }
 
 .leave-button {
-    height: 43px;
-    width: 43px;
-    border-radius: 7px;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
     background-color: white;
     background-image: url(img/quit.png);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
     margin-left: 1%;
+    /* margin-right: 1%; */
     border: none;
     cursor: pointer;
+    animation: fade-in 0.2s ease;
 }
 
 .leave-button:hover {
@@ -487,6 +548,30 @@ li {
 }
 
 .leave-button:active {
+    transform: scale(0.9);
+}
+
+.unfriend-button {
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    background-color: white;
+    background-image: url(img/unfriend.png);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    margin-left: 1%;
+    /* margin-right: 1%; */
+    border: none;
+    cursor: pointer;
+    animation: fade-in 0.8s ease;
+}
+
+.unfriend-button:hover {
+    background-color: rgb(253, 253, 153);
+}
+
+.unfriend-button:active {
     transform: scale(0.9);
 }
 
@@ -734,7 +819,7 @@ li {
 }
 
 #add-user-div {
-    width:max-content;
+    width: 100%;
 }
 
 .add-user-form form {
@@ -758,6 +843,56 @@ li {
 }
 
 .add-user-form h2 {
+    font-family: Aharoni, sans-serif;
+    margin: 20px 0 20px 0;
+    transform: translateY(-18px);
+}
+
+.friends-list-form {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 60%;
+    background-color: rgb(32,31,37);
+    border: 2px solid rgb(216, 216, 216);
+    color: rgb(216, 216, 216);
+    font-family: Aharoni, sans-serif;
+    font-size: 15px;
+    animation: form-pop-up 0.4s ease;
+    margin: auto;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    overflow-y: auto;
+}
+
+#add-friend-div {
+    width:100%;
+}
+
+.friends-list-form form {
+    padding: 1%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.friends-list-form form input {
+    color: rgb(32,31,37);
+    width: 80%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.friends-list-form h2 {
     font-family: Aharoni, sans-serif;
     margin: 20px 0 20px 0;
     transform: translateY(-18px);
@@ -882,8 +1017,12 @@ li {
     margin: 0;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 845px) {
     .show-rooms-button {
+        display: none;
+    }
+
+    .Room-title-small-screen {
         display: none;
     }
 }
@@ -897,16 +1036,64 @@ li {
     .Messages-title {
         font-size: 25px;
     }
+
+    .friend-chats-button {
+        font-size: 15px;
+    }
+    
+    .group-chats-button {
+        font-size: 15px;
+    }
 }
 
-@media screen and (max-width: 970px) {
+@media screen and (max-width: 1100px) {
+    .friend-chats-button {
+        font-size: 12px;
+    }
+    
+    .group-chats-button {
+        font-size: 12px;
+    }
+
     .fixed-buttons {
         left: 0;
         width: 100%;
     }
 }
 
+@media screen and (max-width: 1000px) {
+    .friend-chats-button {
+        font-size: 10px;
+    }
+    
+    .group-chats-button {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 925px) {
+    .friend-chats-button {
+        font-size: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+    
+    .group-chats-button {
+        font-size: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+}
+
 @media screen and (max-width: 845px) {
+    .friend-chats-button {
+        font-size: 15px;
+    }
+    
+    .group-chats-button {
+        font-size: 15px;
+    }
+
     .fixed-buttons input {
         width: 60%;
     }
@@ -999,5 +1186,13 @@ li {
 
     .message {
         font-size: 14px;
+    }
+
+    .friend-chats-button {
+        font-size: 11px;
+    }
+    
+    .group-chats-button {
+        font-size: 11px;
     }
 }

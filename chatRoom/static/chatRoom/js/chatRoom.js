@@ -2,21 +2,29 @@
 $(document).ready(function() {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
-        $("#add-room-form").toggle();
+        $("#add-room-form").show();
     })
 });
 
 $(document).ready(function() {
     $(".add-user-form").hide();
     $(".user-list-button").click(function() {
-        $(".add-user-form").toggle();
+        $(".add-user-form").show();
+    })  
+});
+
+$(document).ready(function() { // Liste d'amis
+    $(".friends-list-form").hide();
+    $(".friends-button").click(function() {
+        $(".friends-list-form").show();
+        $(".profile-options").hide();
     })  
 });
 
 $(document).ready(function() {
     $(".profile-options").hide();
     $(".profile-button").click(function() {
-        $(".profile-options").toggle();
+        $(".profile-options").show();
     })  
 });
 
@@ -29,11 +37,61 @@ $(document).ready(function() {
     })
 });
 
+$(document).ready(function() {
+    var is_group = $("#room-type").val();
+    const unselected_style = {
+        backgroundColor : "rgb(32,31,37)",
+        color : "white",
+        border : "1px solid white"
+    };
+
+    const selected_style = {
+        backgroundColor : "rgb(253, 253, 153)",
+        color : "rgb(32,31,37)",
+        border : "1px solid rgb(32,31,37)"
+    };
+    
+    if (is_group == "False" || is_group == "") {
+        $("#Room-list").hide();
+        $("#Friends-list").show();
+        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
+    }
+    else {
+        $("#Room-list").show();
+        $("#Friends-list").hide();
+        Object.assign(document.getElementById("group-chats-button").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
+    }
+    $(".group-chats-button").click(function() {
+        $("#Room-list").show();
+        $("#Friends-list").hide();
+        Object.assign(document.getElementById("group-chats-button").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
+    })
+
+    $(".friend-chats-button").click(function() {
+        $("#Room-list").hide();
+        $("#Friends-list").show();
+        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
+    })
+});
+
 $(document).mouseup(function(e){
     var container = $("#add-room-form");
     var container2 = $(".add-user-form");
     var container3 = $(".Room-list");
     var container4 = $(".profile-options");
+    var container5 = $(".friends-list-form");
  
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
@@ -53,6 +111,10 @@ $(document).mouseup(function(e){
 
     if(!container4.is(e.target) && container4.has(e.target).length === 0){
         container4.hide();
+    }
+
+    if(!container5.is(e.target) && container5.has(e.target).length === 0){
+        container5.hide();
     }
 });
 
@@ -141,7 +203,7 @@ function update(){
                         for (var key in data.private_list)
                         {
                             if (data.private_list[key].id==room_id) {
-                                var temp='<div class="current-room-div"> <li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.private_list[key].name+'</a><button type="button" class="unfriends" title="Quitter le salon" onclick="window.location.href=\'/unfriend/'+room_id+'\'">.</button></div>';
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.private_list[key].name+'</a> </li> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+room_id+'\'"></button> </div>';
                                 $("#Friends-list").append(temp);
                             }
                             else {
@@ -171,7 +233,7 @@ function update(){
                         for (var key in data.room_list)
                         {
                             if (data.room_list[key].id == room_id) {
-                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'">.</button> </div>';
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'"></button> </div>';
                                 $("#Room-list").append(temp);
                             }
                             else {

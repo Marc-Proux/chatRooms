@@ -10,6 +10,7 @@
 {% if user.is_authenticated %}
     <header>
         <input type="hidden" id="room_id" name="room_id" value="{{ current_room.id }}">
+        <input type="hidden" id="room-type" name="room-type" value="{{ current_room.is_group }}">
         <input type="hidden" id="user" name="user" value="{{ user.username }}">
         <input type="hidden" id="owner" name="owner" value="{{ owner }}">
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
@@ -41,11 +42,21 @@
     </div>
     <!-- <div class="titles"> <p class="Room-title">Salons de discussion</p> <p class="Messages-title">{{ current_room.name }}</p> </div> -->
     <div class="titles">
-        <button class="button-amis" title="Amis">Amis</button>
-        <button class="button-salon" title="Salons">Groupes</button>
+        <p class="Room-title">
+            <button class="friend-chats-button" id="friend-chats-button" title="Liste de vos discussions entre amis">Amis</button>
+            |
+            <button class="group-chats-button" id="group-chats-button" title="Liste de vos discussions de groupe">Groupes</button>
+        </p>
         <p class="Messages-title">{{ current_room.name }}</p>
     </div>
     <aside class="Room-list">
+        <div class="titles">
+            <p class="Room-title-small-screen">
+                <button class="friend-chats-button" id="friend-chats-button2" title="Liste de vos discussions entre amis">Amis</button>
+                |
+                <button class="group-chats-button" id="group-chats-button2" title="Liste de vos discussions de groupe">Groupes</button>
+            </p>
+        </div>
         <nav>
             <ul id="Room-list">
             </ul>
@@ -71,7 +82,7 @@
             <div class="input-message-div">
                 <form method="post" id="post-form">
                     {% csrf_token %}
-                    <input type="text" placeholder="Votre message..." name="message-text-field" class="msg-txt-field" maxlength="400">
+                    <input type="text" placeholder="Votre message..." autocomplete="off" name="message-text-field" class="msg-txt-field" maxlength="400">
                     <button class="send-button" title="Envoyer le message"> </button>
                 </form>
             </div>
@@ -85,7 +96,7 @@
             <h2>Ajout de salon</h2>
             {% csrf_token %}
             <label for="enter-room-name"><p>Nom du salon</p></label>
-            <input type="text" name="room-name" id="enter-room-name" placeholder="Nom..." maxlength="50">
+            <input type="text" name="room-name" autocomplete="off" id="enter-room-name" placeholder="Nom..." maxlength="50">
             {% for message in messages %}
                 {% if 'roomForm' in message.tags %}
                     <div class="alert alert-success">
@@ -108,7 +119,7 @@
             <div id="add-user-div">
                 <form method="POST" id="add-user-form">
                     {% csrf_token %}
-                    <input type="search" id="user-add-input" placeholder="Ajouter un utilisateur...", maxlength="50">
+                    <input type="search" id="user-add-input" autocomplete="off" placeholder="Ajouter un utilisateur...", maxlength="50">
                     {% for message in messages %}
                         {% if 'userForm' in message.tags %}
                             <div class="alert alert-success">
@@ -120,6 +131,25 @@
                 </form>
             </div>
         {% endif %}
+    </section>
+
+    <section class="friends-list-form">
+        <h2>Vos amis</h2>
+        <div id="friends-list-div">
+            <ul class="friends-list">
+            </ul>
+        </div>
+            <div id="add-friend-div">
+                <form method="POST" id="add-friend-form">
+                    <input type="search" id="friend-add-input" autocomplete="off" placeholder="Ajouter un ami...", maxlength="50">
+
+                            <div class="alert alert-success">
+                                <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                            </div>
+
+                    <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Envoyer une demande d'ami</button>
+                </form>
+            </div>
     </section>
 {% endif %}
 {% endblock %}
