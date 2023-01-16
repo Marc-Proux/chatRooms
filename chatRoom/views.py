@@ -109,7 +109,7 @@ def addRoom(request):
     if room_name == "" or room_name[0] == " " or len(room_name)>50:
         messages.error(request,"Nom de chatroom invalide.", extra_tags='roomForm')
         return JsonResponse({'redirect':'/chatrooms'})
-    new_room = Room(name=room_name, owner=request.user)
+    new_room = Room(name=room_name, owner=request.user, is_group=True)
     new_room.save()
     new_room.users.add(request.user, User.objects.get(username='System'))
     admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon "'+room_name+'"', room=Room.objects.get(id=new_room.id))

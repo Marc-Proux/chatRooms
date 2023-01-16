@@ -10,6 +10,7 @@ class Room(models.Model):
     name = models.CharField(max_length=50)
     users = models.ManyToManyField(User)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
+    is_group = models.BooleanField(default=False)
     def __str__(self):
         return self.name
 
