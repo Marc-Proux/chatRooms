@@ -74,6 +74,7 @@ $(window).resize(function() {
 var num_msg = 0;
 var num_room = 0;
 var num_user = 0;
+var friends = 0;
 
 function updateRoomList(){
     var room_id = $("#room_id").val();
@@ -81,21 +82,25 @@ function updateRoomList(){
         $.ajax({
             type:'GET',
             url:'/updateRoomList/',
+            dataType: 'json',
             success: function(data){
                 if ((data.room_list).length != num_room) {
-                    $(".Room-list").empty();
+                    $("#Room-list").empty();
                     for (var key in data.room_list)
                     {
-                        if (data.room_list[key].id == room_id) {
-                            var temp='<li class="current-room"><a>'+data.room_list[key].name+'</a></li>';
-                            $(".Room-list").append(temp);
-                        }
-                        else {
-                            var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
-                            $(".Room-list").append(temp);
-                        }
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
+                        $("#Room-list").append(temp);
                     }
-                    num_room = (data.room_list).length;
+                        num_room = (data.room_list).length;
+                }
+                if ((data.private_list).length != friends) {
+                    $("#Friends-list").empty();
+                    for (var key in data.private_list)
+                    {
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a></li>';
+                        $("#Friends-list").append(temp);
+                    }
+                    friends = (data.private_list).length;
                 }
             },
             error : function(data) {
@@ -117,18 +122,48 @@ function update(){
                 if (data.redirect) {
                     window.location.href = '/chatrooms';
                 }
+                if ((data.private_list).length != friends) {
+                    $("#Friends-list").empty();
+                    if (user == 'System') {
+                        for (var key in data.private_list)
+                        {
+                            if (data.room_list[key]==room_id) {
+                                var temp='<li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
+                                $("#Friends-list").append(temp);
+                            }
+                            else {
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
+                                $("#Friends-list").append(temp);
+                            }
+                        }
+                    }
+                    else {
+                        for (var key in data.private_list)
+                        {
+                            if (data.private_list[key].id==room_id) {
+                                var temp='<div class="current-room-div"> <li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.private_list[key].name+'</a><button type="button" class="unfriends" title="Quitter le salon" onclick="window.location.href=\'/unfriend/'+room_id+'\'">.</button></div>';
+                                $("#Friends-list").append(temp);
+                            }
+                            else {
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li>';
+                                $("#Friends-list").append(temp);
+                            }
+                        }
+                    }
+                    friends = (data.private_list).length;
+                }
                 if ((data.room_list).length != num_room) {
-                    $(".Room-list").empty();
+                    $("#Room-list").empty();
                     if (user == 'System') {
                         for (var key in data.room_list)
                         {
                             if (data.room_list[key].id == room_id) {
                                 var temp='<li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
-                                $(".Room-list").append(temp);
+                                $("#Room-list").append(temp);
                             }
                             else {
                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
-                                $(".Room-list").append(temp);
+                                $("#Room-list").append(temp);
                             }
                         }
                     }
@@ -137,11 +172,11 @@ function update(){
                         {
                             if (data.room_list[key].id == room_id) {
                                 var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'">.</button> </div>';
-                                $(".Room-list").append(temp);
+                                $("#Room-list").append(temp);
                             }
                             else {
                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
-                                $(".Room-list").append(temp);
+                                $("#Room-list").append(temp);
                             }
                         }
                     }
@@ -270,7 +305,6 @@ $(document).on('submit','#add-room-form',function(e){
 // addUser
 $(document).on('submit','#add-user-form',function(e){
     e.preventDefault();
-
     $.ajax({
       type:'POST',
       url:'/addUser/',
