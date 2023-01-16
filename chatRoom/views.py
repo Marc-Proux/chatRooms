@@ -184,6 +184,19 @@ def quitRoom(request, id):
         admin_message.save()
         return HttpResponseRedirect('/chatrooms')
 
+def unfriend(request, id):
+    print("unfriend")
+    room = get_object_or_404(Room, id=id)
+    for users in room.users.all():
+        if users != request.user and users != User.objects.get(username='System'):
+            user = users
+            if user in request.user.friends.all():
+                request.user.friends.remove(user)
+                user.friends.remove(request.user)
+                room.delete()
+                print("unfriend "+user.username)
+            break
+    return HttpResponseRedirect('/chatrooms')
 
 # fonction pour envoyer les mise à jour des messages et des utilisateurs
 def getUpdates(request, id):
@@ -192,14 +205,16 @@ def getUpdates(request, id):
         return JsonResponse({'redirect':'True'})
     messages = room.message_set.all()
     last_message_time = Max("message__date")
-    room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username})
+    room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    private_list = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':list(private_list.values())})
 
 # fonction pour envoyer les mise à jour des salons
 def updateRoomList(request):
     last_message_time = Max("message__date")
-    room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return JsonResponse({'room_list':list(room_list.values())})
+    room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    private_list = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    return JsonResponse({'room_list':list(room_list.values()), 'private_list':list(private_list.values())})
 
 
 # Page d'erreur 404

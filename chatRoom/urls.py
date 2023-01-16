@@ -17,4 +17,5 @@ urlpatterns = [
     path('deleteUser/<int:id>/<str:user_name>', view=views.deleteUser, name='deleteUser'),
     path('updateRoomList/', view=views.updateRoomList, name='updateRoomList'),
     path('quitRoom/<int:id>/', view=views.quitRoom, name='quitRoom'),
+    path('unfriend/<int:id>/', view=views.unfriend, name='unfriend'),
 ]

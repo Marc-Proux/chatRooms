@@ -15,10 +15,17 @@
         <h1 class="main-page-title"><a href="{% url 'index' %}">Chat Room</a></h1>
         <a class="log-out" href="{% url 'logout' %}">Utilisateur : {{ user.username }} <button title="Déconnexion" class="log-out-button" style="height: 20px; width: 20px;"></button></a>
     </header>
-    <div class="titles"> <p class="Room-title">Salons de discussion</p> <p class="Messages-title">{{ current_room.name }}</p> </div>
+    <!-- <div class="titles"> <p class="Room-title">Salons de discussion</p> <p class="Messages-title">{{ current_room.name }}</p> </div> -->
+    <div class="titles">
+        <button class="button-amis" title="Amis">Amis</button>
+        <button class="button-salon" title="Salons">Groupes</button>
+        <p class="Messages-title">{{ current_room.name }}</p>
+    </div>
     <aside class="Room-list">
         <nav>
             <ul id="Room-list">
+            </ul>
+            <ul id ="Friends-list">
             </ul>
         </nav>
     </aside>
