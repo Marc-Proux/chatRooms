@@ -75,9 +75,14 @@ def room(request, id):
     if id not in Room.objects.filter(users=request.user).values_list('pk', flat=True):
         raise Http404('Page not found')
     room = get_object_or_404(Room, id=id)
+    friend = ''
+    for users in room.users.all():
+        if users != request.user and users != User.objects.get(username='System'):
+            friend = users.username
+            break
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username, 'System':'System'})
+    return render(request, 'chatRoom/main-page.html', {'room_list':room_list, 'current_room':room, 'user_list':room.users.all(), 'owner':room.owner.username, 'System':'System', 'friend':friend})
 
 
 # Fonction pour envoyer un message
@@ -184,8 +189,28 @@ def quitRoom(request, id):
         admin_message.save()
         return HttpResponseRedirect('/chatrooms')
 
+def addFriend(request):
+    user_name = request.POST['user_name']
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        if user != request.user:
+            if user not in request.user.friends.all():
+                request.user.friends.add(user)
+                user.friends.add(request.user)
+                new_room = Room(name=user.username+'/'+user.username , owner=User.objects.get(username='System'), is_group=False)
+                new_room.save()
+                new_room.users.add(request.user, user, User.objects.get(username='System'))
+                admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon privé avec '+user.username+' et '+request.user.username, room=Room.objects.get(id=new_room.id))
+                admin_message.save()
+                return JsonResponse({'room_id':new_room.id})
+            else:
+                messages.error(request,"Vous êtes déjà amis avec "+user.username, extra_tags='friendForm')
+                return JsonResponse({'redirect':'/chatrooms'})
+    messages.error(request,"Utilisateur introuvable.", extra_tags='friendForm')
+    return JsonResponse({'redirect':'/chatrooms'})
+
+
 def unfriend(request, id):
-    print("unfriend")
     room = get_object_or_404(Room, id=id)
     for users in room.users.all():
         if users != request.user and users != User.objects.get(username='System'):
@@ -194,7 +219,6 @@ def unfriend(request, id):
                 request.user.friends.remove(user)
                 user.friends.remove(request.user)
                 room.delete()
-                print("unfriend "+user.username)
             break
     return HttpResponseRedirect('/chatrooms')
 
@@ -206,15 +230,33 @@ def getUpdates(request, id):
     messages = room.message_set.all()
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    private_list = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':list(private_list.values())})
+    privates = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    private_list = []
+    for private in privates:
+        friend = {}
+        for users in private.users.all():
+            if users != request.user and users != User.objects.get(username='System'):
+                friend["name"] = users.username
+                break
+        friend["id"] = private.id
+        private_list.append(friend)
+    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':private_list})
 
 # fonction pour envoyer les mise à jour des salons
 def updateRoomList(request):
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    private_list = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    return JsonResponse({'room_list':list(room_list.values()), 'private_list':list(private_list.values())})
+    privates = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
+    private_list = []
+    for private in privates:
+        friend = {}
+        for users in private.users.all():
+            if users != request.user and users != User.objects.get(username='System'):
+                friend["name"] = users.username
+                break
+        friend["id"] = private.id
+        private_list.append(friend)
+    return JsonResponse({'room_list':list(room_list.values()), 'private_list':list(private_list)})
 
 
 # Page d'erreur 404

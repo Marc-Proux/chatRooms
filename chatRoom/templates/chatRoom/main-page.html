@@ -43,7 +43,11 @@
     <div class="titles">
         <button class="button-amis" title="Amis">Amis</button>
         <button class="button-salon" title="Salons">Groupes</button>
-        <p class="Messages-title">{{ current_room.name }}</p>
+        {% if current_room.is_group == False %}
+            <p class="Messages-title">{{ friend }}</p>
+        {% else %}
+            <p class="Messages-title">{{ current_room.name }}</p>
+        {% endif %}
     </div>
     <aside class="Room-list">
         <nav>
