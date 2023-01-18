@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Room, Message, User
+from .models import Room, Message, User, FriendRequest
 
 class UserAdmin(UserAdmin):
     list_display=('username','is_staff')
@@ -24,3 +24,8 @@ class UserAdmin(UserAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Room)   
 admin.site.register(Message)
+admin.site.register(FriendRequest)
+admin.site.site_header = "ChatRoom Admin"
+admin.site.site_title = "ChatRoom Admin Portal"
+admin.site.index_title = "Espace d'administration de ChatRoom"
+admin.site.site_url = "/chatrooms"

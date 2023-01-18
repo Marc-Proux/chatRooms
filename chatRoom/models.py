@@ -22,3 +22,15 @@ class Message(models.Model):
     date = models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.message
+
+class FriendRequest(models.Model):
+    STATUS_CHOICES = (
+        (1, 'Pending'),
+        (2, 'Accepted'),
+        (3, 'Rejected'),
+    )
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests_sent')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='requests_received')
+    def __str__(self):
+        return self.sender.username + " sent a friend request to " + self.receiver.username

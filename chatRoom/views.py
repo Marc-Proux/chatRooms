@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib import messages
-from .models import Room, Message
+from .models import Room, Message, FriendRequest
 from django.db.models import Max
 from django.conf import settings
 User = get_user_model()
@@ -189,37 +189,71 @@ def quitRoom(request, id):
         admin_message.save()
         return HttpResponseRedirect('/chatrooms')
 
-def addFriend(request):
-    user_name = request.POST['user_name']
+def friendRequest(request):
+    user_name = request.POST['friend_name']
     if User.objects.filter(username=user_name).exists():
         user = User.objects.get(username=user_name)
-        if user != request.user:
+        if user != request.user and user != User.objects.get(username='System'):
+            request_sent = user.requests_received.all().filter(sender=request.user)
             if user not in request.user.friends.all():
-                request.user.friends.add(user)
-                user.friends.add(request.user)
-                new_room = Room(name=user.username+'/'+user.username , owner=User.objects.get(username='System'), is_group=False)
-                new_room.save()
-                new_room.users.add(request.user, user, User.objects.get(username='System'))
-                admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon privé avec '+user.username+' et '+request.user.username, room=Room.objects.get(id=new_room.id))
-                admin_message.save()
-                return JsonResponse({'room_id':new_room.id})
+                if not request_sent:
+                    new_request = FriendRequest(sender=request.user, receiver=user, status=0)
+                    new_request.save()
+                    return JsonResponse({'redirect':'sucess'})
+                else:
+                    messages.error(request,"Demande d'ami déjà envoyée.", extra_tags='friendForm')
+                    return JsonResponse({'redirect':'/chatrooms'})
             else:
-                messages.error(request,"Vous êtes déjà amis avec "+user.username, extra_tags='friendForm')
+                messages.error(request,"Utilisateur déjà ami.", extra_tags='friendForm')
                 return JsonResponse({'redirect':'/chatrooms'})
     messages.error(request,"Utilisateur introuvable.", extra_tags='friendForm')
     return JsonResponse({'redirect':'/chatrooms'})
 
 
-def unfriend(request, id):
-    room = get_object_or_404(Room, id=id)
-    for users in room.users.all():
-        if users != request.user and users != User.objects.get(username='System'):
-            user = users
+def acceptRequest(request, user_name):
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        if user != request.user:
+            if request.user.requests_received.all().filter(sender=user):
+                request.user.friends.add(user)
+                new_room = Room(name=request.user.username+'/'+user.username , owner=User.objects.get(username='System'), is_group=False)
+                new_room.save()
+                new_room.users.add(request.user, user, User.objects.get(username='System'))
+                admin_message = Message(user = User.objects.get(username='System'), username=' ', message='Bienvenue dans le salon privé avec '+user.username+' et '+request.user.username, room=Room.objects.get(id=new_room.id))
+                admin_message.save()
+                request_sent = request.user.requests_received.all().filter(sender=user)
+                request_sent.delete()
+                return HttpResponseRedirect('/chatrooms/'+str(new_room.id)+'/')
+            else:
+                return HttpResponseRedirect('/chatrooms')
+    messages.error(request,"Utilisateur introuvable.", extra_tags='friendForm')
+    return HttpResponseRedirect('/chatrooms')
+
+def refuseRequest(request, user_name):
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        if user != request.user:
+            if request.user.requests_received.all().filter(sender=user):
+                request_sent = request.user.requests_received.all().filter(sender=user)
+                request_sent.delete()
+                return HttpResponseRedirect('/chatrooms')
+            else:
+                return JsonResponse({'redirect':'/chatrooms'})
+    messages.error(request,"Utilisateur introuvable.", extra_tags='friendForm')
+    return JsonResponse({'redirect':'/chatrooms'})
+
+def unfriend(request, user_name):
+    if User.objects.filter(username=user_name).exists():
+        user = User.objects.get(username=user_name)
+        print("unfriend :"+user.username)
+        if user != request.user:
             if user in request.user.friends.all():
-                request.user.friends.remove(user)
-                user.friends.remove(request.user)
+                room = Room.objects.filter(users=user, is_group=False).filter(users=request.user).get()
                 room.delete()
-            break
+                request.user.friends.remove(user)
+                return HttpResponseRedirect('/chatrooms')
+            else:
+                return JsonResponse({'redirect':'/chatrooms'})
     return HttpResponseRedirect('/chatrooms')
 
 # fonction pour envoyer les mise à jour des messages et des utilisateurs
@@ -240,7 +274,12 @@ def getUpdates(request, id):
                 break
         friend["id"] = private.id
         private_list.append(friend)
-    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':private_list})
+    request_list = []
+    for request in request.user.requests_received.all():
+        request_user = {}
+        request_user["name"] = request.sender.username
+        request_list.append(request_user)
+    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':private_list, 'request_list':request_list})
 
 # fonction pour envoyer les mise à jour des salons
 def updateRoomList(request):
@@ -256,7 +295,12 @@ def updateRoomList(request):
                 break
         friend["id"] = private.id
         private_list.append(friend)
-    return JsonResponse({'room_list':list(room_list.values()), 'private_list':list(private_list)})
+    request_list = []
+    for request in request.user.requests_received.all():
+        request_user = {}
+        request_user["name"] = request.sender.username
+        request_list.append(request_user)
+    return JsonResponse({'room_list':list(room_list.values()), 'private_list':list(private_list), 'request_list':request_list})
 
 
 # Page d'erreur 404

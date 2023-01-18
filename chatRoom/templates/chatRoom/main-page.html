@@ -138,6 +138,11 @@
     </section>
 
     <section class="friends-list-form">
+        <h2>Demandes en attente</h2>
+        <div id="request-list-div">
+            <ul class="request-list">
+            </ul>
+        </div>
         <h2>Vos amis</h2>
         <div id="friends-list-div">
             <ul class="friends-list">
@@ -146,11 +151,13 @@
             <div id="add-friend-div">
                 <form method="POST" id="add-friend-form">
                     <input type="search" id="friend-add-input" autocomplete="off" placeholder="Ajouter un ami...", maxlength="50">
-
+                    {% for message in messages %}
+                        {% if 'friendForm' in message.tags %}
                             <div class="alert alert-success">
                                 <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
                             </div>
-
+                        {% endif %}
+                    {% endfor %}
                     <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Envoyer une demande d'ami</button>
                 </form>
             </div>
