@@ -11,6 +11,7 @@ class UserAdmin(UserAdmin):
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
         ('Friends', {'fields': ('friends',)}),
+        ('Theme', {'fields': ('theme',)}),
     )
 
     add_fieldsets = (
@@ -18,7 +19,8 @@ class UserAdmin(UserAdmin):
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
-        ('Friends', {'fields': ('friends',)}),
+        ('Friends', {'fields': ('theme',)}),
+        
     )
 
 admin.site.register(User, UserAdmin)
