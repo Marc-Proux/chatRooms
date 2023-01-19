@@ -40,15 +40,15 @@ $(document).ready(function() {
 $(document).ready(function() {
     var is_group = $("#room-type").val();
     const unselected_style = {
-        backgroundColor : "rgb(32,31,37)",
-        color : "white",
-        border : "1px solid white"
+        backgroundColor : "var(--background-color)",
+        color : "var(--white)",
+        border : "1px solid var(--white)"
     };
 
     const selected_style = {
-        backgroundColor : "rgb(253, 253, 153)",
-        color : "rgb(32,31,37)",
-        border : "1px solid rgb(32,31,37)"
+        backgroundColor : "var(--accent-color)",
+        color : "var(--background-color)",
+        border : "1px solid var(--background-color)"
     };
     
     if (is_group == "False" || is_group == "") {
@@ -84,6 +84,28 @@ $(document).ready(function() {
         Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
         Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
     })
+});
+
+$(document).ready(function() {
+    $(".change-mode-button").click(function() {
+        var r = document.querySelector(':root');
+        var rs = getComputedStyle(r)
+
+        if (rs.getPropertyValue("--dark-mode") == 1) {
+            r.style.setProperty('--background-color', '#E8E7E7');
+            r.style.setProperty('--accent-color', '#BF3AAD');
+            r.style.setProperty('--white', '#C17BC1');
+            r.style.setProperty('--main-text-color', '#6A2B6A');
+            r.style.setProperty('--dark-mode', '0');
+        }
+        else {
+            r.style.setProperty('--background-color', 'rgb(32,31,37)');
+            r.style.setProperty('--accent-color', 'rgb(253, 253, 153)');
+            r.style.setProperty('--white', 'white');
+            r.style.setProperty('--main-text-color', 'rgb(216, 216, 216)');
+            r.style.setProperty('--dark-mode', '1');
+        }
+    })  
 });
 
 $(document).mouseup(function(e){
@@ -176,7 +198,7 @@ function updateRoomList(){
                     {
                         var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a></li>';
                         $("#Friends-list").append(temp);
-                        var temp2='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li><button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button>';
+                        var temp2='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
                         $(".friends-list").append(temp2);
                     }
                     friends = (data.private_list).length;
@@ -238,7 +260,7 @@ function update(){
                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li>';
                                 $("#Friends-list").append(temp);
                             }
-                            var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li><button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button>';
+                            var temp='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
                             $(".friends-list").append(temp);
                         }
                     }

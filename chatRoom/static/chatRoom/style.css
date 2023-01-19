@@ -1,7 +1,15 @@
+:root {
+    --dark-mode: 1;
+    --main-text-color: rgb(216, 216, 216);
+    --background-color: rgb(32,31,37);
+    --accent-color: rgb(253, 253, 153);
+    --white: white;
+}
+
 * {
     margin: 0;
     padding: 0;
-    color: rgb(216, 216, 216);
+    color: var(--main-text-color);
     scroll-behavior: smooth;
     word-wrap: break-word;
 }
@@ -21,14 +29,14 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(216, 216, 216); 
+    background: var(--main-text-color); 
     border-radius: 10px;
     transition: ease-in-out 1s;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-   background-color: rgb(253, 253, 153);
+   background-color: var(--accent-color);
 }
 
 @font-face {
@@ -42,13 +50,13 @@
 }
 
 body {
-    background-color: rgb(32,31,37);
+    background-color: var(--background-color);
 }
 
 .project-title {
     font-family: Aharoni, sans-serif;
     text-align: left;
-    color: rgb(216, 216, 216);
+    color: var(--main-text-color);
     font-size: 450%;
     margin-left: 3%;
     margin-top: 3%;
@@ -71,8 +79,8 @@ body {
     transform: translateY(-20%);
     width: max-content;
     height: max-content;
-    background-color: rgb(32,31,37);
-    border: 2px solid rgb(216, 216, 216);
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
     border-radius: 20px;
     padding: 1.5% 3% 0% 3%;
     text-align: left;
@@ -96,13 +104,13 @@ body {
 }
 
 /* .log-out:hover {
-    background-color: rgb(216, 216, 216);
-    color: rgb(32,31,37);
+    background-color: var(--main-text-color);
+    color: var(--background-color);
     transform: scale(1.1);
 } */
 
 .log-out-button {
-    background-color: rgb(216, 216, 216);
+    background-color: var(--main-text-color);
     border-radius: 30px;
     background-image: url(img/quit.png);
     background-repeat: no-repeat;
@@ -114,7 +122,7 @@ body {
 }
 
 .log-out-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
     transform: scale(1.0);
     border-radius: 15px;
 }
@@ -125,7 +133,7 @@ body {
 }
 
 .settings-button {
-    background-color: rgb(216, 216, 216);
+    background-color: var(--main-text-color);
     border-radius: 30px;
     background-image: url(img/settings.png);
     background-repeat: no-repeat;
@@ -137,7 +145,7 @@ body {
 }
 
 .settings-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
     transform: scale(1.0);
     border-radius: 15px;
 }
@@ -148,7 +156,7 @@ body {
 }
 
 .friends-button {
-    background-color: rgb(216, 216, 216);
+    background-color: var(--main-text-color);
     border-radius: 30px;
     background-image: url(img/friends.png);
     background-repeat: no-repeat;
@@ -160,7 +168,7 @@ body {
 }
 
 .friends-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
     transform: scale(1.0);
     border-radius: 15px;
 }
@@ -171,7 +179,7 @@ body {
 }
 
 .profile-button {
-    background-color: rgb(32,31,37);
+    background-color: var(--background-color);
     border-radius: 100%;
     background-image: url(img/profile-white.png);
     background-repeat: no-repeat;
@@ -184,7 +192,7 @@ body {
 }
 
 .profile-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
     background-image: url(img/profile.png);
     /* transform: scale(1.1) translateY(35%); */
 }
@@ -207,8 +215,8 @@ body {
 .centered-button button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(32,31,37);
-    background-color: rgb(216, 216, 216);
+    color: var(--background-color);
+    background-color: var(--main-text-color);
     border: 0;
     font-size: 250%;
     padding: 0.75% 1.5% 0.75% 1.5%;
@@ -218,8 +226,8 @@ body {
 }
 
 .centered-button button:hover {
-    background-color: rgb(253, 253, 153);
-    color: rgb(32,31,37);
+    background-color: var(--accent-color);
+    color: var(--background-color);
     transform: scale(1.1);
 }
 
@@ -236,14 +244,14 @@ footer {
 .form-div {
     width: 25%;
     height: 30%;
-    /* background-color: rgb(32,31,37); */
+    /* background-color: var(--background-color); */
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     margin: auto;
-    color: rgb(216, 216, 216);
+    color: var(--main-text-color);
     font-family: Aharoni, sans-serif;
     font-size: 22px;
     animation: fade-in 1s;
@@ -251,7 +259,7 @@ footer {
 }
 
 .form-div input {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     width: 96%;
     padding: 2%;
     margin: 1.5% 0 5% 0;
@@ -276,8 +284,8 @@ footer {
 .sign-in-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(216, 216, 216);
-    background-color: rgb(32,31,37);
+    color: var(--main-text-color);
+    background-color: var(--background-color);
     border: 0px;
     font-size: 18px;
     border-radius: 15px;
@@ -289,16 +297,16 @@ footer {
 }
 
 .sign-in-button:hover {
-    background-color: rgb(216, 216, 216);
-    color: rgb(32,31,37);
+    background-color: var(--main-text-color);
+    color: var(--background-color);
     transform: scale(1.1);
 }
 
 .sign-up-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(253, 253, 153);
-    background-color: rgb(32,31,37);
+    color: var(--accent-color);
+    background-color: var(--background-color);
     border: 0px;
     font-size: 18px;
     border-radius: 15px;
@@ -310,8 +318,8 @@ footer {
 }
 
 .sign-up-button:hover {
-    background-color: rgb(253, 253, 153);
-    color: rgb(32,31,37);
+    background-color: var(--accent-color);
+    color: var(--background-color);
     transform: scale(1.1);
 }
 
@@ -323,7 +331,7 @@ footer {
 .main-page-title {
     font-family: Aharoni, sans-serif;
     text-align: left;
-    color: rgb(216, 216, 216);
+    color: var(--main-text-color);
     font-size: 350%;
     margin: 1.5%;
     /* animation: title-animation 1s; */
@@ -357,7 +365,7 @@ li {
     font-family: Aharoni, sans-serif;
     font-size: 30px;
     text-align: center;
-    color: rgb(253, 253, 153);
+    color: var(--accent-color);
 }
 
 .Room-title {
@@ -374,14 +382,17 @@ li {
     float: right;
     width: 45%;
     margin-right: 20%;
-    background-color: rgb(32,31,37);
+    background-color: var(--background-color);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .Room-title-small-screen {
     vertical-align: middle;
     font-family: Aharoni, sans-serif;
     text-align: center;
-    color: rgb(253, 253, 153);
+    color: var(--accent-color);
     width: 100%;
     margin-top: 3%;
     direction: ltr;
@@ -395,8 +406,8 @@ li {
 .friend-chats-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(32,31,37);
-    background-color: rgb(253, 253, 153);
+    color: var(--background-color);
+    background-color: var(--accent-color);
     border: 0px;
     font-size: 20px;
     border-radius: 7px;
@@ -407,15 +418,15 @@ li {
 }
 
 .friend-chats-button:hover {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     transform: scale(1.05) translateY(-20%);
 }
 
 .group-chats-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(32,31,37);
-    background-color: rgb(253, 253, 153);
+    color: var(--background-color);
+    background-color: var(--accent-color);
     border: 0px;
     font-size: 20px;
     border-radius: 7px;
@@ -426,7 +437,7 @@ li {
 }
 
 .group-chats-button:hover {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     transform: scale(1.05) translateY(-20%);
 }
 
@@ -454,7 +465,7 @@ li {
 }
 
 .user { /* user displayed above the message*/
-    color: rgb(253, 253, 153);
+    color: var(--accent-color);
     font-family: Aharoni, sans-serif;
     margin-top: 1%;
     animation: message-animation 0.5s ease;
@@ -463,7 +474,7 @@ li {
 .message {
     font-family: sans-serif;
     padding-bottom: 5px;
-    color: rgb(216, 216, 216);
+    color: var(--main-text-color);
     border-bottom: 1px solid;
     border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
     animation: message-animation 0.5s ease;
@@ -522,7 +533,7 @@ li {
 }
 
 .current-room {
-    background-color: white;
+    background-color: var(--white);
     height: 100%;
     width: 90%;
 }
@@ -531,7 +542,7 @@ li {
     height: 35px;
     width: 35px;
     border-radius: 100%;
-    background-color: white;
+    background-color: var(--white);
     background-image: url(img/quit.png);
     background-repeat: no-repeat;
     background-size: 70%;
@@ -544,7 +555,7 @@ li {
 }
 
 .leave-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
 }
 
 .leave-button:active {
@@ -552,10 +563,10 @@ li {
 }
 
 .unfriend-button {
+    aspect-ratio: 1/1;
     height: 35px;
-    width: 35px;
     border-radius: 100%;
-    background-color: white;
+    background-color: var(--white);
     background-image: url(img/unfriend.png);
     background-repeat: no-repeat;
     background-size: 70%;
@@ -568,7 +579,7 @@ li {
 }
 
 .unfriend-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
 }
 
 .unfriend-button:active {
@@ -584,7 +595,7 @@ li {
 }
 
 .current-room a {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     cursor: default;
     text-decoration: none;
     padding: 3%;
@@ -594,12 +605,12 @@ li {
 
 
 .Room-name a:hover {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     /* transform: scale(1.05); */
 }
 
 .Room-name:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
     /* transform: scale(1.05); */
 }
 
@@ -619,7 +630,7 @@ li {
 
 #add-room-button {
     vertical-align: bottom;
-    background-color: white;
+    background-color: var(--white);
     background-image: url(img/plus.png);
     background-size: 45%;
     background-position: center;
@@ -635,8 +646,8 @@ li {
 
 #add-room-button:hover {
     border-radius: 10px;
-    color: rgb(32,31,37);
-    background-color: rgb(253, 253, 153);
+    color: var(--background-color);
+    background-color: var(--accent-color);
     /* transform: scale(1.2); */
 }
 
@@ -646,7 +657,7 @@ li {
 
 #user-list-button {
     vertical-align: bottom;
-    background-color: white;
+    background-color: var(--white);
     background-image: url(img/users.png);
     background-size: 65%;
     background-position: center;
@@ -661,8 +672,8 @@ li {
 
 #user-list-button:hover {
     border-radius: 10px;
-    color: rgb(32,31,37);
-    background-color: rgb(253, 253, 153);
+    color: var(--background-color);
+    background-color: var(--accent-color);
     /* transform: scale(1.2); */
 }
 
@@ -676,7 +687,7 @@ li {
     vertical-align: bottom;
     border: 0;
     border-radius: 16px;
-    background-color: white;
+    background-color: var(--white);
     background-image: url("img/send.png");
     background-size: 45%;
     background-position: center;
@@ -686,7 +697,7 @@ li {
 }
 
 .send-button:hover {
-    background-color: rgb(253, 253, 153);
+    background-color: var(--accent-color);
     /* transform: scale(1.04) */
     border-radius: 10px;
 }
@@ -702,8 +713,8 @@ li {
     padding: 9px;
     border: 0;
     border-radius: 15px;
-    background-color: white;
-    color: rgb(32,31,37);
+    background-color: var(--white);
+    color: var(--background-color);
     transition: ease-in-out 0.2s;
 }
 
@@ -721,8 +732,8 @@ li {
     bottom: 4%;
     left: 30%;
     border-radius: 15px;
-    background-color: rgb(32,31,37);
-    background: linear-gradient(90deg, rgba(32,31,37,1) 0%, rgba(32,31,37,1) 85%, rgba(32,31,37,0) 85%);
+    background-color: var(--background-color);
+    background: linear-gradient(90deg, var(--background-color) 0%, var(--background-color) 85%, rgba(32,31,37,0) 85%);
 }
 
 .add-room-form {
@@ -737,9 +748,9 @@ li {
 
 .add-room-form form {
     width: 100%;
-    background-color: rgb(32,31,37);
-    border: 2px solid rgb(216, 216, 216);
-    color: rgb(216, 216, 216);
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
     font-family: Aharoni, sans-serif;
     font-size: 22px;
     animation: form-pop-up 0.4s ease;
@@ -756,7 +767,7 @@ li {
 }
 
 .add-room-form form input {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     width: 97%;
     padding: 2%;
     margin: 1.5% 0 5% 0;
@@ -777,8 +788,8 @@ li {
 #cancel-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(216, 216, 216);
-    background-color: rgb(32,31,37);
+    color: var(--main-text-color);
+    background-color: var(--background-color);
     border: 0px;
     font-size: 18px;
     border-radius: 15px;
@@ -789,8 +800,8 @@ li {
 }
 
 #cancel-button:hover {
-    background-color: rgb(216, 216, 216);
-    color: rgb(32,31,37);
+    background-color: var(--main-text-color);
+    color: var(--background-color);
     transform: scale(1.1);
 }
 
@@ -805,9 +816,9 @@ li {
     left: 0;
     width: max-content;
     height: 60%;
-    background-color: rgb(32,31,37);
-    border: 2px solid rgb(216, 216, 216);
-    color: rgb(216, 216, 216);
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
     font-family: Aharoni, sans-serif;
     font-size: 15px;
     animation: form-pop-up 0.4s ease;
@@ -833,7 +844,7 @@ li {
 }
 
 .add-user-form form input {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     width: 80%;
     padding: 2%;
     margin: 1.5% 0 5% 0;
@@ -859,9 +870,9 @@ li {
     left: 0;
     width: 20%;
     height: 60%;
-    background-color: rgb(32,31,37);
-    border: 2px solid rgb(216, 216, 216);
-    color: rgb(216, 216, 216);
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
     font-family: Aharoni, sans-serif;
     font-size: 15px;
     animation: form-pop-up 0.4s ease;
@@ -883,7 +894,7 @@ li {
 }
 
 .friends-list-form form input {
-    color: rgb(32,31,37);
+    color: var(--background-color);
     width: 80%;
     padding: 2%;
     margin: 1.5% 0 5% 0;
@@ -901,8 +912,8 @@ li {
 #user-cancel-button {
     font-family: Aharoni, sans-serif;
     text-decoration: none;
-    color: rgb(216, 216, 216);
-    background-color: rgb(32,31,37);
+    color: var(--main-text-color);
+    background-color: var(--background-color);
     border: 0px;
     font-size: 12px;
     border-radius: 15px;
@@ -913,14 +924,14 @@ li {
 }
 
 #user-cancel-button:hover {
-    background-color: rgb(216, 216, 216);
-    color: rgb(32,31,37);
+    background-color: var(--main-text-color);
+    color: var(--background-color);
     transform: scale(1.1);
 }
 
 #emoji-button {
     vertical-align: bottom;
-    background-color: white;
+    background-color: var(--white);
     background-image: url(img/emoji_icon.png);
     background-size: 55%;
     background-position: center;
@@ -935,8 +946,8 @@ li {
 
 #emoji-button:hover {
     border-radius: 10px;
-    color: rgb(32,31,37);
-    background-color: rgb(253, 253, 153);
+    color: var(--background-color);
+    background-color: var(--accent-color);
     /* transform: scale(1.1); */
 }
 
@@ -966,7 +977,7 @@ li {
 
 .user-name-list a:hover {
     text-decoration: underline;
-    color: rgb(253, 253, 153);
+    color: var(--accent-color);
 }
 
 .admin-name-list {
@@ -983,7 +994,7 @@ li {
 }
 
 .admin-name-list span {
-    color: rgb(253, 253, 153);
+    color: var(--accent-color);
     font-family: sans-serif;
     font-size: 15px;
 }
@@ -1003,8 +1014,8 @@ li {
 }
 
 .show-rooms-button:hover {
-    color: rgb(32,31,37);
-    background-color: rgb(253, 253, 153);
+    color: var(--background-color);
+    background-color: var(--accent-color);
     /* transform: scale(1.1); */
 }
 
@@ -1015,6 +1026,52 @@ li {
 .input-message-div {
     padding: 0;
     margin: 0;
+}
+
+.friend-name div {
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    /* transition: ease-in-out 0.2s; */
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    transition: 0.2s ease;
+    animation: fade-in 0.8s ease;
+    position: relative;
+    height: 35px;
+}
+
+.friend-name a {
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    margin: auto;
+    padding: 3%;
+    font-family: Aharoni, sans-serif;
+    position: absolute;
+    left: 0;
+    border-radius: 15px;
+}
+
+.friend-name a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.friend-name .unfriend-button {
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    height: 90%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-10%);
 }
 
 @media screen and (min-width: 845px) {
@@ -1123,6 +1180,10 @@ li {
         width: 90%;
     }
 
+    .friends-list-form {
+        width: 70%;
+    }
+
     .add-room-form, .add-user-form {
         width: 70%;
     }
@@ -1133,7 +1194,7 @@ li {
         left: 72%;
         bottom: 10%;
         z-index: 5;
-        background-color: rgb(253, 253, 153);
+        background-color: var(--accent-color);
     }
 
     .messages-list {
@@ -1159,8 +1220,8 @@ li {
     .Room-list {
         display: none;
         z-index: 4;
-        background-color: rgb(32,31,37);
-        border: 2px solid rgb(253, 253, 153);
+        background-color: var(--background-color);
+        border: 2px solid var(--accent-color);
         box-shadow: 1px 1px 5px black;
         border-radius: 8px;
         height: 94%;
