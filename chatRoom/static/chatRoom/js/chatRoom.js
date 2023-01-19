@@ -1,4 +1,4 @@
-// Show/hide the forms
+// Show the forms
 $(document).ready(function() {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
@@ -36,6 +36,42 @@ $(document).ready(function() {
         $(".add-room-button").show();
     })
 });
+
+// Hide the forms
+
+$(document).mouseup(function(e){
+    var container = $("#add-room-form");
+    var container2 = $(".add-user-form");
+    var container3 = $(".Room-list");
+    var container4 = $(".profile-options");
+    var container5 = $(".friends-list-form");
+ 
+    // If the target of the click isn't the container
+    if(!container.is(e.target) && container.has(e.target).length === 0){
+        container.hide();
+    }
+
+    if(!container2.is(e.target) && container2.has(e.target).length === 0){
+        container2.hide();
+    }
+
+    if(window.innerWidth < 845 && !container3.is(e.target) && container3.has(e.target).length === 0){
+        container3.hide();
+        $(".add-room-button").hide();
+        $(".show-rooms-button").show();
+        $(".user-list-button").show();
+    }
+
+    if(!container4.is(e.target) && container4.has(e.target).length === 0){
+        container4.hide();
+    }
+
+    if(!container5.is(e.target) && container5.has(e.target).length === 0){
+        container5.hide();
+    }
+});
+
+// Show or Hide the friends in the room list
 
 $(document).ready(function() {
     var is_group = $("#room-type").val();
@@ -86,6 +122,8 @@ $(document).ready(function() {
     })
 });
 
+// White and dark mode
+
 $(document).ready(function() {
     $(".change-mode-button").click(function() {
         var r = document.querySelector(':root');
@@ -96,6 +134,21 @@ $(document).ready(function() {
             r.style.setProperty('--accent-color', '#BF3AAD');
             r.style.setProperty('--white', '#C17BC1');
             r.style.setProperty('--main-text-color', '#6A2B6A');
+
+            r.style.setProperty('--emoji_icon', 'url(img/emoji_icon-white.png)');
+            r.style.setProperty('--friends', 'url(img/friends-white.png)');
+            r.style.setProperty('--list', 'url(img/list-white.png)');
+            r.style.setProperty('--plus', 'url(img/plus-white.png)');
+            r.style.setProperty('--quit', 'url(img/quit-white.png)');
+            r.style.setProperty('--send', 'url(img/send-white.png)');
+            r.style.setProperty('--settings', 'url(img/settings-white.png)');
+            r.style.setProperty('--unfriend', 'url(img/unfriend-white.png)');
+            r.style.setProperty('--users', 'url(img/users-white.png)');
+
+            r.style.setProperty('--profile', 'url(img/profile-white.png)');
+            r.style.setProperty('--profile-white', 'url(img/profile.png)');
+            
+            r.style.setProperty('--mode', 'url(img/day.png)');
             r.style.setProperty('--dark-mode', '0');
         }
         else {
@@ -103,41 +156,24 @@ $(document).ready(function() {
             r.style.setProperty('--accent-color', 'rgb(253, 253, 153)');
             r.style.setProperty('--white', 'white');
             r.style.setProperty('--main-text-color', 'rgb(216, 216, 216)');
+
+            r.style.setProperty('--emoji_icon', 'url(img/emoji_icon.png)');
+            r.style.setProperty('--friends', 'url(img/friends.png)');
+            r.style.setProperty('--list', 'url(img/list.png)');
+            r.style.setProperty('--plus', 'url(img/plus.png)');
+            r.style.setProperty('--quit', 'url(img/quit.png)');
+            r.style.setProperty('--send', 'url(img/send.png)');
+            r.style.setProperty('--settings', 'url(img/settings.png)');
+            r.style.setProperty('--unfriend', 'url(img/unfriend.png)');
+            r.style.setProperty('--users', 'url(img/users.png)');
+
+            r.style.setProperty('--profile', 'url(img/profile.png)');
+            r.style.setProperty('--profile-white', 'url(img/profile-white.png)');
+
+            r.style.setProperty('--mode', 'url(img/night.png)');
             r.style.setProperty('--dark-mode', '1');
         }
     })  
-});
-
-$(document).mouseup(function(e){
-    var container = $("#add-room-form");
-    var container2 = $(".add-user-form");
-    var container3 = $(".Room-list");
-    var container4 = $(".profile-options");
-    var container5 = $(".friends-list-form");
- 
-    // If the target of the click isn't the container
-    if(!container.is(e.target) && container.has(e.target).length === 0){
-        container.hide();
-    }
-
-    if(!container2.is(e.target) && container2.has(e.target).length === 0){
-        container2.hide();
-    }
-
-    if(window.innerWidth < 845 && !container3.is(e.target) && container3.has(e.target).length === 0){
-        container3.hide();
-        $(".add-room-button").hide();
-        $(".show-rooms-button").show();
-        $(".user-list-button").show();
-    }
-
-    if(!container4.is(e.target) && container4.has(e.target).length === 0){
-        container4.hide();
-    }
-
-    if(!container5.is(e.target) && container5.has(e.target).length === 0){
-        container5.hide();
-    }
 });
 
 $(window).resize(function() {
@@ -160,208 +196,6 @@ var num_room = 0;
 var num_user = 0;
 var friends = 0;
 var request = 0;
-
-// function updateRoomList(){
-//     var room_id = $("#room_id").val();
-//     if (room_id == ""){
-//         $.ajax({
-//             type:'GET',
-//             url:'/updateRoomList/',
-//             dataType: 'json',
-//             success: function(data){
-//                 if (data.redirect) {
-//                     alert(data.redirect)
-//                     window.location.href = '/chatrooms';
-//                 }
-//                 if ((data.request_list).length != request) {
-//                     $(".request-list").empty();
-//                     for (var key in data.request_list)
-//                     {
-//                         var temp='<li id="request-list">'+data.request_list[key].name+'</li><button type="button" class="Accept-request" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="Accept-request" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button>';
-//                         $(".request-list").append(temp);
-//                     }
-//                     request = (data.request_list).length;
-//                 }
-//                 if ((data.room_list).length != num_room) {
-//                     $("#Room-list").empty();
-//                     for (var key in data.room_list)
-//                     {
-//                         var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
-//                         $("#Room-list").append(temp);
-//                     }
-//                         num_room = (data.room_list).length;
-//                 }
-//                 if ((data.private_list).length != friends) {
-//                     $("#Friends-list").empty();
-//                     $(".friends-list").empty();
-//                     for (var key in data.private_list)
-//                     {
-//                         var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a></li>';
-//                         $("#Friends-list").append(temp);
-//                         var temp2='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
-//                         $(".friends-list").append(temp2);
-//                     }
-//                     friends = (data.private_list).length;
-//                 }
-//             },
-//             error : function(data) {
-//                 console.log('Error', data);
-//             }
-//         });
-//     }
-//     setTimeout(updateRoomList, 1000);
-// };
-
-// function update(){
-//     var room_id = $("#room_id").val();
-//     var user = $("#user").val();
-//     if (room_id != ""){
-//         $.ajax({
-//             type:'GET',
-//             url:'/getUpdates/'+room_id+'/',
-//             success: function(data){
-//                 if (data.redirect) {
-//                     window.location.href = '/chatrooms';
-//                 }
-//                 if ((data.request_list).length != request) {
-//                     $(".request-list").empty();
-//                     for (var key in data.request_list)
-//                     {
-//                         var temp='<li id="request-list">'+data.request_list[key].name+'</li><button type="button" class="Accept-request" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="Accept-request" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button>';
-//                         $(".request-list").append(temp);
-//                     }
-//                     request = (data.request_list).length;
-//                 }
-
-//                 if ((data.private_list).length != friends) {
-//                     $("#Friends-list").empty();
-//                     if (user == 'System') {
-//                         for (var key in data.private_list)
-//                         {
-//                             if (data.room_list[key]==room_id) {
-//                                 var temp='<li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
-//                                 $("#Friends-list").append(temp);
-//                             }
-//                             else {
-//                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
-//                                 $("#Friends-list").append(temp);
-//                             }
-//                         }
-//                     }
-//                     else {
-//                         $(".friend-list").empty();
-//                         for (var key in data.private_list)
-//                         {
-//                             if (data.private_list[key].id==room_id) {
-//                                 var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.private_list[key].name+'</a> </li> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div>';
-//                                 $("#Friends-list").append(temp);
-//                             }
-//                             else {
-//                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li>';
-//                                 $("#Friends-list").append(temp);
-//                             }
-//                             var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li><button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button>';
-//                             $(".friends-list").append(temp);
-//                         }
-//                     }
-//                     friends = (data.private_list).length;
-//                 }
-//                 if ((data.room_list).length != num_room) {
-//                     $("#Room-list").empty();
-//                     if (user == 'System') {
-//                         for (var key in data.room_list)
-//                         {
-//                             if (data.room_list[key].id == room_id) {
-//                                 var temp='<li class="current-room" style="height: fit-content;"><a title="Salon actuel">'+data.room_list[key].name+'</a>';
-//                                 $("#Room-list").append(temp);
-//                             }
-//                             else {
-//                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
-//                                 $("#Room-list").append(temp);
-//                             }
-//                         }
-//                     }
-//                     else {
-//                         for (var key in data.room_list)
-//                         {
-//                             if (data.room_list[key].id == room_id) {
-//                                 var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.room_list[key].name+'</a> </li> <button type="button" class="leave-button" title="Quitter le salon" onclick="window.location.href=\'/quitRoom/'+room_id+'\'"></button> </div>';
-//                                 $("#Room-list").append(temp);
-//                             }
-//                             else {
-//                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a> </li>';
-//                                 $("#Room-list").append(temp);
-//                             }
-//                         }
-//                     }
-//                     num_room = (data.room_list).length;
-//                 }
-//                 if ( (data.messages).length != num_msg) {
-//                     for (let i = num_msg; i < (data.messages).length; i++)
-//                     {
-//                         var date = new Date(data.messages[i].date);
-//                         date = date.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
-//                         var temp='<li class="user">'+data.messages[i].username+'</li><li class="message">'+data.messages[i].message+'</li><li class="date">'+date+'</li>';
-//                         $(".message-box").append(temp);
-//                     }
-//                     var elem = document.getElementById('messages-div');
-//                     elem.scrollTop = elem.scrollHeight;
-//                     num_msg = (data.messages).length;;
-//                 }
-
-//                 if ( (data.user_list).length != num_user) {
-//                     $(".user-list").empty();
-//                     if (data.owner == user) {
-//                         for (var key in data.user_list)
-//                         {
-//                             if (data.user_list[key].username == data.owner) {
-//                                 var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
-//                                 $(".user-list").append(temp);
-//                             }
-//                             else if (data.user_list[key].username != 'System') {
-//                                 var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
-//                                 $(".user-list").append(temp);
-//                             }
-//                         }
-//                     }
-
-//                     else if ('System' == user) {
-//                         for (var key in data.user_list)
-//                         {
-//                             if (data.user_list[key].username == data.owner) {
-//                                 var temp='<li class="user-name-list">'+data.user_list[key].username+' | <span>Admin </span><a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>'
-//                                 $(".user-list").append(temp);
-//                             }
-//                             else if (data.user_list[key].username != 'System') {
-//                                 var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
-//                                 $(".user-list").append(temp);
-//                             }
-//                         }
-//                     }
-
-//                     else {
-//                         for (var key in data.user_list)
-//                         {
-//                             if (data.user_list[key].username == data.owner) {
-//                                 var temp='<li class="admin-name-list">'+data.user_list[key].username+' | <span>Admin</span></li>'
-//                                 $(".user-list").append(temp);
-//                             }
-//                             else if (data.user_list[key].username != 'System') {
-//                                 var temp='<li class="user-name-list">'+data.user_list[key].username+'</li>';
-//                                 $(".user-list").append(temp);
-//                             }
-//                         }
-//                     }
-//                     num_user = (data.user_list).length;
-//                 }
-//             },
-//             error : function(data) {
-//                 console.log('Error', data);
-//             }
-//         });
-//     }
-//     setTimeout(update, 1000);
-// };
 
 function update() {
     var room_id = $("#room_id").val();

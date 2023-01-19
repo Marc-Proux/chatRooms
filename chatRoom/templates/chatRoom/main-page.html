@@ -83,7 +83,7 @@
     <section class="fixed-buttons">
         <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
         {% if current_room.id != NONE %}
-            <button class="emoji-button" id="emoji-button" title="Use emojis !"></button>        
+            <button class="emoji-button" id="emoji-button" title="Utiliser des émojis !"></button>        
             <div class="input-message-div">
                 <form method="post" id="post-form">
                     {% csrf_token %}
@@ -109,8 +109,8 @@
                     </div>
                 {% endif %}
             {% endfor %}
-            <button type="submit" class="sign-up-button" style="margin-left: 0; margin-right: 20px;">Ajouter le salon</button>
-            <button type="button" class="add-room-button" id="cancel-button">Annuler</button>
+            <button type="submit" class="sign-up-button" style="margin-left: 0;">Ajouter le salon</button>
+            <!-- <button type="button" class="add-room-button" id="cancel-button">Annuler</button> -->
         </form>
     </section>
 
