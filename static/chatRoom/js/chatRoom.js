@@ -137,6 +137,7 @@ var num_msg = 0;
 var num_room = 0;
 var num_user = 0;
 var friends = 0;
+var request = 0;
 
 function updateRoomList(){
     var room_id = $("#room_id").val();
@@ -146,6 +147,19 @@ function updateRoomList(){
             url:'/updateRoomList/',
             dataType: 'json',
             success: function(data){
+                if (data.redirect) {
+                    alert(data.redirect)
+                    window.location.href = '/chatrooms';
+                }
+                if ((data.request_list).length != request) {
+                    $(".request-list").empty();
+                    for (var key in data.request_list)
+                    {
+                        var temp='<li id="request-list">'+data.request_list[key].name+'</li><button type="button" class="Accept-request" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="Accept-request" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button>';
+                        $(".request-list").append(temp);
+                    }
+                    request = (data.request_list).length;
+                }
                 if ((data.room_list).length != num_room) {
                     $("#Room-list").empty();
                     for (var key in data.room_list)
@@ -157,10 +171,13 @@ function updateRoomList(){
                 }
                 if ((data.private_list).length != friends) {
                     $("#Friends-list").empty();
+                    $(".friends-list").empty();
                     for (var key in data.private_list)
                     {
                         var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a></li>';
                         $("#Friends-list").append(temp);
+                        var temp2='<li class="Room-name"> <div class="current-room-div"> <a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
+                        $(".friends-list").append(temp2);
                     }
                     friends = (data.private_list).length;
                 }
@@ -184,6 +201,16 @@ function update(){
                 if (data.redirect) {
                     window.location.href = '/chatrooms';
                 }
+                if ((data.request_list).length != request) {
+                    $(".request-list").empty();
+                    for (var key in data.request_list)
+                    {
+                        var temp='<li id="request-list">'+data.request_list[key].name+'</li><button type="button" class="Accept-request" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="Accept-request" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button>';
+                        $(".request-list").append(temp);
+                    }
+                    request = (data.request_list).length;
+                }
+
                 if ((data.private_list).length != friends) {
                     $("#Friends-list").empty();
                     if (user == 'System') {
@@ -200,16 +227,19 @@ function update(){
                         }
                     }
                     else {
+                        $(".friend-list").empty();
                         for (var key in data.private_list)
                         {
                             if (data.private_list[key].id==room_id) {
-                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.private_list[key].name+'</a> </li> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+room_id+'\'"></button> </div>';
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.private_list[key].name+'</a> </li> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div>';
                                 $("#Friends-list").append(temp);
                             }
                             else {
                                 var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li>';
                                 $("#Friends-list").append(temp);
                             }
+                            var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li><button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button>';
+                            $(".friends-list").append(temp);
                         }
                     }
                     friends = (data.private_list).length;
@@ -364,7 +394,7 @@ $(document).on('submit','#add-room-form',function(e){
     $('#room-add-input').val('');
 });
 
-// addUser
+// addUser to room
 $(document).on('submit','#add-user-form',function(e){
     e.preventDefault();
     $.ajax({
@@ -382,6 +412,28 @@ $(document).on('submit','#add-user-form',function(e){
       }
     });
     $('#user-add-input').val('');
+});
+
+// sent friend request
+$(document).on('submit','#add-friend-form',function(e){
+    e.preventDefault();
+    $.ajax({
+        type:'POST',
+        url:'/friendRequest/',
+        data:{
+            friend_name:$('#friend-add-input').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function(data){
+            if (data.redirect && data.redirect == 'sucess'){
+                alert('Demande d\'ami envoyée');
+            }
+            else if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+        }
+    });
+    $('#friend-add-input').val('');
 });
 
 // emoji button

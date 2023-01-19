@@ -161,6 +161,7 @@ var num_user = 0;
 var friends = 0;
 var request = 0;
 
+<<<<<<< HEAD
 // function updateRoomList(){
 //     var room_id = $("#room_id").val();
 //     if (room_id == ""){
@@ -198,7 +199,7 @@ var request = 0;
 //                     {
 //                         var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a></li>';
 //                         $("#Friends-list").append(temp);
-//                         var temp2='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
+//                         var temp2='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li><button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button>';
 //                         $(".friends-list").append(temp2);
 //                     }
 //                     friends = (data.private_list).length;
@@ -211,6 +212,58 @@ var request = 0;
 //     }
 //     setTimeout(updateRoomList, 1000);
 // };
+=======
+function updateRoomList(){
+    var room_id = $("#room_id").val();
+    if (room_id == ""){
+        $.ajax({
+            type:'GET',
+            url:'/updateRoomList/',
+            dataType: 'json',
+            success: function(data){
+                if (data.redirect) {
+                    alert(data.redirect)
+                    window.location.href = '/chatrooms';
+                }
+                if ((data.request_list).length != request) {
+                    $(".request-list").empty();
+                    for (var key in data.request_list)
+                    {
+                        var temp='<li id="request-list">'+data.request_list[key].name+'</li><button type="button" class="Accept-request" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="Accept-request" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button>';
+                        $(".request-list").append(temp);
+                    }
+                    request = (data.request_list).length;
+                }
+                if ((data.room_list).length != num_room) {
+                    $("#Room-list").empty();
+                    for (var key in data.room_list)
+                    {
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.room_list[key].id+'/">'+data.room_list[key].name+'</a></li>';
+                        $("#Room-list").append(temp);
+                    }
+                        num_room = (data.room_list).length;
+                }
+                if ((data.private_list).length != friends) {
+                    $("#Friends-list").empty();
+                    $(".friends-list").empty();
+                    for (var key in data.private_list)
+                    {
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a></li>';
+                        $("#Friends-list").append(temp);
+                        var temp2='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
+                        $(".friends-list").append(temp2);
+                    }
+                    friends = (data.private_list).length;
+                }
+            },
+            error : function(data) {
+                console.log('Error', data);
+            }
+        });
+    }
+    setTimeout(updateRoomList, 1000);
+};
+>>>>>>> e31609e1cd777a661a89b27c4d4fc7d55ee88bbb
 
 // function update(){
 //     var room_id = $("#room_id").val();
@@ -398,6 +451,26 @@ function update() {
                             $("#Friends-list").append(temp);
                         }
                     }
+<<<<<<< HEAD
+=======
+                    else {
+                        $(".friend-list").empty();
+                        for (var key in data.private_list)
+                        {
+                            if (data.private_list[key].id==room_id) {
+                                var temp='<div class="current-room-div"> <li class="current-room"><a title="Salon actuel">'+data.private_list[key].name+'</a> </li> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div>';
+                                $("#Friends-list").append(temp);
+                            }
+                            else {
+                                var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li>';
+                                $("#Friends-list").append(temp);
+                            }
+                            var temp='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
+                            $(".friends-list").append(temp);
+                        }
+                    }
+                    friends = (data.private_list).length;
+>>>>>>> e31609e1cd777a661a89b27c4d4fc7d55ee88bbb
                 }
                 else {
                     $(".friend-list").empty();
@@ -411,7 +484,7 @@ function update() {
                             var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li>';
                             $("#Friends-list").append(temp);
                         }
-                        var temp='<li class="friend-name"> <div> <a title="Accéder à la discussion" href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+' </a> <button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button> </div> </li>';
+                        var temp='<li class="Room-name"><a href="/chatrooms/'+data.private_list[key].id+'/">'+data.private_list[key].name+'</a> </li><button type="button" class="unfriend-button" title="Retirer de la liste d\'amis" onclick="window.location.href=\'/unfriend/'+data.private_list[key].name+'\'"></button>';
                         $(".friends-list").append(temp);
                     }
                 }
