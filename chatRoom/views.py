@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect, Http404, JsonResponse
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model, update_session_auth_hash
 from django.contrib import messages
 from .models import Room, Message, FriendRequest
 from django.db.models import Max
@@ -257,11 +257,8 @@ def unfriend(request, user_name):
     return HttpResponseRedirect('/chatrooms')
 
 # fonction pour envoyer les mise à jour des messages et des utilisateurs
-def getUpdates(request, id):
-    room = get_object_or_404(Room, id=id)
-    if request.user not in room.users.all():
-        return JsonResponse({'redirect':'True'})
-    messages = room.message_set.all()
+def getUpdates(request, id=None):
+    print('id :'+str(id))
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     privates = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
@@ -279,29 +276,29 @@ def getUpdates(request, id):
         request_user = {}
         request_user["name"] = request.sender.username
         request_list.append(request_user)
-    return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':private_list, 'request_list':request_list})
 
-# fonction pour envoyer les mise à jour des salons
-def updateRoomList(request):
-    last_message_time = Max("message__date")
-    room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    privates = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
-    private_list = []
-    for private in privates:
-        friend = {}
-        for users in private.users.all():
-            if users != request.user and users != User.objects.get(username='System'):
-                friend["name"] = users.username
-                break
-        friend["id"] = private.id
-        private_list.append(friend)
-    request_list = []
-    for request in request.user.requests_received.all():
-        request_user = {}
-        request_user["name"] = request.sender.username
-        request_list.append(request_user)
-    return JsonResponse({'room_list':list(room_list.values()), 'private_list':list(private_list), 'request_list':request_list})
+    if id :
+        room = get_object_or_404(Room, id=id)
+        if request.user not in room.users.all():
+            return JsonResponse({'redirect':'True'})
+        messages = room.message_set.all()
+        return JsonResponse({'messages':list(messages.values()), 'user_list':list(room.users.all().values()), 'room_list':list(room_list.values()), 'owner':room.owner.username, 'private_list':private_list, 'request_list':request_list})
+    
+    return JsonResponse({'room_list':list(room_list.values()), 'private_list':private_list, 'request_list':request_list})
 
+def changePassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Votre mot de passe a été changé avec succès.')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'chatRoom/change_password.html', {'form': form})
 
 # Page d'erreur 404
 def error404(request, exception):
