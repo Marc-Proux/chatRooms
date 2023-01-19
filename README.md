@@ -96,6 +96,6 @@ Application sous [license MIT](./LICENSE.md)
 
 <footer>
 <p align="center">
-Créé avec ❤️ par Geryes and Marc, étudiants à l'<a href="https://www.ensisa.uha.fr">ENSISA</a>.
+Créé avec ❤️ par Geryes et Marc, étudiants à l'<a href="https://www.ensisa.uha.fr">ENSISA</a>.
 </p>
 </footer>
