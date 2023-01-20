@@ -15,6 +15,10 @@ User = get_user_model()
 def index(request):
     return render(request, 'chatRoom/index.html')
 
+# Page des paramètres utilisateur
+def user_settings(request):
+    return render(request, 'chatRoom/settings.html')
+
 # Page de connexion
 def login(request):
     if request.user.is_authenticated:

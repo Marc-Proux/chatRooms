@@ -1,9 +1,31 @@
 :root {
+    /* Color variables */
     --dark-mode: 1;
     --main-text-color: rgb(216, 216, 216);
     --background-color: rgb(32,31,37);
     --accent-color: rgb(253, 253, 153);
     --white: white;
+
+    /* Image variables */
+    --emoji_icon: url(img/emoji_icon.png);
+    --friends: url(img/friends.png);
+    --list: url(img/list.png);
+    --plus: url(img/plus.png);
+    --send: url(img/send.png);
+    --settings: url(img/settings.png);
+    --unfriend: url(img/unfriend.png);
+    --users: url(img/users.png);
+    --mode: url(img/night.png);
+    --trash-white: url(img/trash-white.png);
+
+    --profile: url(img/profile.png);
+    --profile-white: url(img/profile-white.png);
+    --quit: url(img/quit.png);
+    --quit-white: url(img/quit-white.png);
+}
+
+::placeholder {
+    color: var(--background-color);
 }
 
 * {
@@ -51,6 +73,7 @@
 
 body {
     background-color: var(--background-color);
+    /* transition: ease 0.2s; */
 }
 
 .project-title {
@@ -90,10 +113,14 @@ body {
     animation: form-pop-up 0.4s ease;
 }
 
+.profile-options nav {
+    text-align: center;
+}
+
 .log-out {
     position: absolute;
     right: 5%;
-    top: 5%;
+    top: 4%;
     text-decoration: none;
     font-family: Aharoni, sans-serif;
     border-radius: 12px;
@@ -112,13 +139,13 @@ body {
 .log-out-button {
     background-color: var(--main-text-color);
     border-radius: 30px;
-    background-image: url(img/quit.png);
+    background-image: var(--quit);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
     border: none;
     cursor: pointer;
-    transition: ease-in-out 0.3s;
+    transition: ease 0.3s;
 }
 
 .log-out-button:hover {
@@ -135,13 +162,13 @@ body {
 .settings-button {
     background-color: var(--main-text-color);
     border-radius: 30px;
-    background-image: url(img/settings.png);
+    background-image: var(--settings);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
     border: none;
     cursor: pointer;
-    transition: ease-in-out 0.3s;
+    transition: ease 0.3s;
 }
 
 .settings-button:hover {
@@ -158,13 +185,13 @@ body {
 .friends-button {
     background-color: var(--main-text-color);
     border-radius: 30px;
-    background-image: url(img/friends.png);
+    background-image: var(--friends);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
     border: none;
     cursor: pointer;
-    transition: ease-in-out 0.3s;
+    transition: ease 0.3s;
 }
 
 .friends-button:hover {
@@ -179,26 +206,49 @@ body {
 }
 
 .profile-button {
+    background-color: rgba(32,31,37,0);
+    border-radius: 100%;
+    background-image: var(--profile-white);
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transform: translateY(35%);
+    transition: ease 0.3s;
+}
+
+.profile-button:hover {
+    background-color: var(--accent-color);
+    background-image: var(--profile);
+    /* transform: scale(1.1) translateY(35%); */
+}
+
+.profile-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.change-mode-button {
     background-color: var(--background-color);
     border-radius: 100%;
-    background-image: url(img/profile-white.png);
+    background-image: var(--mode);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
     border: none;
     cursor: pointer;
     transform: translateY(35%);
-    transition: ease-in-out 0.3s;
+    transition: ease 0.3s;
 }
 
-.profile-button:hover {
+.change-mode-button:hover {
     background-color: var(--accent-color);
-    background-image: url(img/profile.png);
     /* transform: scale(1.1) translateY(35%); */
 }
 
-.profile-button:active {
-    transform: scale(1.0) translateY(35%);
+.change-mode-button:active {
+    transform: scale(0.9) translateY(35%);
     transition: ease 0.05s;
 }
 
@@ -259,6 +309,7 @@ footer {
 }
 
 .form-div input {
+    background-color: var(--white);
     color: var(--background-color);
     width: 96%;
     padding: 2%;
@@ -382,10 +433,11 @@ li {
     float: right;
     width: 45%;
     margin-right: 20%;
-    background-color: var(--background-color);
+    background-color: none;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transition: ease 0.3s;
 }
 
 .Room-title-small-screen {
@@ -539,11 +591,11 @@ li {
 }
 
 .leave-button {
+    aspect-ratio: 1/1;
     height: 35px;
-    width: 35px;
     border-radius: 100%;
     background-color: var(--white);
-    background-image: url(img/quit.png);
+    background-image: var(--quit);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
@@ -551,11 +603,13 @@ li {
     /* margin-right: 1%; */
     border: none;
     cursor: pointer;
+    transition: ease 0.3s;
     animation: fade-in 0.2s ease;
 }
 
 .leave-button:hover {
     background-color: var(--accent-color);
+    border-radius: 7px;
 }
 
 .leave-button:active {
@@ -567,7 +621,7 @@ li {
     height: 35px;
     border-radius: 100%;
     background-color: var(--white);
-    background-image: url(img/unfriend.png);
+    background-image: var(--unfriend);
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: center;
@@ -575,11 +629,13 @@ li {
     /* margin-right: 1%; */
     border: none;
     cursor: pointer;
+    transition: ease 0.3s;
     animation: fade-in 0.8s ease;
 }
 
 .unfriend-button:hover {
     background-color: var(--accent-color);
+    border-radius: 7px;
 }
 
 .unfriend-button:active {
@@ -631,7 +687,7 @@ li {
 #add-room-button {
     vertical-align: bottom;
     background-color: var(--white);
-    background-image: url(img/plus.png);
+    background-image: var(--plus);
     background-size: 45%;
     background-position: center;
     background-repeat: no-repeat;
@@ -641,11 +697,11 @@ li {
     border-radius: 100%;
     margin-right: 220px;
     cursor: pointer;
-    transition: ease-in-out 0.1s;
+    transition: ease 0.3s;
 }
 
 #add-room-button:hover {
-    border-radius: 10px;
+    border-radius: 7px;
     color: var(--background-color);
     background-color: var(--accent-color);
     /* transform: scale(1.2); */
@@ -658,7 +714,7 @@ li {
 #user-list-button {
     vertical-align: bottom;
     background-color: var(--white);
-    background-image: url(img/users.png);
+    background-image: var(--users);
     background-size: 65%;
     background-position: center;
     background-repeat: no-repeat;
@@ -667,11 +723,11 @@ li {
     border: 0;
     border-radius: 100%;
     cursor: pointer;
-    transition: ease-in-out 0.2s;
+    transition: ease 0.3s;
 }
 
 #user-list-button:hover {
-    border-radius: 10px;
+    border-radius: 7px;
     color: var(--background-color);
     background-color: var(--accent-color);
     /* transform: scale(1.2); */
@@ -688,18 +744,18 @@ li {
     border: 0;
     border-radius: 16px;
     background-color: var(--white);
-    background-image: url("img/send.png");
+    background-image: var(--send);
     background-size: 45%;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-    transition: ease-in-out 0.1s;
+    transition: ease 0.3s;
 }
 
 .send-button:hover {
     background-color: var(--accent-color);
     /* transform: scale(1.04) */
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .send-button:active {
@@ -732,8 +788,9 @@ li {
     bottom: 4%;
     left: 30%;
     border-radius: 15px;
-    background-color: var(--background-color);
-    background: linear-gradient(90deg, var(--background-color) 0%, var(--background-color) 85%, rgba(32,31,37,0) 85%);
+    transition: ease 0.3s;
+    background-color: none;
+    /* background: linear-gradient(90deg, var(--background-color) 0%, var(--background-color) 85%, rgba(32,31,37,0) 85%); */
 }
 
 .add-room-form {
@@ -767,6 +824,7 @@ li {
 }
 
 .add-room-form form input {
+    background-color: var(--white);
     color: var(--background-color);
     width: 97%;
     padding: 2%;
@@ -794,7 +852,7 @@ li {
     font-size: 18px;
     border-radius: 15px;
     padding: 5px 5px 5px 5px;
-    transition: ease-out 0.3s;
+    transition: ease 0.3s;
     margin-left: 20px;
     margin-right: 0px;
 }
@@ -844,6 +902,7 @@ li {
 }
 
 .add-user-form form input {
+    background-color: var(--white);
     color: var(--background-color);
     width: 80%;
     padding: 2%;
@@ -884,7 +943,9 @@ li {
 }
 
 #add-friend-div {
+    margin-top: 5%;
     width:100%;
+    animation: fade-in ease 0.2s;
 }
 
 .friends-list-form form {
@@ -893,7 +954,12 @@ li {
     text-align: center;
 }
 
+#add-friend_form {
+    animation: fade-in ease 0.2s;
+}
+
 .friends-list-form form input {
+    background-color: var(--white);
     color: var(--background-color);
     width: 80%;
     padding: 2%;
@@ -918,7 +984,7 @@ li {
     font-size: 12px;
     border-radius: 15px;
     padding: 5px 5px 5px 5px;
-    transition: ease-out 0.3s;
+    transition: ease 0.3s;
     margin-left: 10px;
     margin-bottom: 5px;
 }
@@ -932,7 +998,7 @@ li {
 #emoji-button {
     vertical-align: bottom;
     background-color: var(--white);
-    background-image: url(img/emoji_icon.png);
+    background-image: var(--emoji_icon);
     background-size: 55%;
     background-position: center;
     background-repeat: no-repeat;
@@ -941,11 +1007,11 @@ li {
     border: 0;
     border-radius: 100%;
     cursor: pointer;
-    transition: ease-in-out 0.2s;
+    transition: ease 0.3s;
 }
 
 #emoji-button:hover {
-    border-radius: 10px;
+    border-radius: 7px;
     color: var(--background-color);
     background-color: var(--accent-color);
     /* transform: scale(1.1); */
@@ -1003,7 +1069,8 @@ li {
     width: 30px;
     height: 30px;
     position: fixed;
-    background-image: url(img/list.png);
+    background-color: var(--white);
+    background-image: var(--list);
     background-size: 45%;
     background-position: center;
     background-repeat: no-repeat;
@@ -1043,6 +1110,7 @@ li {
     animation: fade-in 0.8s ease;
     position: relative;
     height: 35px;
+    margin: 5% 0 5% 0;
 }
 
 .friend-name a {
@@ -1074,12 +1142,181 @@ li {
     transform: translateY(-10%);
 }
 
+.settings-section1 {
+    position: relative;
+    width: 90%; 
+    margin-left: 5%;
+}
+
+.settings-div-right {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    right: 10%;
+    top: 1%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.settings-div-right input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.settings-div-left {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 10%;
+    top: 1%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.settings-div-left input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.settings-div-middle {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    margin: auto;
+    margin-bottom: 3%;
+    color: var(--main-text-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateX(-50%);
+}
+
+.settings-log-out-button {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    background-image: var(--quit-white);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    transform: translateY(35%);
+}
+
+.settings-log-out-button:hover {
+    background-color: var(--accent-color);
+    background-image: var(--quit);
+    transform: scale(1.0);
+    border-radius: 15px;
+    transform: translateY(35%);
+}
+
+.settings-log-out-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.delete-account-button {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    background-image: var(--trash-white);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    transform: translateY(35%);
+}
+
+.delete-account-button:hover {
+    background-color: red;
+    background-image: var(--trash-white);
+    transform: scale(1.0);
+    border-radius: 15px;
+    transform: translateY(35%);
+}
+
+.delete-account-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.responsive-section {
+    width: 80%;
+    margin-left: 10%;
+    position: relative;
+}
+
+.settings-div {
+    position: relative;
+    width: 70%;
+    height: 30%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    margin-bottom: 10%;
+    border-top: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    padding-top: 3%;
+}
+
+.settings-div input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Responsive Web-design : */
+
 @media screen and (min-width: 845px) {
     .show-rooms-button {
         display: none;
     }
 
     .Room-title-small-screen {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .settings-div {
         display: none;
     }
 }
@@ -1115,6 +1352,22 @@ li {
     .fixed-buttons {
         left: 0;
         width: 100%;
+    }
+
+    .settings-section1 {
+        display: none;
+    }
+
+    .settings-div-left {
+        display: none;
+    }
+
+    .settings-div-right {
+        display: none;
+    }
+
+    .settings-div-middle {
+        display: none;
     }
 }
 
@@ -1181,7 +1434,7 @@ li {
     }
 
     .friends-list-form {
-        width: 70%;
+        width: 60%;
     }
 
     .add-room-form, .add-user-form {
@@ -1230,11 +1483,35 @@ li {
         transform: translateX(-11%);
         animation: room-list-animation 0.3s ease;
     }
+
+    .log-out {
+        top: 3%;
+    }
 }
 
 @keyframes room-list-animation {
     0% {transform: translateX(-100%);}
     100% {transform: translateX(-11%);}
+}
+
+@media screen and (max-width: 540px) {
+    .settings-div {
+        font-size: 13px;
+    }
+
+    .settings-div input {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .settings-div {
+        font-size: 10px;
+    }
+
+    .settings-div input {
+        font-size: 8px;
+    }
 }
 
 @media screen and (max-width: 360px) {

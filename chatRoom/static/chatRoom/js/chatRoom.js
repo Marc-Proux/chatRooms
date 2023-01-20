@@ -1,4 +1,4 @@
-// Show/hide the forms
+// Show the forms
 $(document).ready(function() {
     $("#add-room-form").hide();
     $(".add-room-button").click(function() {
@@ -37,76 +37,7 @@ $(document).ready(function() {
     })
 });
 
-$(document).ready(function() {
-    var is_group = $("#room-type").val();
-    const unselected_style = {
-        backgroundColor : "var(--background-color)",
-        color : "var(--white)",
-        border : "1px solid var(--white)"
-    };
-
-    const selected_style = {
-        backgroundColor : "var(--accent-color)",
-        color : "var(--background-color)",
-        border : "1px solid var(--background-color)"
-    };
-    
-    if (is_group == "False" || is_group == "") {
-        $("#Room-list").hide();
-        $("#Friends-list").show();
-        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
-        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
-        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
-        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
-    }
-    else {
-        $("#Room-list").show();
-        $("#Friends-list").hide();
-        Object.assign(document.getElementById("group-chats-button").style , selected_style);
-        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
-        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
-        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
-    }
-    $(".group-chats-button").click(function() {
-        $("#Room-list").show();
-        $("#Friends-list").hide();
-        Object.assign(document.getElementById("group-chats-button").style , selected_style);
-        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
-        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
-        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
-    })
-
-    $(".friend-chats-button").click(function() {
-        $("#Room-list").hide();
-        $("#Friends-list").show();
-        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
-        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
-        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
-        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
-    })
-});
-
-$(document).ready(function() {
-    $(".change-mode-button").click(function() {
-        var r = document.querySelector(':root');
-        var rs = getComputedStyle(r)
-
-        if (rs.getPropertyValue("--dark-mode") == 1) {
-            r.style.setProperty('--background-color', '#E8E7E7');
-            r.style.setProperty('--accent-color', '#BF3AAD');
-            r.style.setProperty('--white', '#C17BC1');
-            r.style.setProperty('--main-text-color', '#6A2B6A');
-            r.style.setProperty('--dark-mode', '0');
-        }
-        else {
-            r.style.setProperty('--background-color', 'rgb(32,31,37)');
-            r.style.setProperty('--accent-color', 'rgb(253, 253, 153)');
-            r.style.setProperty('--white', 'white');
-            r.style.setProperty('--main-text-color', 'rgb(216, 216, 216)');
-            r.style.setProperty('--dark-mode', '1');
-        }
-    })  
-});
+// Hide the forms
 
 $(document).mouseup(function(e){
     var container = $("#add-room-form");
@@ -138,6 +69,170 @@ $(document).mouseup(function(e){
     if(!container5.is(e.target) && container5.has(e.target).length === 0){
         container5.hide();
     }
+});
+
+// Show or Hide the friends in the room list
+
+$(document).ready(function() {
+    var is_group = $("#room-type").val();
+    const unselected_style = {
+        backgroundColor : "var(--background-color)",
+        color : "var(--white)",
+        border : "1px solid var(--white)"
+    };
+
+    const selected_style = {
+        backgroundColor : "var(--accent-color)",
+        color : "var(--background-color)",
+        border : "1px solid var(--background-color)"
+    };
+    
+    if (is_group == "False" || is_group == "") {
+        $("#Room-list").hide();
+        $("#Friends-list").show();
+        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
+    }
+    else {
+        $("#Room-list").show();
+        $("#Friends-list").hide();
+        Object.assign(document.getElementById("group-chats-button").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
+    }
+    $("#group-chats-button").click(function() {
+        $("#Room-list").show();
+        $("#Friends-list").hide();
+        Object.assign(document.getElementById("group-chats-button").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
+    })
+
+    $("#friend-chats-button").click(function() {
+        $("#Room-list").hide();
+        $("#Friends-list").show();
+        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
+    })
+
+    $("#group-chats-button2").click(function() {
+        $("#Room-list").show();
+        $("#Friends-list").hide();
+        Object.assign(document.getElementById("group-chats-button").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , unselected_style);
+    })
+
+    $("#friend-chats-button2").click(function() {
+        $("#Room-list").hide();
+        $("#Friends-list").show();
+        Object.assign(document.getElementById("friend-chats-button").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button").style , unselected_style);
+        Object.assign(document.getElementById("friend-chats-button2").style , selected_style);
+        Object.assign(document.getElementById("group-chats-button2").style , unselected_style);
+    })
+});
+
+// Show or Hide friend requests
+
+$(document).ready(function() {
+    const unselected_style = {
+        backgroundColor : "var(--background-color)",
+        color : "var(--white)",
+        border : "1px solid var(--white)"
+    };
+
+    const selected_style = {
+        backgroundColor : "var(--accent-color)",
+        color : "var(--background-color)",
+        border : "1px solid var(--background-color)"
+    };
+    
+    $("#request-list-div").hide();
+    $("#friends-list-div").show();
+    $("#add-friend-form").show();
+    Object.assign(document.getElementById("show-friends-button").style , selected_style);
+    Object.assign(document.getElementById("show-requests-button").style , unselected_style);
+
+    $("#show-requests-button").click(function() {
+        $("#request-list-div").show();
+        $("#friends-list-div").hide();
+        $("#add-friend-form").hide();
+        Object.assign(document.getElementById("show-friends-button").style , unselected_style);
+        Object.assign(document.getElementById("show-requests-button").style , selected_style);
+    })
+
+    $("#show-friends-button").click(function() {
+        $("#request-list-div").hide();
+        $("#friends-list-div").show();
+        $("#add-friend-form").show();
+        Object.assign(document.getElementById("show-friends-button").style , selected_style);
+        Object.assign(document.getElementById("show-requests-button").style , unselected_style);
+    })
+});
+
+// White and dark mode
+
+$(document).ready(function() {
+    $(".change-mode-button").click(function() {
+        var r = document.querySelector(':root');
+
+        if ($("#theme").val() == 1) {
+            r.style.setProperty('--background-color', '#E8E7E7');
+            r.style.setProperty('--accent-color', '#BF3AAD');
+            r.style.setProperty('--white', '#C17BC1');
+            r.style.setProperty('--main-text-color', '#6A2B6A');
+
+            r.style.setProperty('--emoji_icon', 'url(img/emoji_icon-white.png)');
+            r.style.setProperty('--friends', 'url(img/friends-white.png)');
+            r.style.setProperty('--list', 'url(img/list-white.png)');
+            r.style.setProperty('--plus', 'url(img/plus-white.png)');
+            r.style.setProperty('--send', 'url(img/send-white.png)');
+            r.style.setProperty('--settings', 'url(img/settings-white.png)');
+            r.style.setProperty('--unfriend', 'url(img/unfriend-white.png)');
+            r.style.setProperty('--users', 'url(img/users-white.png)');
+            r.style.setProperty('--trash-white', 'url(img/trash.png)');
+
+            r.style.setProperty('--profile', 'url(img/profile-white.png)');
+            r.style.setProperty('--profile-white', 'url(img/profile.png)');
+            r.style.setProperty('--quit', 'url(img/quit-white.png)');
+            r.style.setProperty('--quit-white', 'url(img/quit.png)');
+            
+            r.style.setProperty('--mode', 'url(img/day.png)');
+            document.getElementById("theme").value = 0;
+        }
+        else {
+            r.style.setProperty('--background-color', 'rgb(32,31,37)');
+            r.style.setProperty('--accent-color', 'rgb(253, 253, 153)');
+            r.style.setProperty('--white', 'white');
+            r.style.setProperty('--main-text-color', 'rgb(216, 216, 216)');
+
+            r.style.setProperty('--emoji_icon', 'url(img/emoji_icon.png)');
+            r.style.setProperty('--friends', 'url(img/friends.png)');
+            r.style.setProperty('--list', 'url(img/list.png)');
+            r.style.setProperty('--plus', 'url(img/plus.png)');
+            r.style.setProperty('--send', 'url(img/send.png)');
+            r.style.setProperty('--settings', 'url(img/settings.png)');
+            r.style.setProperty('--unfriend', 'url(img/unfriend.png)');
+            r.style.setProperty('--users', 'url(img/users.png)');
+            r.style.setProperty('--trash-white', 'url(img/trash-white.png)');
+
+            r.style.setProperty('--profile', 'url(img/profile.png)');
+            r.style.setProperty('--profile-white', 'url(img/profile-white.png)');
+            r.style.setProperty('--quit', 'url(img/quit.png)');
+            r.style.setProperty('--quit-white', 'url(img/quit-white.png)');
+
+            r.style.setProperty('--mode', 'url(img/night.png)');
+            document.getElementById("theme").value = 1;
+        }
+    })  
 });
 
 $(window).resize(function() {
@@ -176,7 +271,7 @@ function update() {
                 $(".request-list").empty();
                 for (var key in data.request_list)
                 {
-                    var temp='<li id="request-list">'+data.request_list[key].name+'</li><button type="button" class="Accept-request" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="Accept-request" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button>';
+                    var temp='<li id="request-list" class="message" style="margin: 0; padding: 10px; text-align: left; font-size: 18px; position: relative;">'+data.request_list[key].name+'</li> <li style="margin-bottom: 30px;"><div style="position: absolute; right: 5%;"> <button type="button" class="sign-up-button" style="font-size= 10px; margin= 0; margin-right: 5px;" title="Accepter la demande" onclick="window.location.href=\'/acceptRequest/'+data.request_list[key].name+'\'">Accepter</button><button type="button" class="sign-in-button" style="font-size= 10px; margin-right: 0; marging-left: 5px;" title="Refuser la demande" onclick="window.location.href=\'/refuseRequest/'+data.request_list[key].name+'\'">Refuser</button> </div> </li>';
                     $(".request-list").append(temp);
                 }
                 request = (data.request_list).length;

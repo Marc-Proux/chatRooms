@@ -27,17 +27,20 @@
         <nav>
             <div style="margin-bottom: 20px;">
                 <button title="Liste d'amis" class="friends-button" id="friends-button" style="height: 50px; width: 50px;"></button>
-                <!-- <label for="friends-button">Liste d'amis</label> -->
+                <br>
+                <label for="friends-button">Liste d'amis</label>
             </div>
 
             <div style="margin-bottom: 20px;">
-                <button title="Paramètres du compte" class="settings-button" id="settings-button" style="height: 50px; width: 50px;"></button>
-                <!-- <label for="settings-button">Paramètres du compte</label> -->
+                <button onclick="window.location.href='/settings'" title="Paramètres du compte" class="settings-button" id="settings-button" style="height: 50px; width: 50px;"></button>
+                <br>
+                <label for="settings-button">Paramètres</label>
             </div>
             
             <div style="margin-bottom: 20px;">
-                <button onclick="window.location.href='/logout'" title="Déconnexion" class="log-out-button" id="log-out-button" style="height: 50px; width: 50px;"></button>
-                <!-- <label for="log-out-button">Se déconnecter</label> -->
+                <button onclick="window.location.href='/logout'" title="Se déconnecter du compte" class="log-out-button" id="log-out-button" style="height: 50px; width: 50px;"></button>
+                <br>
+                <label for="log-out-button">Déconnexion</label>
             </div>
             
         </nav>
@@ -84,7 +87,7 @@
     <section class="fixed-buttons">
         <button class="add-room-button" id="add-room-button" title="Ajouter un salon de discussion"></button>
         {% if current_room.id != NONE %}
-            <button class="emoji-button" id="emoji-button" title="Use emojis !"></button>        
+            <button class="emoji-button" id="emoji-button" title="Utiliser des émojis !"></button>        
             <div class="input-message-div">
                 <form method="post" id="post-form">
                     {% csrf_token %}
@@ -110,8 +113,8 @@
                     </div>
                 {% endif %}
             {% endfor %}
-            <button type="submit" class="sign-up-button" style="margin-left: 0; margin-right: 20px;">Ajouter le salon</button>
-            <button type="button" class="add-room-button" id="cancel-button">Annuler</button>
+            <button type="submit" class="sign-up-button" style="margin-left: 0;">Ajouter le salon</button>
+            <!-- <button type="button" class="add-room-button" id="cancel-button">Annuler</button> -->
         </form>
     </section>
 
@@ -140,12 +143,15 @@
     </section>
 
     <section class="friends-list-form">
-        <h2>Demandes en attente</h2>
+        <p style="font-size: 150%;">
+            <button class="friend-chats-button" id="show-friends-button" title="Votre liste d'amis">Amis</button>
+            ◑
+            <button class="group-chats-button" id="show-requests-button" title="Demandes d'amis en attente">Demandes</button>
+        </p>
         <div id="request-list-div">
             <ul class="request-list">
             </ul>
         </div>
-        <h2>Vos amis</h2>
         <div id="friends-list-div">
             <ul class="friends-list">
             </ul>
