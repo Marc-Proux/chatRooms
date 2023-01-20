@@ -5,7 +5,13 @@
     <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
     <!-- Jquery -->
     <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
-    <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
+    <!-- <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script> -->
+    <script src="{% static 'chatRoom/js/settings.js' %}"></script>
+    {% csrf_token %}
+    <script>
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    </script>
+
 
 
 <header>
@@ -24,12 +30,12 @@
 
         <div class="settings-div-left">
             <h3 style="text-align: center;">Changer de nom d'utilisateur</h3> <br>
-            <form method="post">
+            <form method="post" id="change-username-form">
                 <label for="new-username">Nouveau pseudo</label> <br>
                 <input type="text" id="new-username" required="" name="new-username"> <br>
 
                 <label for="current-password">Mot de passe du compte</label> <br>
-                <input type="password" id="current-password" required="" name="current-password"> <br>
+                <input type="password" id="password" required="" name="current-password"> <br>
 
                 <!-- <br> <br>
                 <br> <br> -->
@@ -83,7 +89,7 @@
                 <input type="text" id="new-username" required="" name="new-username"> <br>
 
                 <label for="current-password">Mot de passe du compte</label> <br>
-                <input type="password" id="current-password" required="" name="current-password"> <br>
+                <input type="password" id="password" required="" name="current-password"> <br>
 
                 <div style="position: absolute; right: 0;"> <button type="submit" class="sign-in-button" style="margin: 0; font-size: 13px;">Changer le pseudo</button> </div>
             </form>

@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate, get_user_model, update_session_auth_hash
 from django.contrib import messages
 from .models import Room, Message, FriendRequest
-from .forms import SignUpForm
+from .forms import SignUpForm, ChangeUsernameForm
 from django.db.models import Max
 from django.conf import settings
 User = get_user_model()
@@ -290,19 +290,42 @@ def getUpdates(request, id=None):
     
     return JsonResponse({'room_list':list(room_list.values()), 'private_list':private_list, 'request_list':request_list})
 
-def changePassword(request):
+def changeUsername(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        print("changeUsername")
+        print(request.POST)
+        form = ChangeUsernameForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)
-            messages.success(request, 'Votre mot de passe a été changé avec succès.')
-            return redirect('change_password')
+            new_username = form.cleaned_data['new_username']
+            print("new_username : "+new_username)
+            # if User.objects.filter(username=new_username).exists():
+            #     messages.error(request,"Nom d'utilisateur déjà utilisé.", extra_tags='changeUsernameForm')
+            # else:
+            #     request.user.username = new_username
+            #     request.user.save()
+            #     messages.success(request,"Nom d'utilisateur changé avec succès.", extra_tags='changeUsernameForm')
+            #     return HttpResponseRedirect('/chatrooms')
         else:
-            messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
+            print("form not valid")
     else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'chatRoom/change_password.html', {'form': form})
+        form = ChangeUsernameForm()
+    print(form.errors)
+    return render(request, 'chatRoom/settings.html', {'form': form})
+
+
+# def changePassword(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)
+#             messages.success(request, 'Votre mot de passe a été changé avec succès.')
+#             return redirect('change_password')
+#         else:
+#             messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'chatRoom/change_password.html', {'form': form})
 
 # Page d'erreur 404
 def error404(request, exception):

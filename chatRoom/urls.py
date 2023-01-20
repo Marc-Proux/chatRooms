@@ -22,4 +22,5 @@ urlpatterns = [
     path('refuseRequest/<str:user_name>/', view=views.refuseRequest, name='refuseRequest'),
 
     path('settings', views.user_settings, name='chatRooms'),
+    path('settings/changeUsername', views.changeUsername, name='changeUsername'),
 ]
