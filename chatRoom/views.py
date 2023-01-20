@@ -1,10 +1,11 @@
 from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate, get_user_model, update_session_auth_hash
 from django.contrib import messages
 from .models import Room, Message, FriendRequest
+from .forms import SignUpForm
 from django.db.models import Max
 from django.conf import settings
 User = get_user_model()
@@ -50,7 +51,7 @@ def signup(request):
         elif request.POST['password1'] != request.POST['password2']:
             messages.error(request,"Les mots de passe ne sont pas identiques.")
             return HttpResponseRedirect('/signup')
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -62,7 +63,7 @@ def signup(request):
             messages.error(request,"Formulaire invalide.")
             return HttpResponseRedirect('/signup')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'chatRoom/signup.html', {'form': form})
 
 
@@ -262,7 +263,6 @@ def unfriend(request, user_name):
 
 # fonction pour envoyer les mise à jour des messages et des utilisateurs
 def getUpdates(request, id=None):
-    print('id :'+str(id))
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user, is_group=True).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     privates = Room.objects.filter(users=request.user, is_group=False).annotate(last_message_time=last_message_time).order_by('-last_message_time')
