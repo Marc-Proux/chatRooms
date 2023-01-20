@@ -14,7 +14,7 @@ urlpatterns = [
     path('sendMessage/', views.sendMessage, name='sendMessage'),
     path('addRoom/', view=views.addRoom, name='addRoom'),
     path('addUser/', view=views.addUser, name='addUser'),
-    path('deleteUser/<int:id>/<str:user_name>', view=views.deleteUser, name='deleteUser'),
+    path('removeUser/<int:id>/<str:user_name>', view=views.removeUser, name='deleteUser'),
     path('quitRoom/<int:id>/', view=views.quitRoom, name='quitRoom'),
     path('unfriend/<str:user_name>/', view=views.unfriend, name='unfriend'),
     path('friendRequest/', view=views.friendRequest, name='friendRequest'),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('settings', views.user_settings, name='chatRooms'),
     path('settings/changeUsername', views.changeUsername, name='changeUsername'),
     path('settings/changeTheme', views.changeTheme, name='changeTheme'),
+    path('deleteUser', views.deleteUser, name='deleteUser'),
 ]

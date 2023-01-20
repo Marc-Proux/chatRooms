@@ -147,11 +147,10 @@ def addUser(request):
     return JsonResponse({'redirect':'/chatrooms/'+str(room_id)+'/'})
 
 # fonction pour supprimer un utilisateur d'un salon
-def deleteUser(request, id, user_name):
+def removeUser(request, id, user_name):
     room = get_object_or_404(Room, id=id)
     if request.user.username == 'System' or room.owner == request.user:
         if len(room.users.all()) <= 2:
-            print("delete room")
             room.delete()
             return HttpResponseRedirect('/chatrooms')
         delete_user = User.objects.get(username=user_name)
@@ -161,7 +160,6 @@ def deleteUser(request, id, user_name):
                 if users != delete_user and users != User.objects.get(username='System'):
                     room.owner = users
                     room.save()
-                    print("new owner:"+users.username)
                     break
         room.users.remove(delete_user)
         admin_message = Message(user = User.objects.get(username='System'), username=' ', message=delete_user.username+' a quitté le salon', room=room)
@@ -174,9 +172,7 @@ def quitRoom(request, id):
     delete_user = request.user
     room = get_object_or_404(Room, id=id)
     user_list = room.users.all()
-    print(len(user_list))
     if len(user_list) <= 2:
-        print("delete room")
         room.delete()
         return HttpResponseRedirect('/chatrooms')
     elif room.owner == delete_user:
@@ -293,9 +289,11 @@ def getUpdates(request, id=None):
 
 def changeUsername(request):
     if request.method == 'POST':
+        print("username : "+request.POST['old_username'])
         if request.user.username == request.POST['old_username']:
             form = ChangeUsernameForm(request.POST)
             if form.is_valid():
+                print("form is valid")
                 new_username = form.cleaned_data['new_username']
                 if User.objects.filter(username=new_username).exists():
                     messages.error(request,"Nom d'utilisateur déjà utilisé.", extra_tags='changeUsernameForm')
@@ -306,6 +304,7 @@ def changeUsername(request):
                     messages.success(request,"Nom d'utilisateur changé avec succès.", extra_tags='changeUsernameFormSucess')
                     return JsonResponse({'redirect':'/settings'})
             else:
+                print("form is not valid")
                 messages.error(request,"Mot de passe incorrect.", extra_tags='changeUsernameForm')
                 return JsonResponse({'redirect':'/settings'})
         else:
@@ -338,6 +337,15 @@ def changeTheme(request):
 #     else:
 #         form = PasswordChangeForm(request.user)
 #     return render(request, 'chatRoom/change_password.html', {'form': form})
+
+def deleteUser(request):
+    room_list = Room.objects.filter(users=request.user, is_group=False)
+    for room in room_list:
+        room.delete()
+    user = request.user
+    user.delete()
+    return HttpResponseRedirect('/')
+
 
 # Page d'erreur 404
 def error404(request, exception):

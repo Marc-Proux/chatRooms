@@ -309,7 +309,7 @@ function update() {
                                 $(".user-list").append(temp);
                             }
                             else if (data.user_list[key].username != 'System') {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
+                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/removeUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
                                 $(".user-list").append(temp);
                             }
                         }
@@ -319,11 +319,11 @@ function update() {
                         for (var key in data.user_list)
                         {
                             if (data.user_list[key].username == data.owner) {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <span>Admin </span><a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>'
+                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <span>Admin </span><a href="/removeUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>'
                                 $(".user-list").append(temp);
                             }
                             else if (data.user_list[key].username != 'System') {
-                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/deleteUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
+                                var temp='<li class="user-name-list">'+data.user_list[key].username+' | <a href="/removeUser/'+room_id+'/'+data.user_list[key].username+'">Retirer</a> </li>';
                                 $(".user-list").append(temp);
                             }
                         }
