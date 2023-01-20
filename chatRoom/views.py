@@ -292,24 +292,26 @@ def getUpdates(request, id=None):
 
 def changeUsername(request):
     if request.method == 'POST':
-        print("changeUsername")
-        print(request.POST)
-        form = ChangeUsernameForm(request.POST)
-        if form.is_valid():
-            new_username = form.cleaned_data['new_username']
-            print("new_username : "+new_username)
-            # if User.objects.filter(username=new_username).exists():
-            #     messages.error(request,"Nom d'utilisateur déjà utilisé.", extra_tags='changeUsernameForm')
-            # else:
-            #     request.user.username = new_username
-            #     request.user.save()
-            #     messages.success(request,"Nom d'utilisateur changé avec succès.", extra_tags='changeUsernameForm')
-            #     return HttpResponseRedirect('/chatrooms')
+        if request.user.username == request.POST['old_username']:
+            form = ChangeUsernameForm(request.POST)
+            if form.is_valid():
+                new_username = form.cleaned_data['new_username']
+                if User.objects.filter(username=new_username).exists():
+                    messages.error(request,"Nom d'utilisateur déjà utilisé.", extra_tags='changeUsernameForm')
+                    return JsonResponse({'redirect':'/settings'})
+                else:
+                    request.user.username = new_username
+                    request.user.save()
+                    messages.success(request,"Nom d'utilisateur changé avec succès.", extra_tags='changeUsernameFormSucess')
+                    return JsonResponse({'redirect':'/settings'})
+            else:
+                messages.error(request,"Mot de passe incorrect.", extra_tags='changeUsernameForm')
+                return JsonResponse({'redirect':'/settings'})
         else:
-            print("form not valid")
+            messages.error(request, "Vous n'êtes pas connecté", extra_tags='changeUsernameForm')
+            return JsonResponse({'redirect':'/settings'})
     else:
         form = ChangeUsernameForm()
-    print(form.errors)
     return render(request, 'chatRoom/settings.html', {'form': form})
 
 def changeTheme(request):

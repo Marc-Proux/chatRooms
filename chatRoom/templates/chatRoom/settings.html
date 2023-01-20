@@ -29,6 +29,17 @@
 
                 <label for="current-password">Mot de passe du compte</label> <br>
                 <input type="password" id="password" required="" name="current-password"> <br>
+                {% for message in messages %}
+                    {% if 'changeUsernameFormSucess' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: green;">{{ message }}</a>
+                        </div>
+                    {% elif 'changeUsernameForm' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
                 <!-- <br> <br>
                 <br> <br> -->
@@ -83,6 +94,17 @@
 
                 <label for="current-password">Mot de passe du compte</label> <br>
                 <input type="password" id="password" required="" name="current-password"> <br>
+                {% for message in messages %}
+                    {% if 'changeUsernameFormSucess' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: green;">{{ message }}</a>
+                        </div>
+                    {% elif 'changeUsernameForm' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
                 <div style="position: absolute; right: 0;"> <button type="submit" class="sign-in-button" style="margin: 0; font-size: 13px;">Changer le pseudo</button> </div>
             </form>
