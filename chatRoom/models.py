@@ -5,11 +5,11 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class User(AbstractUser):
     THEME_CHOICES = (
-        (0, 'Light'),
-        (1, 'Dark'),
+        ('light', 'Light'),
+        ('dark', 'Dark'),
     )
     friends = models.ManyToManyField('self', blank=True)
-    theme = models.IntegerField(choices=THEME_CHOICES, default=1)
+    theme = models.CharField(max_length=5, choices=THEME_CHOICES, default='dark')
 
 class Room(models.Model):
     name = models.CharField(max_length=50)

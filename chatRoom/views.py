@@ -69,6 +69,7 @@ def signup(request):
 
 # Page de chat sans salon d'ouvert
 def chatRooms(request):
+    print(request.user.theme)
     last_message_time = Max("message__date")
     room_list = Room.objects.filter(users=request.user).annotate(last_message_time=last_message_time).order_by('-last_message_time')
     return render(request, 'chatRoom/main-page.html', {'room_list':room_list})
@@ -314,10 +315,10 @@ def changeUsername(request):
 
 def changeTheme(request):
     user = request.user
-    if user.theme == 0:
-        user.theme = 1
+    if user.theme == 'light':
+        user.theme = 'dark'
     else:
-        user.theme = 0
+        user.theme = 'light'
     user.save()
     return HttpResponseRedirect('/settings')
 

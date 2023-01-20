@@ -24,6 +24,9 @@
         <div class="settings-div-left">
             <h3 style="text-align: center;">Changer de nom d'utilisateur</h3> <br>
             <form method="post" id="change-username-form">
+                <label for="new-username">Pseudo actuel</label> <br>
+                <input type="text" id="new-username" readonly name="new-username" placeholder="{{ user.username }}" style="background-color: gray;"> <br>
+
                 <label for="new-username">Nouveau pseudo</label> <br>
                 <input type="text" id="new-username" required="" name="new-username"> <br>
 
@@ -58,7 +61,7 @@
 
     <section>
         <div class="settings-div-middle">
-            <h3 style="text-align: center; font-family: Aharoni, sans-serif;">Options supplémentaires</h3> <br>
+            <h3 style="text-align: center; font-family: Aharoni, sans-serif;">Plus d'options</h3> <br>
             <li style="list-style: disc;">
                 <label for="change-mode-button">Changer le thème du site: </label>
                 <button name="change-mode-button" title="Mode clair/sombre" class="change-mode-button" style=" height: 50px; width: 50px; border-radius: 15px;" onclick="window.location.href='settings/changeTheme'"></button>
@@ -78,6 +81,9 @@
         <div class="settings-div">
             <h3 style="text-align: center;">Changer de nom d'utilisateur</h3> <br>
             <form method="post">
+                <label for="new-username">Pseudo actuel</label> <br>
+                <input type="text" id="new-username" readonly name="new-username" placeholder="{{ user.username }}" style="background-color: gray;"> <br>
+
                 <label for="new-username">Nouveau pseudo</label> <br>
                 <input type="text" id="new-username" required="" name="new-username"> <br>
 
@@ -105,7 +111,7 @@
         </div>
         <br>
         <div class="settings-div">
-            <h3 style="text-align: center; font-family: Aharoni, sans-serif;">Options supplémentaires</h3> <br>
+            <h3 style="text-align: center; font-family: Aharoni, sans-serif;">Plus d'options</h3> <br>
             <li style="list-style: disc;">
                 <label for="change-mode-button">Changer le thème du site: </label>
                 <button name="change-mode-button" title="Mode clair/sombre" class="change-mode-button" style=" height: 35px; width: 35px; border-radius: 15px;" onclick="window.location.href='settings/changeTheme'"></button>
@@ -121,6 +127,14 @@
         </div>
 
     </section>
+
+    <div class="add-user-form" style="border: 3px solid red; height: fit-content;">
+        <h2>Voulez-vous vraiment supprimer votre compte ?</h2>
+        <div>
+            <button class="sign-in-button" style="margin: 0; margin-right: 5px;">Oui</button>
+            <button class="sign-up-button" id="Non" style="margin: 0; margin-left: 5px;">Non</button>
+        </div>
+    </div>
 </body>
 
 {% endblock %}
