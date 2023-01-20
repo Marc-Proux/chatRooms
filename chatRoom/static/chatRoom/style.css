@@ -11,15 +11,17 @@
     --friends: url(img/friends.png);
     --list: url(img/list.png);
     --plus: url(img/plus.png);
-    --quit: url(img/quit.png);
     --send: url(img/send.png);
     --settings: url(img/settings.png);
     --unfriend: url(img/unfriend.png);
     --users: url(img/users.png);
     --mode: url(img/night.png);
+    --trash-white: url(img/trash-white.png);
 
     --profile: url(img/profile.png);
     --profile-white: url(img/profile-white.png);
+    --quit: url(img/quit.png);
+    --quit-white: url(img/quit-white.png);
 }
 
 ::placeholder {
@@ -71,7 +73,7 @@
 
 body {
     background-color: var(--background-color);
-    transition: ease 1s;
+    /* transition: ease 0.2s; */
 }
 
 .project-title {
@@ -109,6 +111,10 @@ body {
     font-size: 18px;
     vertical-align: middle;
     animation: form-pop-up 0.4s ease;
+}
+
+.profile-options nav {
+    text-align: center;
 }
 
 .log-out {
@@ -937,13 +943,19 @@ li {
 }
 
 #add-friend-div {
+    margin-top: 5%;
     width:100%;
+    animation: fade-in ease 0.2s;
 }
 
 .friends-list-form form {
     padding: 1%;
     border-radius: 15px;
     text-align: center;
+}
+
+#add-friend_form {
+    animation: fade-in ease 0.2s;
 }
 
 .friends-list-form form input {
@@ -1098,6 +1110,7 @@ li {
     animation: fade-in 0.8s ease;
     position: relative;
     height: 35px;
+    margin: 5% 0 5% 0;
 }
 
 .friend-name a {
@@ -1129,12 +1142,181 @@ li {
     transform: translateY(-10%);
 }
 
+.settings-section1 {
+    position: relative;
+    width: 90%; 
+    margin-left: 5%;
+}
+
+.settings-div-right {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    right: 10%;
+    top: 1%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.settings-div-right input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.settings-div-left {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 10%;
+    top: 1%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.settings-div-left input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.settings-div-middle {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    margin: auto;
+    margin-bottom: 3%;
+    color: var(--main-text-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateX(-50%);
+}
+
+.settings-log-out-button {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    background-image: var(--quit-white);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    transform: translateY(35%);
+}
+
+.settings-log-out-button:hover {
+    background-color: var(--accent-color);
+    background-image: var(--quit);
+    transform: scale(1.0);
+    border-radius: 15px;
+    transform: translateY(35%);
+}
+
+.settings-log-out-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.delete-account-button {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    background-image: var(--trash-white);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    transform: translateY(35%);
+}
+
+.delete-account-button:hover {
+    background-color: red;
+    background-image: var(--trash-white);
+    transform: scale(1.0);
+    border-radius: 15px;
+    transform: translateY(35%);
+}
+
+.delete-account-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.responsive-section {
+    width: 80%;
+    margin-left: 10%;
+    position: relative;
+}
+
+.settings-div {
+    position: relative;
+    width: 70%;
+    height: 30%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    margin-bottom: 10%;
+    border-top: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    padding-top: 3%;
+}
+
+.settings-div input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Responsive Web-design : */
+
 @media screen and (min-width: 845px) {
     .show-rooms-button {
         display: none;
     }
 
     .Room-title-small-screen {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .settings-div {
         display: none;
     }
 }
@@ -1170,6 +1352,22 @@ li {
     .fixed-buttons {
         left: 0;
         width: 100%;
+    }
+
+    .settings-section1 {
+        display: none;
+    }
+
+    .settings-div-left {
+        display: none;
+    }
+
+    .settings-div-right {
+        display: none;
+    }
+
+    .settings-div-middle {
+        display: none;
     }
 }
 
@@ -1236,7 +1434,7 @@ li {
     }
 
     .friends-list-form {
-        width: 70%;
+        width: 60%;
     }
 
     .add-room-form, .add-user-form {
@@ -1294,6 +1492,26 @@ li {
 @keyframes room-list-animation {
     0% {transform: translateX(-100%);}
     100% {transform: translateX(-11%);}
+}
+
+@media screen and (max-width: 540px) {
+    .settings-div {
+        font-size: 13px;
+    }
+
+    .settings-div input {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .settings-div {
+        font-size: 10px;
+    }
+
+    .settings-div input {
+        font-size: 8px;
+    }
 }
 
 @media screen and (max-width: 360px) {

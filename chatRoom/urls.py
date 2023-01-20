@@ -20,4 +20,6 @@ urlpatterns = [
     path('friendRequest/', view=views.friendRequest, name='friendRequest'),
     path('acceptRequest/<str:user_name>/', view=views.acceptRequest, name='addFriend'),
     path('refuseRequest/<str:user_name>/', view=views.refuseRequest, name='refuseRequest'),
+
+    path('settings', views.user_settings, name='chatRooms'),
 ]
