@@ -1,13 +1,17 @@
 {% extends "chatRoom/baseLayout.html" %}
 {% load static %}
 {% block content %}
-
-<!-- Importing settings.js -->
+    <!-- JS for bootstrap -->
+    <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery -->
+    <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
+    <!-- <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script> -->
     <script src="{% static 'chatRoom/js/settings.js' %}"></script>
     {% csrf_token %}
     <script>
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     </script>
+
 
 
 <header>
