@@ -30,9 +30,21 @@ $(document).ready(function() {
 
 $(document).mouseup(function(e){
     var container = $(".add-user-form");
+    var container2 = $(".contact-div");
  
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
         container.hide();
     }
+
+    if(!container2.is(e.target) && container2.has(e.target).length === 0){
+        container2.hide();
+    }
+});
+
+$(document).ready(function() {
+    $(".contact-div").hide();
+    $(".contact").click(function() {
+        $(".contact-div").show();
+    })
 });

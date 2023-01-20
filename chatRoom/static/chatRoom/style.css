@@ -1204,8 +1204,8 @@ li {
 
 .settings-div-middle {
     width: 22%;
-    height: 30%;
-    /* background-color: var(--background-color); */
+    height: fit-content;
+    /* background-color: red; */
     position: absolute;
     left: 50%;
     bottom: 5%;
@@ -1301,6 +1301,47 @@ li {
     border-radius: 8px;
     font-size: 14px;
     text-align: left;
+}
+
+.settings-div , .settings-div-middle {
+    cursor: pointer;
+}
+
+.settings-div a:hover , .settings-div-middle a:hover {
+    text-decoration: underline;
+}
+
+.contact-div {
+    position: fixed;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: 60%;
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 23px;
+    animation: form-pop-up 0.4s ease;
+    margin: auto;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    overflow-y: auto;
+}
+
+.contact-div a {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.contact-div a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive Web-design : */
@@ -1486,6 +1527,11 @@ li {
 
     .log-out {
         top: 3%;
+    }
+
+    .contact-div {
+        width: 80%;
+        font-size: 18px;
     }
 }
 
