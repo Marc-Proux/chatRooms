@@ -1,11 +1,10 @@
 {% extends "chatRoom/baseLayout.html" %}
 {% load static %}
 {% block content %}
-    <!-- JS for bootstrap -->
-    <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
+    <!-- Importing emoji library -->
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
-    <!-- Jquery -->
-    <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
+
+    <!-- Importing chatRoom.js -->
     <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
 {% if user.is_authenticated %}
     <header>
