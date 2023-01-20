@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, Http404, JsonResponse
+from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
@@ -311,6 +311,15 @@ def changeUsername(request):
         form = ChangeUsernameForm()
     print(form.errors)
     return render(request, 'chatRoom/settings.html', {'form': form})
+
+def changeTheme(request):
+    user = request.user
+    if user.theme == 0:
+        user.theme = 1
+    else:
+        user.theme = 0
+    user.save()
+    return HttpResponseRedirect('/settings')
 
 
 # def changePassword(request):

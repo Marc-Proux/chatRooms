@@ -11,10 +11,7 @@
 
 
 <header>
-    <input type="hidden" id="room_id" name="room_id" value="{{ current_room.id }}">
-    <input type="hidden" id="room-type" name="room-type" value="{{ current_room.is_group }}">
     <input type="hidden" id="user" name="user" value="{{ user.username }}">
-    <input type="hidden" id="owner" name="owner" value="{{ owner }}">
     <input type="hidden" id="theme" name="theme" value="{{ user.theme }}">
     <h1 class="main-page-title"><a href="{% url 'login' %}">Chat Rooms</a></h1>
 </header>
@@ -64,7 +61,7 @@
             <h3 style="text-align: center; font-family: Aharoni, sans-serif;">Options supplémentaires</h3> <br>
             <li style="list-style: disc;">
                 <label for="change-mode-button">Changer le thème du site: </label>
-                <button name="change-mode-button" title="Mode clair/sombre" class="change-mode-button" style=" height: 50px; width: 50px; border-radius: 15px;"></button>
+                <button name="change-mode-button" title="Mode clair/sombre" class="change-mode-button" style=" height: 50px; width: 50px; border-radius: 15px;" onclick="window.location.href='settings/changeTheme'"></button>
             </li>
             <li style="list-style: disc;">
                 <label for="log-out-button">Se déconnecter: </label>
@@ -111,7 +108,7 @@
             <h3 style="text-align: center; font-family: Aharoni, sans-serif;">Options supplémentaires</h3> <br>
             <li style="list-style: disc;">
                 <label for="change-mode-button">Changer le thème du site: </label>
-                <button name="change-mode-button" title="Mode clair/sombre" class="change-mode-button" style=" height: 35px; width: 35px; border-radius: 15px;"></button>
+                <button name="change-mode-button" title="Mode clair/sombre" class="change-mode-button" style=" height: 35px; width: 35px; border-radius: 15px;" onclick="window.location.href='settings/changeTheme'"></button>
             </li>
             <li style="list-style: disc;">
                 <label for="log-out-button">Se déconnecter: </label>

@@ -1,6 +1,7 @@
 {% extends "chatRoom/baseLayout.html" %}
 {% block content %}
     <header>
+        <input type="hidden" id="theme" name="theme" value="{{ user.theme }}">
         <h1 class="project-title"><a href="{% url 'index' %}">Chat Rooms</a></h1>
     </header>
     <form>
