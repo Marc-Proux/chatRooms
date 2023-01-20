@@ -206,13 +206,13 @@ body {
 }
 
 .profile-button {
-    background-color: rgba(32,31,37,0);
+    background-color: rgba(0, 0, 0,0);
     border-radius: 100%;
     background-image: var(--profile-white);
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: center;
-    border: none;
+    border: 1px solid var(--white);
     cursor: pointer;
     transform: translateY(35%);
     transition: ease 0.3s;
