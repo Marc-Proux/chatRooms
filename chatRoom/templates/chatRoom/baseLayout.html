@@ -8,11 +8,12 @@
     {% block styles %}
         <link rel="stylesheet" href="{% static 'chatRoom/style.css' %}" />
     {% endblock %}
+    {% block js %}
+        <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
+        <script src="{% static 'chatRoom/js/base.js' %}"></script>
+    {% endblock %}
   </head>
-  <!-- JS for bootstrap -->
-  <script src="{% static 'chatRoom/js/bootstrap.min.js' %}"></script>
-  <!-- Jquery -->
-  <script src="{% static 'chatRoom/js/jquery.js' %}"></script>
 
 <body>
     <section>

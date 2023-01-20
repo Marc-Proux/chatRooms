@@ -356,7 +356,6 @@ function update() {
 $(document).ready(function(){
     $.ajaxSetup({ cache: false });
     update();
-    updateRoomList();
 });
 
 
