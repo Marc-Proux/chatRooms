@@ -25,7 +25,7 @@
             <h3 style="text-align: center;">Changer de nom d'utilisateur</h3> <br>
             <form method="post" id="change-username-form">
                 <label for="new-username">Pseudo actuel</label> <br>
-                <input type="text" id="new-username" readonly name="new-username" placeholder="{{ user.username }}" style="background-color: gray;"> <br>
+                <input type="text" id="old-username" readonly name="new-username" placeholder="{{ user.username }}" value="{{ user.username }}" style="background-color: gray;"> <br>
 
                 <label for="new-username">Nouveau pseudo</label> <br>
                 <input type="text" id="new-username" required="" name="new-username"> <br>
@@ -153,7 +153,7 @@
     <div class="add-user-form" style="border: 3px solid red; height: fit-content; position: fixed;">
         <h2>Voulez-vous vraiment supprimer votre compte ?</h2>
         <div>
-            <button class="sign-in-button" style="margin: 0; margin-right: 5px;">Oui</button>
+            <button class="sign-in-button" style="margin: 0; margin-right: 5px;" onclick="window.location.href='/deleteUser'">Oui</button>
             <button class="sign-up-button" id="Non" style="margin: 0; margin-left: 5px;">Non</button>
         </div>
     </div>

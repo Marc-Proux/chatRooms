@@ -4,7 +4,7 @@ $(document).on('submit', '#change-username-form', function (e) {
         type: 'POST',
         url: 'settings/changeUsername',
         data: {
-            old_username: $('#user').val(),
+            old_username: $('#old-username').val(),
             new_username: $('#new-username').val(),
             current_password: $('#password').val(),
             csrfmiddlewaretoken: csrftoken,

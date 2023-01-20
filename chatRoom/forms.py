@@ -13,11 +13,13 @@ class ChangeUsernameForm(forms.Form):
     new_username = forms.CharField()
     current_password = forms.CharField(widget=forms.PasswordInput)
     def clean(self):
-        print("test")
         old_username = self.cleaned_data.get('old_username')
-        print(old_username)
+        print("username: "+old_username)
+        print("password: "+self.cleaned_data.get('current_password'))
         cleaned_data = super().clean()
         user = authenticate(username=self.cleaned_data.get('old_username'), password=self.cleaned_data.get('current_password'))
-        if user is None:
-            raise forms.ValidationError("Incorrect password")
-        return cleaned_data
+        if user:
+            print("user authenticated")
+            print("data :"+str(cleaned_data))
+            return cleaned_data
+        raise forms.ValidationError("Incorrect password")
