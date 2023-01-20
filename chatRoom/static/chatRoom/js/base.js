@@ -2,11 +2,11 @@
 
 function switch_mode() {
     var r = document.querySelector(':root');
-    if ($("#theme").val() == 0) {
-        r.style.setProperty('--background-color', '#E8E7E7');
-        r.style.setProperty('--accent-color', '#BF3AAD');
-        r.style.setProperty('--white', '#C17BC1');
-        r.style.setProperty('--main-text-color', '#6A2B6A');
+    if ($("#theme").val() == 'light') {
+        r.style.setProperty('--background-color', '#ECECEC');
+        r.style.setProperty('--accent-color', '#02475E');
+        r.style.setProperty('--white', '#4991A8');
+        r.style.setProperty('--main-text-color', '#010522');
 
         r.style.setProperty('--emoji_icon', 'url(img/emoji_icon-white.png)');
         r.style.setProperty('--friends', 'url(img/friends-white.png)');
@@ -24,7 +24,6 @@ function switch_mode() {
         r.style.setProperty('--quit-white', 'url(img/quit.png)');
         
         r.style.setProperty('--mode', 'url(img/day.png)');
-        document.getElementById("theme").value = 1;
     }
     else {
         r.style.setProperty('--background-color', 'rgb(32,31,37)');
@@ -48,7 +47,6 @@ function switch_mode() {
         r.style.setProperty('--quit-white', 'url(img/quit-white.png)');
 
         r.style.setProperty('--mode', 'url(img/night.png)');
-        document.getElementById("theme").value = 0;
     }
 }
 
