@@ -273,9 +273,9 @@ def getUpdates(request, id=None):
         friend["id"] = private.id
         private_list.append(friend)
     request_list = []
-    for request in request.user.requests_received.all():
+    for friend_request in request.user.requests_received.all():
         request_user = {}
-        request_user["name"] = request.sender.username
+        request_user["name"] = friend_request.sender.username
         request_list.append(request_user)
 
     if id :
