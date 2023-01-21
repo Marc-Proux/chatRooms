@@ -4,10 +4,10 @@
 
 <!-- Importing settings.js -->
     <script src="{% static 'chatRoom/js/settings.js' %}"></script>
-    {% csrf_token %}
+    <!-- {% csrf_token %}
     <script>
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    </script>
+    </script> -->
 
 
 <header>
@@ -23,15 +23,19 @@
 
         <div class="settings-div-left">
             <h3 style="text-align: center;">Changer de nom d'utilisateur</h3> <br>
-            <form method="post" id="change-username-form">
+            <form method="post" id="change-username-form-big">
+                {% csrf_token %}
+                <script>
+                    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                </script>
                 <label for="new-username">Pseudo actuel</label> <br>
-                <input type="text" id="old-username" readonly name="new-username" placeholder="{{ user.username }}" value="{{ user.username }}" style="background-color: gray;"> <br>
+                <input type="text" id="old-username-big" readonly name="new-username" placeholder="{{ user.username }}" value="{{ user.username }}" style="background-color: gray;"> <br>
 
                 <label for="new-username">Nouveau pseudo</label> <br>
-                <input type="text" id="new-username" required="" name="new-username"> <br>
+                <input type="text" id="new-username-big" required="" name="new-username"> <br>
 
                 <label for="current-password">Mot de passe du compte</label> <br>
-                <input type="password" id="password" required="" name="current-password"> <br>
+                <input type="password" id="password-big" required="" name="current-password"> <br>
                 {% for message in messages %}
                     {% if 'changeUsernameFormSucess' in message.tags %}
                         <div class="alert alert-success">
@@ -53,15 +57,30 @@
         </div>
         <div class="settings-div-right">
             <h3 style="text-align: center;">Changer de mot de passe</h3> <br>
-            <form method="post">
+            <form method="post" id="change-password-form-big">
+                {% csrf_token %}
+                <script>
+                    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                </script>
                 <label for="current-password">Votre mot de passe actuel</label> <br>
-                <input type="password" id="current-password" required="" name="current-password"> <br>
+                <input type="password" id="current-password-big" required="" name="current-password"> <br>
 
                 <label for="new-password">Nouveau mot de passe</label> <br>
-                <input type="password" id="new-password" required="" name="new-password"> <br>
+                <input type="password" id="new-password-big" required="" name="new-password"> <br>
 
                 <label for="confirm-new-password">Confirmer le nouveau mot de passe</label> <br>
-                <input type="password" id="confirm-new-password" required="" name="confirm-new-password"> <br>
+                <input type="password" id="confirm-new-password-big" required="" name="confirm-new-password"> <br>
+                {% for message in messages %}
+                    {% if 'changePasswordFormSucess' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: green;">{{ message }}</a>
+                        </div>
+                    {% elif 'changePasswordForm' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
                 <br>
                 <div style="position: absolute; right: 0;"> <button type="submit" class="sign-up-button" style="margin: 0;">Changer le mot de passe</button> </div>
@@ -97,15 +116,19 @@
     <section class="responsive-section">
         <div class="settings-div">
             <h3 style="text-align: center;">Changer de nom d'utilisateur</h3> <br>
-            <form method="post">
+            <form method="post" id="change-username-form-small">
+                {% csrf_token %}
+                <script>
+                    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                </script>
                 <label for="new-username">Pseudo actuel</label> <br>
-                <input type="text" id="new-username" readonly name="new-username" placeholder="{{ user.username }}" style="background-color: gray;"> <br>
+                <input type="text" id="old-username-small" readonly name="new-username" placeholder="{{ user.username }}" value="{{ user.username }}" style="background-color: gray;"> <br>
 
                 <label for="new-username">Nouveau pseudo</label> <br>
-                <input type="text" id="new-username" required="" name="new-username"> <br>
+                <input type="text" id="new-username-small" required="" name="new-username"> <br>
 
                 <label for="current-password">Mot de passe du compte</label> <br>
-                <input type="password" id="password" required="" name="current-password"> <br>
+                <input type="password" id="password-small" required="" name="current-password"> <br>
                 {% for message in messages %}
                     {% if 'changeUsernameFormSucess' in message.tags %}
                         <div class="alert alert-success">
@@ -124,15 +147,31 @@
         <br>
         <div class="settings-div">
             <h3 style="text-align: center;">Changer de mot de passe</h3> <br>
-            <form method="post">
+            <form method="post" id="change-password-form-small">
+                {% csrf_token %}
+                <script>
+                    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                </script>
                 <label for="current-password">Votre mot de passe actuel</label> <br>
-                <input type="password" id="current-password" required="" name="current-password"> <br>
+                <input type="password" id="current-password-small" required="" name="current-password"> <br>
 
                 <label for="new-password">Nouveau mot de passe</label> <br>
-                <input type="password" id="new-password" required="" name="new-password"> <br>
+                <input type="password" id="new-password-small" required="" name="new-password"> <br>
 
                 <label for="confirm-new-password">Confirmer le nouveau mot de passe</label> <br>
-                <input type="password" id="confirm-new-password" required="" name="confirm-new-password"> <br>
+                <input type="password" id="confirm-new-password-small" required="" name="confirm-new-password"> <br>
+
+                {% for message in messages %}
+                    {% if 'changePasswordFormSucess' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: green;">{{ message }}</a>
+                        </div>
+                    {% elif 'changePasswordForm' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
                 <div style="position: absolute; right: 0;"> <button type="submit" class="sign-up-button" style="margin: 0; font-size: 13px;">Changer le mot de passe</button> </div>
             </form>

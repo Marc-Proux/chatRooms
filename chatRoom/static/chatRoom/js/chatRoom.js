@@ -39,6 +39,8 @@ $(document).ready(function() {
 
 // Hide the forms
 
+
+
 $(document).mouseup(function(e){
     var container = $("#add-room-form");
     var container2 = $(".add-user-form");
@@ -190,6 +192,7 @@ $(window).resize(function() {
         $(".show-rooms-button").show();
     }
 });
+
 
 // update
 
@@ -360,16 +363,25 @@ $(document).ready(function(){
 
 
 // sendMessage
+function replace(message){
+    var message = message.replace(/&/g, "&");
+    message = message.replace(/</g, "&lt;");
+    message = message.replace(/>/g, "&gt;");
+    message = message.replace(/"/g, '&rdquo;');
+    message = message.replace(/'/g, "&rsquo;");
+    return message;
+}
+
 $(document).on('submit','#post-form',function(e){
     e.preventDefault();
-
+    message = replace($('.msg-txt-field').val());
     $.ajax({
       type:'POST',
       url:'/sendMessage/',
       data:{
-          value:$('.msg-txt-field').val(),
+          value:message,
           room_id:$("#room_id").val(),
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
         success: function(data){
             if (data.redirect){

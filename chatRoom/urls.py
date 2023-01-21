@@ -24,4 +24,5 @@ urlpatterns = [
     path('settings/changeUsername', views.changeUsername, name='changeUsername'),
     path('settings/changeTheme', views.changeTheme, name='changeTheme'),
     path('deleteUser', views.deleteUser, name='deleteUser'),
+    path('changePassword', views.changePassword, name='changePassword'),
 ]

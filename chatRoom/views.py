@@ -1,11 +1,11 @@
-from django.http import HttpResponseRedirect, Http404, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate, get_user_model, update_session_auth_hash
 from django.contrib import messages
 from .models import Room, Message, FriendRequest
-from .forms import SignUpForm, ChangeUsernameForm
+from .forms import SignUpForm, ChangeUsernameForm, ChangePasswordForm
 from django.db.models import Max
 from django.conf import settings
 User = get_user_model()
@@ -324,19 +324,22 @@ def changeTheme(request):
     return HttpResponseRedirect('/settings')
 
 
-# def changePassword(request):
-#     if request.method == 'POST':
-#         form = PasswordChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             update_session_auth_hash(request, user)
-#             messages.success(request, 'Votre mot de passe a été changé avec succès.')
-#             return redirect('change_password')
-#         else:
-#             messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
-#     else:
-#         form = PasswordChangeForm(request.user)
-#     return render(request, 'chatRoom/change_password.html', {'form': form})
+def changePassword(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            print("form is valid")
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Votre mot de passe a été changé avec succès.', extra_tags='changePasswordFormSucess')
+            return JsonResponse({'redirect':'/settings'})
+        else:
+            print("form is not valid")
+            messages.error(request, 'Mot de passe invalide.', extra_tags='changePasswordForm')
+            return JsonResponse({'redirect':'/settings'})
+    else:
+        form = ChangePasswordForm(request.user)
+    return render(request, 'chatRoom/settings.html', {'form': form})
 
 def deleteUser(request):
     room_list = Room.objects.filter(users=request.user, is_group=False)

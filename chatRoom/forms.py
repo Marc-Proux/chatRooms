@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model, authenticate
 User = get_user_model()
 
@@ -23,3 +23,8 @@ class ChangeUsernameForm(forms.Form):
             print("data :"+str(cleaned_data))
             return cleaned_data
         raise forms.ValidationError("Incorrect password")
+
+class ChangePasswordForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
