@@ -1,0 +1,1536 @@
+:root {
+    /* Color variables */
+    --dark-mode: 1;
+    --main-text-color: rgb(216, 216, 216);
+    --background-color: rgb(32,31,37);
+    --accent-color: rgb(253, 253, 153);
+    --white: white;
+
+    /* Image variables */
+    --emoji_icon: url(img/emoji_icon.png);
+    --friends: url(img/friends.png);
+    --list: url(img/list.png);
+    --plus: url(img/plus.png);
+    --send: url(img/send.png);
+    --settings: url(img/settings.png);
+    --unfriend: url(img/unfriend.png);
+    --users: url(img/users.png);
+    --mode: url(img/night.png);
+    --trash-white: url(img/trash-white.png);
+
+    --profile: url(img/profile.png);
+    --profile-white: url(img/profile-white.png);
+    --quit: url(img/quit.png);
+    --quit-white: url(img/quit-white.png);
+}
+
+::placeholder {
+    color: var(--background-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: var(--main-text-color);
+    scroll-behavior: smooth;
+    word-wrap: break-word;
+}
+
+/* Custom scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(167, 167, 167); 
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--main-text-color); 
+    border-radius: 10px;
+    transition: ease-in-out 1s;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+   background-color: var(--accent-color);
+}
+
+@font-face {
+    font-family: "Aharoni";
+    src: url(fonts/ahronbd.ttf);
+}
+
+@keyframes fade-in {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+body {
+    background-color: var(--background-color);
+    /* transition: ease 0.2s; */
+}
+
+.project-title {
+    font-family: Aharoni, sans-serif;
+    text-align: left;
+    color: var(--main-text-color);
+    font-size: 450%;
+    margin-left: 3%;
+    margin-top: 3%;
+}
+
+.project-title a {
+    text-decoration: none;
+}
+
+.profile-options {
+    z-index: 4;
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    transform: translateY(-20%);
+    width: max-content;
+    height: max-content;
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    border-radius: 20px;
+    padding: 1.5% 3% 0% 3%;
+    text-align: left;
+    font-family: sans-serif;
+    font-size: 18px;
+    vertical-align: middle;
+    animation: form-pop-up 0.4s ease;
+}
+
+.profile-options nav {
+    text-align: center;
+}
+
+.log-out {
+    position: absolute;
+    right: 5%;
+    top: 4%;
+    text-decoration: none;
+    font-family: Aharoni, sans-serif;
+    border-radius: 12px;
+    transition: ease-in-out 0.3s;
+    padding: 5px;
+    padding-bottom: 10px;
+    cursor: default;
+}
+
+/* .log-out:hover {
+    background-color: var(--main-text-color);
+    color: var(--background-color);
+    transform: scale(1.1);
+} */
+
+.log-out-button {
+    background-color: var(--main-text-color);
+    border-radius: 30px;
+    background-image: var(--quit);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.log-out-button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.0);
+    border-radius: 15px;
+}
+
+.log-out-button:active {
+    transform: scale(0.9);
+    transition: ease 0.05s; 
+}
+
+.settings-button {
+    background-color: var(--main-text-color);
+    border-radius: 30px;
+    background-image: var(--settings);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.settings-button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.0);
+    border-radius: 15px;
+}
+
+.settings-button:active {
+    transform: scale(0.9);
+    transition: ease 0.05s;
+}
+
+.friends-button {
+    background-color: var(--main-text-color);
+    border-radius: 30px;
+    background-image: var(--friends);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.friends-button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.0);
+    border-radius: 15px;
+}
+
+.friends-button:active {
+    transform: scale(0.9);
+    transition: ease 0.05s;
+}
+
+.profile-button {
+    background-color: rgba(32,31,37,0);
+    border-radius: 100%;
+    background-image: var(--profile-white);
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transform: translateY(35%);
+    transition: ease 0.3s;
+}
+
+.profile-button:hover {
+    background-color: var(--accent-color);
+    background-image: var(--profile);
+    /* transform: scale(1.1) translateY(35%); */
+}
+
+.profile-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.change-mode-button {
+    background-color: var(--background-color);
+    border-radius: 100%;
+    background-image: var(--mode);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transform: translateY(35%);
+    transition: ease 0.3s;
+}
+
+.change-mode-button:hover {
+    background-color: var(--accent-color);
+    /* transform: scale(1.1) translateY(35%); */
+}
+
+.change-mode-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.centered-button {
+    position: absolute;
+    color: rgb(167, 167, 167);
+    top: 41%;
+    width: 99%;
+    text-align: center;
+    margin: auto;
+    animation: fade-in 1s;
+}
+
+.centered-button button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--background-color);
+    background-color: var(--main-text-color);
+    border: 0;
+    font-size: 250%;
+    padding: 0.75% 1.5% 0.75% 1.5%;
+    border-radius: 15px;
+    transition: ease-out 0.3s;
+    cursor: pointer;
+}
+
+.centered-button button:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+footer {
+    position: fixed;
+    z-index: 0;
+    bottom: 1%;
+    color: rgb(167, 167, 167);
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.form-div {
+    width: 25%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 22px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.form-div input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 96%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.help-text {
+    /* In the html file directly.. */
+    font-family: sans-serif;
+}
+
+.signUpTitle {
+    height:30%
+}
+
+.buttons-div {
+    float: right;
+}
+
+.sign-in-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    border: 0px;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease-out 0.3s;
+    margin-left: 20px;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+.sign-in-button:hover {
+    background-color: var(--main-text-color);
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+.sign-up-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--accent-color);
+    background-color: var(--background-color);
+    border: 0px;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease-out 0.3s;
+    margin-left: 20px;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+.sign-up-button:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+.sign-up-text {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.main-page-title {
+    font-family: Aharoni, sans-serif;
+    text-align: left;
+    color: var(--main-text-color);
+    font-size: 350%;
+    margin: 1.5%;
+    /* animation: title-animation 1s; */
+}
+
+/* @keyframes title-animation {
+    0% {
+        font-size: 450%;
+        margin-left: 3%;
+        margin-top: 3%;
+    }
+
+    100% {
+        font-size: 350%;
+        margin: 1.5%;
+    }
+} */
+
+.main-page-title a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+    width: 100%;
+}
+
+.Messages-title, .Room-title{
+    display: inline-block;
+    vertical-align: middle;
+    font-family: Aharoni, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: var(--accent-color);
+}
+
+.Room-title {
+    width: 18.8%;
+    margin-left: 11.2%;
+    font-size: 40px;
+    background-image: linear-gradient(rgba(255,255,255,0) , rgba(255,255,255,0.2), rgba(255,255,255,0));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.Messages-title {
+    float: right;
+    width: 45%;
+    margin-right: 20%;
+    background-color: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: ease 0.3s;
+}
+
+.Room-title-small-screen {
+    vertical-align: middle;
+    font-family: Aharoni, sans-serif;
+    text-align: center;
+    color: var(--accent-color);
+    width: 100%;
+    margin-top: 3%;
+    direction: ltr;
+    font-size: 40px;
+    background-image: linear-gradient(rgba(255,255,255,0) , rgba(255,255,255,0.2), rgba(255,255,255,0));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.friend-chats-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    border: 0px;
+    font-size: 20px;
+    border-radius: 7px;
+    padding: 5px 20px 5px 20px;
+    transition: ease-out 0.3s;
+    cursor: pointer;
+    transform: translateY(-20%);
+}
+
+.friend-chats-button:hover {
+    color: var(--background-color);
+    transform: scale(1.05) translateY(-20%);
+}
+
+.group-chats-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    border: 0px;
+    font-size: 20px;
+    border-radius: 7px;
+    padding: 5px 20px 5px 20px;
+    transition: ease-out 0.3s;
+    cursor: pointer;
+    transform: translateY(-20%);
+}
+
+.group-chats-button:hover {
+    color: var(--background-color);
+    transform: scale(1.05) translateY(-20%);
+}
+
+.messages-list {
+    width: 60%;
+    height: 70%;
+    padding-right: 7%;
+    /* float: right; */
+    text-align: left;
+    position: absolute;
+    bottom: 15%;
+    right: 0%;
+    /* animation: fade-in 2s; */
+    /* background-color: red; */
+}
+
+.messages-list div {
+    padding-left: 3%;
+    margin-top: 3.6%;
+    height: 100%;
+    border-left: 2px solid;
+    border-image:linear-gradient(0deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    /* border-radius: 1.5%; */
+    position: relative;
+}
+
+.user { /* user displayed above the message*/
+    color: var(--accent-color);
+    font-family: Aharoni, sans-serif;
+    margin-top: 1%;
+    animation: message-animation 0.5s ease;
+}
+
+.message {
+    font-family: sans-serif;
+    padding-bottom: 5px;
+    color: var(--main-text-color);
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    animation: message-animation 0.5s ease;
+}
+
+@keyframes message-animation {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
+}
+
+/* #msg-txt-field-error::placeholder {
+    color: rgba(224, 19, 19, 0.735);
+} */
+
+.date {
+    font-family: sans-serif;
+    text-align: right;
+    font-size: 14px;
+}
+
+.message-box {
+    width: 85%;
+}
+
+.messages-list ul{
+    align-items: baseline;
+}
+
+.messages-list div {
+    overflow-y: auto;
+}
+
+.Room-name, .current-room {
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    /* transition: ease-in-out 0.2s; */
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    transition: 0.2s ease;
+    animation: fade-in 0.8s ease;
+}
+
+.current-room-div {
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    display: flex;
+    direction: ltr;
+    align-items: center;
+    width: 100%;
+}
+
+.current-room {
+    background-color: var(--white);
+    height: 100%;
+    width: 90%;
+}
+
+.leave-button {
+    aspect-ratio: 1/1;
+    height: 35px;
+    border-radius: 100%;
+    background-color: var(--white);
+    background-image: var(--quit);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    margin-left: 1%;
+    /* margin-right: 1%; */
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    animation: fade-in 0.2s ease;
+}
+
+.leave-button:hover {
+    background-color: var(--accent-color);
+    border-radius: 7px;
+}
+
+.leave-button:active {
+    transform: scale(0.9);
+}
+
+.unfriend-button {
+    aspect-ratio: 1/1;
+    height: 35px;
+    border-radius: 100%;
+    background-color: var(--white);
+    background-image: var(--unfriend);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    margin-left: 1%;
+    /* margin-right: 1%; */
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    animation: fade-in 0.8s ease;
+}
+
+.unfriend-button:hover {
+    background-color: var(--accent-color);
+    border-radius: 7px;
+}
+
+.unfriend-button:active {
+    transform: scale(0.9);
+}
+
+.Room-name a {
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    margin: auto;
+    padding: 3%;
+}
+
+.current-room a {
+    color: var(--background-color);
+    cursor: default;
+    text-decoration: none;
+    padding: 3%;
+    display: block;
+    height: 100%;
+}
+
+
+.Room-name a:hover {
+    color: var(--background-color);
+    /* transform: scale(1.05); */
+}
+
+.Room-name:hover {
+    background-color: var(--accent-color);
+    /* transform: scale(1.05); */
+}
+
+.Room-list {
+    width: 19%;
+    height: 72%;
+    margin-left: 5%;
+    padding-left: 6%;
+    padding-right: 3%;
+    position: absolute;
+    left: 0;
+    /* animation: fade-in 1s; */
+    overflow-y: auto;
+    /* background-color: red; */
+    direction: rtl;
+}
+
+#add-room-button {
+    vertical-align: bottom;
+    background-color: var(--white);
+    background-image: var(--plus);
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 100%;
+    margin-right: 220px;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+#add-room-button:hover {
+    border-radius: 7px;
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    /* transform: scale(1.2); */
+}
+
+#add-room-button:active {
+    transform: scale(0.9);
+}
+
+#user-list-button {
+    vertical-align: bottom;
+    background-color: var(--white);
+    background-image: var(--users);
+    background-size: 65%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+#user-list-button:hover {
+    border-radius: 7px;
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    /* transform: scale(1.2); */
+}
+
+#user-list-button:active {
+    transform: scale(0.9);
+}
+
+.send-button {
+    height: 35px;
+    width: 60px;
+    vertical-align: bottom;
+    border: 0;
+    border-radius: 16px;
+    background-color: var(--white);
+    background-image: var(--send);
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+.send-button:hover {
+    background-color: var(--accent-color);
+    /* transform: scale(1.04) */
+    border-radius: 7px;
+}
+
+.send-button:active {
+    transform: scale(0.9);
+}
+
+.fixed-buttons input {
+    width: 55%;
+    vertical-align: bottom;
+    font-size: 15px;
+    padding: 9px;
+    border: 0;
+    border-radius: 15px;
+    background-color: var(--white);
+    color: var(--background-color);
+    transition: ease-in-out 0.2s;
+}
+
+.fixed-buttons div {
+    display: inline-block;
+    width: 60%;
+}
+
+.fixed-buttons {
+    margin: auto;
+    /* animation: fade-in 2s; */
+    width: 70%;
+    display: inline-block;
+    position: fixed;
+    bottom: 4%;
+    left: 30%;
+    border-radius: 15px;
+    transition: ease 0.3s;
+    background-color: none;
+    /* background: linear-gradient(90deg, var(--background-color) 0%, var(--background-color) 85%, rgba(32,31,37,0) 85%); */
+}
+
+.add-room-form {
+    position: absolute;
+    width: 34%;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    z-index: 0;
+    /* background-color: red; */
+}
+
+.add-room-form form {
+    width: 100%;
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 22px;
+    animation: form-pop-up 0.4s ease;
+    margin: auto;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+}
+
+@keyframes form-pop-up {
+    0% {scale: 0; opacity: 0%;}
+    70% {scale: 1.1; opacity: 80%;}
+    100% {scale: 1; opacity: 100%;}
+}
+
+.add-room-form form input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 97%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.add-room-form form label {
+    text-align: left;
+}
+
+.add-room-form h2 {
+    font-family: Aharoni, sans-serif;
+    margin: 0 0 20px 0;
+}
+
+#cancel-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    border: 0px;
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease 0.3s;
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+#cancel-button:hover {
+    background-color: var(--main-text-color);
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+.add-user-form {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: 60%;
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 15px;
+    animation: form-pop-up 0.4s ease;
+    margin: auto;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    overflow-y: auto;
+}
+
+#add-user-div {
+    width: 100%;
+}
+
+.add-user-form form {
+    padding: 1%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.add-room-form label {
+    margin-bottom: 5px;
+}
+
+.add-user-form form input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 80%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.add-user-form h2 {
+    font-family: Aharoni, sans-serif;
+    margin: 20px 0 20px 0;
+    transform: translateY(-18px);
+}
+
+.friends-list-form {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 60%;
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 15px;
+    animation: form-pop-up 0.4s ease;
+    margin: auto;
+    padding: 3%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    overflow-y: auto;
+}
+
+#add-friend-div {
+    margin-top: 5%;
+    width:100%;
+    animation: fade-in ease 0.2s;
+}
+
+.friends-list-form form {
+    padding: 1%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#add-friend_form {
+    animation: fade-in ease 0.2s;
+}
+
+.friends-list-form form input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 80%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.friends-list-form h2 {
+    font-family: Aharoni, sans-serif;
+    margin: 20px 0 20px 0;
+    transform: translateY(-18px);
+}
+
+#user-cancel-button {
+    font-family: Aharoni, sans-serif;
+    text-decoration: none;
+    color: var(--main-text-color);
+    background-color: var(--background-color);
+    border: 0px;
+    font-size: 12px;
+    border-radius: 15px;
+    padding: 5px 5px 5px 5px;
+    transition: ease 0.3s;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+#user-cancel-button:hover {
+    background-color: var(--main-text-color);
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+#emoji-button {
+    vertical-align: bottom;
+    background-color: var(--white);
+    background-image: var(--emoji_icon);
+    background-size: 55%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+
+#emoji-button:hover {
+    border-radius: 7px;
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    /* transform: scale(1.1); */
+}
+
+#emoji-button:active {
+    transform: scale(0.9);
+}
+
+.user-name-list {
+    font-family: Aharoni, sans-serif;
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-size: 25px;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    /* transition: ease-in-out 0.2s; */
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.user-name-list a {
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 15px;
+    color: rgb(167, 167, 167);
+}
+
+.user-name-list a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
+.admin-name-list {
+    font-family: Aharoni, sans-serif;
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-size: 25px;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    /* transition: ease-in-out 0.2s; */
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.admin-name-list span {
+    color: var(--accent-color);
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.show-rooms-button {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    background-color: var(--white);
+    background-image: var(--list);
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    border: 0;
+    margin-top: 5%;
+    z-index: 4;
+}
+
+.show-rooms-button:hover {
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    /* transform: scale(1.1); */
+}
+
+.show-rooms-button:active {
+    transform: scale(0.9);
+}
+
+.input-message-div {
+    padding: 0;
+    margin: 0;
+}
+
+.friend-name div {
+    border-bottom: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    /* transition: ease-in-out 0.2s; */
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    transition: 0.2s ease;
+    animation: fade-in 0.8s ease;
+    position: relative;
+    height: 35px;
+    margin: 5% 0 5% 0;
+}
+
+.friend-name a {
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    margin: auto;
+    padding: 3%;
+    font-family: Aharoni, sans-serif;
+    position: absolute;
+    left: 0;
+    border-radius: 15px;
+}
+
+.friend-name a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.friend-name .unfriend-button {
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    height: 90%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-10%);
+}
+
+.settings-section1 {
+    position: relative;
+    width: 90%; 
+    margin-left: 5%;
+}
+
+.settings-div-right {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    right: 10%;
+    top: 1%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.settings-div-right input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.settings-div-left {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 10%;
+    top: 1%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateY(-20%);
+}
+
+.settings-div-left input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.settings-div-middle {
+    width: 22%;
+    height: 30%;
+    /* background-color: var(--background-color); */
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    margin: auto;
+    margin-bottom: 3%;
+    color: var(--main-text-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    transform: translateX(-50%);
+}
+
+.settings-log-out-button {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    background-image: var(--quit-white);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    transform: translateY(35%);
+}
+
+.settings-log-out-button:hover {
+    background-color: var(--accent-color);
+    background-image: var(--quit);
+    transform: scale(1.0);
+    border-radius: 15px;
+    transform: translateY(35%);
+}
+
+.settings-log-out-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.delete-account-button {
+    background-color: var(--background-color);
+    border-radius: 30px;
+    background-image: var(--trash-white);
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    transition: ease 0.3s;
+    transform: translateY(35%);
+}
+
+.delete-account-button:hover {
+    background-color: red;
+    background-image: var(--trash-white);
+    transform: scale(1.0);
+    border-radius: 15px;
+    transform: translateY(35%);
+}
+
+.delete-account-button:active {
+    transform: scale(0.9) translateY(35%);
+    transition: ease 0.05s;
+}
+
+.responsive-section {
+    width: 80%;
+    margin-left: 10%;
+    position: relative;
+}
+
+.settings-div {
+    position: relative;
+    width: 70%;
+    height: 30%;
+    margin: auto;
+    color: var(--main-text-color);
+    font-family: sans-serif;
+    font-size: 18px;
+    animation: fade-in 1s;
+    margin-bottom: 10%;
+    border-top: 1px solid;
+    border-image:linear-gradient(90deg, rgba(167,167,167,0) 0%, rgba(167,167,167,0.5) 50%, rgba(167,167,167,0) 100%) 1;
+    padding-top: 3%;
+}
+
+.settings-div input {
+    background-color: var(--white);
+    color: var(--background-color);
+    width: 100%;
+    padding: 2%;
+    margin: 1.5% 0 5% 0;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* Responsive Web-design : */
+
+@media screen and (min-width: 845px) {
+    .show-rooms-button {
+        display: none;
+    }
+
+    .Room-title-small-screen {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .settings-div {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .fixed-buttons {
+        left: 5%;
+        width: 100%;
+    }
+    
+    .Messages-title {
+        font-size: 25px;
+    }
+
+    .friend-chats-button {
+        font-size: 15px;
+    }
+    
+    .group-chats-button {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .friend-chats-button {
+        font-size: 12px;
+    }
+    
+    .group-chats-button {
+        font-size: 12px;
+    }
+
+    .fixed-buttons {
+        left: 0;
+        width: 100%;
+    }
+
+    .settings-section1 {
+        display: none;
+    }
+
+    .settings-div-left {
+        display: none;
+    }
+
+    .settings-div-right {
+        display: none;
+    }
+
+    .settings-div-middle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .friend-chats-button {
+        font-size: 10px;
+    }
+    
+    .group-chats-button {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 925px) {
+    .friend-chats-button {
+        font-size: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+    
+    .group-chats-button {
+        font-size: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+}
+
+@media screen and (max-width: 845px) {
+    .friend-chats-button {
+        font-size: 15px;
+    }
+    
+    .group-chats-button {
+        font-size: 15px;
+    }
+
+    .fixed-buttons input {
+        width: 60%;
+    }
+
+    .send-button {
+        width: 45px;
+    }
+
+    .input-message-div {
+        margin-left: 5%;
+    }
+
+    #user-list-button {
+        position: fixed;
+        right: 0;
+    }
+
+    .Room-title, footer{
+        display: none;
+    }
+
+    .main-page-title, .project-title {
+        font-size: 40px;
+    }
+
+    .form-div {
+        width: 90%;
+    }
+
+    .friends-list-form {
+        width: 60%;
+    }
+
+    .add-room-form, .add-user-form {
+        width: 70%;
+    }
+
+    #add-room-button {
+        display: none;
+        position: fixed;
+        left: 72%;
+        bottom: 10%;
+        z-index: 5;
+        background-color: var(--accent-color);
+    }
+
+    .messages-list {
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        border: 0;
+        width: 90%;
+    }
+
+    .message {
+        margin-right: 0;
+        padding-right: 0;
+    }
+
+    .Messages-title {
+        margin-right: 35%;
+        margin-top: 3%;
+        font-size: 20px;
+        width: 50%;
+    }
+
+    .Room-list {
+        display: none;
+        z-index: 4;
+        background-color: var(--background-color);
+        border: 2px solid var(--accent-color);
+        box-shadow: 1px 1px 5px black;
+        border-radius: 8px;
+        height: 94%;
+        width: 60%;
+        bottom: 0;
+        transform: translateX(-11%);
+        animation: room-list-animation 0.3s ease;
+    }
+
+    .log-out {
+        top: 3%;
+    }
+}
+
+@keyframes room-list-animation {
+    0% {transform: translateX(-100%);}
+    100% {transform: translateX(-11%);}
+}
+
+@media screen and (max-width: 540px) {
+    .settings-div {
+        font-size: 13px;
+    }
+
+    .settings-div input {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .settings-div {
+        font-size: 10px;
+    }
+
+    .settings-div input {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .Messages-title {
+        margin-right: 35%;
+        margin-top: 10%;
+        font-size: 14px;
+        width: 50%;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .friend-chats-button {
+        font-size: 11px;
+    }
+    
+    .group-chats-button {
+        font-size: 11px;
+    }
+}

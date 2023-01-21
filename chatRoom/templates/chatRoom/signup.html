@@ -1,0 +1,60 @@
+{% extends "chatRoom/baseLayout.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<header>
+  <h1 class="project-title"><a href="{% url 'index' %}">Chat Rooms</a></h1>
+</header>
+<div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-div">
+      <p>
+        <label for="id_username">Nom d'utilisateur:</label>
+        <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username" style="font-family: sans-serif; margin-bottom: 1.5%;">
+
+        <p class="helptext" style="font-family: sans-serif; font-size: 11px; text-align: justify; margin: 0; margin-bottom: 5%;">Requis. 150 caractères ou moins. Lettres, numéros et @/./+/-/_ uniquement.</p>
+      </p>
+
+
+      <p>
+        <label for="id_password1">Mot de passe:</label>
+        <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1" style="font-family: sans-serif; margin-bottom: 1.5%;">
+        
+        </p>
+          <ul>
+            <li class="helptext" style="font-family: sans-serif; font-size: 11px; text-align: justify; margin: 0; margin-bottom: 1%;">Votre mot de passe ne doit pas être trop similaire à vos informations personnelles.</li>
+            <li class="helptext" style="font-family: sans-serif; font-size: 11px; text-align: justify; margin: 0; margin-bottom: 1%;">Votre mot de passe doit contenir au moins 8 caractères.</li>
+            <li class="helptext" style="font-family: sans-serif; font-size: 11px; text-align: justify; margin: 0; margin-bottom: 1%;">Votre mot de passe ne doit pas être un mot de passe couramment utilisé.</li>
+            <li class="helptext" style="font-family: sans-serif; font-size: 11px; text-align: justify; margin: 0; margin-bottom: 5%;">Votre mot de passe ne peut pas être entièrement numérique.</li>
+          </ul>
+        
+        
+      <p></p>
+
+
+      <p>
+        <label for="id_password2">Confirmation du mot de passe:</label>
+        <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2" style="font-family: sans-serif; margin-bottom: 1.5%;">
+        
+          <span class="helptext" style="font-family: sans-serif; font-size: 11px; text-align: justify; margin: 0; margin-bottom: 5%;">Entrez le même mot de passe qu'au dessus.</span>
+      </p>
+      {% for message in messages %}
+        <p class="helptext" style="font-family: sans-serif; font-size: 11px; text-align:justify; margin: 0; margin-bottom: 1%; color:red;">{{ message }}</p>
+      {% endfor %}
+      <div class="buttons-div">
+        <button class="sign-up-button" type="submit">S'inscrire</button>
+      </div>
+
+      <div>
+        <p></p>
+        <br>
+        <br>
+        <p class="sign-up-text">Revenir à la page de<button class="sign-in-button" style="margin-left: 3px; width: fit-content;" onclick="window.location.href='/login';">connexion</button></p>
+      </div>
+
+    </div>
+  </form>
+</div>
+{% endblock %}
