@@ -1,8 +1,6 @@
 {% extends "chatRoom/baseLayout.html" %}
 {% load static %}
 {% block content %}
-    <!-- Importing emoji library -->
-    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
 
     <!-- Importing chatRoom.js -->
     <script src="{% static 'chatRoom/js/chatRoom.js' %}"></script>
@@ -154,19 +152,24 @@
             <ul class="friends-list">
             </ul>
         </div>
-            <div id="add-friend-div">
-                <form method="POST" id="add-friend-form">
-                    <input type="search" id="friend-add-input" autocomplete="off" placeholder="Ajouter un ami...", maxlength="50">
-                    {% for message in messages %}
-                        {% if 'friendForm' in message.tags %}
-                            <div class="alert alert-success">
-                                <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Envoyer une demande d'ami</button>
-                </form>
-            </div>
+        <div id="add-friend-div">
+            <form method="POST" id="add-friend-form">
+                <input type="search" id="friend-add-input" autocomplete="off" placeholder="Ajouter un ami...", maxlength="50">
+                {% for message in messages %}
+                    {% if 'friendForm' in message.tags %}
+                        <div class="alert alert-success">
+                            <a class="close" href="#" data-dismiss="alert" style="text-decoration: none; font-size: small; font-family: sans-serif; color: red;">{{ message }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <button type="submit" class="sign-up-button" style="font-size: 12px; margin: 0 0 5px 0;">Envoyer une demande d'ami</button>
+            </form>
+        </div>
+
     </section>
+
+    <div id="emoji-menu">
+        <h2>Ajouter un emoji</h2> <br>
+    </div>
 {% endif %}
 {% endblock %}
