@@ -1344,6 +1344,46 @@ li {
     text-decoration: underline;
 }
 
+#emoji-menu {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--background-color);
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
+    font-family: Aharoni, sans-serif;
+    font-size: 15px;
+    animation: form-pop-up 0.4s ease;
+    margin: auto;
+    padding: 1%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px black;
+    overflow-y: auto;
+}
+
+.emoji {
+    background-color: rgba(0, 0, 0,0);
+    width: 35px;
+    height: 35px;
+    border: 0;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: ease 0.3s;
+    margin: 5px;
+    font-size: 18px;
+}
+
+.emoji:hover {
+    background-color: var(--white);
+}
+
 /* Responsive Web-design : */
 
 @media screen and (min-width: 845px) {

@@ -45,6 +45,7 @@ $(document).mouseup(function(e){
     var container3 = $(".Room-list");
     var container4 = $(".profile-options");
     var container5 = $(".friends-list-form");
+    var container6 = $("#emoji-menu");
  
     // If the target of the click isn't the container
     if(!container.is(e.target) && container.has(e.target).length === 0){
@@ -68,6 +69,10 @@ $(document).mouseup(function(e){
 
     if(!container5.is(e.target) && container5.has(e.target).length === 0){
         container5.hide();
+    }
+
+    if(!container6.is(e.target) && container6.has(e.target).length === 0){
+        container6.hide();
     }
 });
 
@@ -448,18 +453,35 @@ $(document).on('submit','#add-friend-form',function(e){
 });
 
 // emoji button
-const picker = new EmojiButton( {
-    position: 'top-start',
-    autoHide: false,
-    theme:'dark',
-});
+
+var emoji_array = ["😂", "😁", "😅", "😭", 
+"🥺", "😍", "❤️", "💩", 
+"🍆", "💦", "🍑", "😘", 
+"😕", "☹️", "🙃", "👍", 
+"👎", "💀", "😡", "😈"];
 
 $(document).ready(function() {
+    $("#emoji-menu").hide();
     $("#emoji-button").click(function() {
-        picker.togglePicker(document.querySelector('#emoji-button'));
-    })  
-});
+        $("#emoji-menu").show();
+    })
 
-picker.on('emoji', emoji => {
-    document.querySelector('.msg-txt-field').value += emoji;
+    for (var key in emoji_array) {
+        if (key % 4 == 0 && key > 0) {
+            $("#emoji-menu").append('<br>')
+        }
+        var emoji = emoji_array[key];
+        var element = document.createElement("BUTTON");
+        // Assign different attributes to the element.
+        element.value = emoji;
+        element.id = emoji;
+        element.textContent = emoji;
+        element.className = "emoji";
+        element.onclick = function() {
+            $(".msg-txt-field").val($(".msg-txt-field").val() + this.value);
+        }
+        var div = document.getElementById("emoji-menu");
+        //Append the element in page (in span).  
+        div.appendChild(element);
+    }
 });
