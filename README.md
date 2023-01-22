@@ -89,6 +89,8 @@ python manage.py changepassword System
  ```
  SAFE_LANGUAGE = True  #settings.py
  ```
+ - Editer son mot de passe et pseudo via la page paramètre
+ - Choisir entre le thème clair et sombre
 
 ## License
 
