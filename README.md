@@ -1,5 +1,5 @@
 <h1 align="center">
-	ChatRoom
+	Chat Rooms
 </h1>
 
 <p align ="center">
@@ -8,7 +8,7 @@
 	ChatRoom est une <a href="https://fr.wikipedia.org/wiki/Application_web">Application Web</a>
 	de <a href ="https://fr.wikipedia.org/wiki/Chat_en_ligne">Chat en Ligne</a> gratuite et 
 	hébergeable sur tout serveur.<br></br>
-	Découvrez le site <a href="http://chatrooms.alwaysdata.net/">ChatRoom</a>.
+	Découvrez le site <a href="http://chatrooms.alwaysdata.net/">Chat Rooms</a>.
 </p>
 
 <hr />
@@ -21,7 +21,7 @@ jQuery <a href="https://jquery.com/">3.6.1</a>
 
 
 ## Installation
-ChatRoom est un projet Web, front-end et back-end nécessitant plusieurs packages. Accedez à la console de votre serveur pour suivre la procédure d'installation.
+Chat Rooms est un projet Web, front-end et back-end nécessitant plusieurs packages. Accedez à la console de votre serveur pour suivre la procédure d'installation.
 
 Création de l'environnement virtuel pour django
 ```
